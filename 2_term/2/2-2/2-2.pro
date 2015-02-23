@@ -8,7 +8,8 @@ SOURCES += main.cpp \
     infToPostForm.cpp \
     postCalculate.cpp \
     stackDouble.cpp \
-    arrayStack.cpp
+    arrayStack.cpp \
+    calculator.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -18,5 +19,6 @@ HEADERS += \
     postCalculate.h \
     stackDouble.h \
     stack.h \
-    arrayStack.h
+    arrayStack.h \
+    calculator.h
 

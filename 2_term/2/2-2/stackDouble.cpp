@@ -6,9 +6,8 @@ StackDouble::StackElement::StackElement(double value, StackElement* next)
     this->value = value;
 }
 
-StackDouble::StackDouble()
+StackDouble::StackDouble() : head(nullptr)
 {
-    head = nullptr;
 }
 
 void StackDouble::push(double value)

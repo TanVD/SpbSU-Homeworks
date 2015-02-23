@@ -1,6 +1,5 @@
 #include <iostream>
-#include <infToPostForm.h>
-#include <postCalculate.h>
+#include "calculator.h"
 
 using namespace std;
 
@@ -24,16 +23,12 @@ int main()
     int counter = 0;
     char* equationIn = new char[100];
     getStringConsole(&counter, equationIn);
-    char* equationPost = new char[200];
-    int newLength = infToPostform(equationIn, equationPost, counter);
-    bool isValid = true;
-    double result = postCalculate(equationPost, newLength, &isValid);
-    if (isValid)
-        cout << "Output: " << result << endl;
+    calculator calc;
+    calc.calculate(equationIn, counter);
+    if (calc.isResultValid())
+        cout << "Output: " << calc.returnResult() << endl;
     else
         cout << "Not valid" << endl;
-    delete[] equationIn;
-    delete[] equationPost;
     return 0;
 }
 

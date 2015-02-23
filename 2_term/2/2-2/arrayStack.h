@@ -6,7 +6,6 @@ class ArrayStack : public Stack
 public:
     ArrayStack();
     ~ArrayStack();
-public:
     void push(double number);
     double pop();
     double top();

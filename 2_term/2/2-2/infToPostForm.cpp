@@ -9,8 +9,8 @@ enum OperationsLabels
     minus = 12,
     multiply = 21,
     divide = 22,
-    opBracket = 30,
-    clBracket = 40
+    openedBracket = 30,
+    closedBracket = 40
 };
 
 
@@ -41,12 +41,12 @@ int inputOperation(char operationChar)
         }
         case '(':
         {
-            operation = opBracket;
+            operation = openedBracket;
             break;
         }
         case ')':
         {
-            operation = clBracket;
+            operation = closedBracket;
             break;
         }
     }
@@ -104,16 +104,16 @@ int infToPostform(char expressionIn[], char expressionPost[], int expressionInEn
             return 0;
         }
 
-        if (((operation > operationalStack->top() + 1) && (operation != clBracket))
-                || (operationalStack->top() == opBracket))
+        if (((operation > operationalStack->top() + 1) && (operation != closedBracket))
+                || (operationalStack->top() == openedBracket))
         {
             operationalStack->push(operation);
         }
         else
         {
-            while ((operation <= operationalStack->top() + 1) || (operation == clBracket))
+            while ((operation <= operationalStack->top() + 1) || (operation == closedBracket))
             {
-                if ((operationalStack->top() == opBracket) && (operation == clBracket))
+                if ((operationalStack->top() == openedBracket) && (operation == closedBracket))
                 {
                     operationalStack->pop();
                     break;
@@ -122,8 +122,8 @@ int infToPostform(char expressionIn[], char expressionPost[], int expressionInEn
                 expressionPost[k] = outputOperation(operationalStack->pop());
                 k++;
 
-                if (((operation > operationalStack->top() + 1) && (operation != clBracket))
-                        || ((operationalStack->top() == opBracket) && (operation != clBracket)))
+                if (((operation > operationalStack->top() + 1) && (operation != closedBracket))
+                        || ((operationalStack->top() == openedBracket) && (operation != closedBracket)))
                 {
                     operationalStack->push(operation);
                     break;

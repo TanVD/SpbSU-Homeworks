@@ -6,7 +6,6 @@ class StackDouble : public Stack
 public:
     StackDouble();
     ~StackDouble();
-public:
     void push(double number);
     double pop();
     double top();
