@@ -2,15 +2,14 @@
 #include "list.h"
 #include <iostream>
 
-LinkedList::LinkedList()
+LinkedList::LinkedList() : head(nullptr)
 {
-    this->head = nullptr;
 }
 
 LinkedList::~LinkedList()
 {
-    ListElement* current = this->head;
-    ListElement* toDelete = this->head;
+    ListElement* current = head;
+    ListElement* toDelete = head;
     while (current != nullptr)
     {
         toDelete = current;
@@ -21,13 +20,13 @@ LinkedList::~LinkedList()
 
 void LinkedList::add(int value)
 {
-    this->head = new ListElement(value, this->head);
+    head = new ListElement(value, head);
 }
 
 bool LinkedList::remove(int value)
 {
-    ListElement *current  = this->head;
-    ListElement *previous  = this->head;
+    ListElement *current  = head;
+    ListElement *previous  = head;
     while (current != nullptr && current->value != value)
     {
         previous = current;
@@ -45,7 +44,7 @@ bool LinkedList::remove(int value)
 
 void LinkedList::print()
 {
-    ListElement *current = this->head;
+    ListElement *current = head;
     while (current != nullptr)
     {
         std::cout << current->value << std::endl;

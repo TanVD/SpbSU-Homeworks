@@ -1,15 +1,14 @@
 #include "doubleLinkedList.h"
 #include <iostream>
 
-DoubleLinkedList::DoubleLinkedList()
+DoubleLinkedList::DoubleLinkedList() : head(nullptr)
 {
-    this->head = nullptr;
 }
 
 DoubleLinkedList::~DoubleLinkedList()
 {
-    ListElement* current = this->head;
-    ListElement* toDelete = this->head;
+    ListElement* current = head;
+    ListElement* toDelete = head;
     while (current != nullptr)
     {
         toDelete = current;
@@ -20,17 +19,17 @@ DoubleLinkedList::~DoubleLinkedList()
 
 void DoubleLinkedList::add(int value)
 {
-    ListElement* newElement = new ListElement(value, this->head, nullptr);
-    if (this->head != nullptr)
+    ListElement* newElement = new ListElement(value, head, nullptr);
+    if (head != nullptr)
     {
-        this->head->lPrevious = newElement;
+        head->lPrevious = newElement;
     }
-    this->head = newElement;
+    head = newElement;
 }
 
 bool DoubleLinkedList::remove(int value)
 {
-    ListElement* current = this->head;
+    ListElement* current = head;
     while (current != nullptr && current->value != value)
     {
         current = current->lNext;
@@ -48,7 +47,7 @@ bool DoubleLinkedList::remove(int value)
 
 void DoubleLinkedList::print()
 {
-    ListElement *current = this->head;
+    ListElement *current = head;
     while (current != nullptr)
     {
         std::cout << current->value << std::endl;
