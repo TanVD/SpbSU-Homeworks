@@ -1,6 +1,6 @@
 #pragma once
-
 #include "stack.h"
+
 class StackDouble : public Stack
 {
 public:

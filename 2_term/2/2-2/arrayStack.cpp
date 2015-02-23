@@ -39,7 +39,7 @@ double ArrayStack::pop()
     }
     size = size - 1;
     array[size] = 0;
-    if (size == capacity/ 2 &&
+    if (size == capacity / 2 &&
             capacity % 2 == 0 && capacity / 2 != 0)
     {
         double* newArray = new double[size];

@@ -1,6 +1,6 @@
+#include "postCalculate.h"
 #include "stackDouble.h"
 #include "stack.h"
-#include "postCalculate.h"
 #include <ctype.h>
 
 double postCalculate(char expressionPost[], int expressionEnd, bool *isValid)
