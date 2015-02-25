@@ -37,8 +37,15 @@ bool DoubleLinkedList::remove(int value)
     if (current != nullptr)
     {
         ListElement *toDelete = current;
-        current->lPrevious->lNext = current->lNext;
-        current->lNext->lPrevious = current->lPrevious;
+        if (current != head)
+        {
+            current->lPrevious->lNext = current->lNext;
+            current->lNext->lPrevious = current->lPrevious;
+        }
+        else
+        {
+            head = current->lNext;
+        }
         delete toDelete;
         return true;
     }
