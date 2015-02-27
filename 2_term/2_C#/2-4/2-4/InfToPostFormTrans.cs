@@ -140,15 +140,8 @@ namespace Application
 
             while (!operationalStack.IsEmpty())
             {
-                if (operationalStack.Top() != 0)
-                {
                     expressionPost[k] = OutputOperation(operationalStack.Pop());
                     k++;
-                }
-                else
-                {
-                    operationalStack.Pop();
-                }
             }
             return k;
         }

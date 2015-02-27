@@ -42,8 +42,7 @@ namespace Application
                 this.value = value;
             }
         }
-
-        StackElement head { set; get; }
+        private StackElement head;
     }
 }
 

@@ -57,7 +57,7 @@ namespace Application
             public ListElement lNext { set; get; }
         };
 
-        private ListElement head { set; get; }
+        private ListElement head;
     };
 }
 

@@ -4,7 +4,7 @@ namespace Application
 {
     public class Stack
     {
-        private StackElement head { set; get; }
+        private StackElement head;
 
         public Stack()
         {

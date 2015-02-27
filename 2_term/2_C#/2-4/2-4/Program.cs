@@ -6,7 +6,7 @@ namespace Application
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Enter the equation without whitespaces: ");
+            Console.WriteLine("Enter the equation: ");
             string equationIn = Console.ReadLine();
             Calculator calc = new Calculator();
             calc.Calculate(equationIn.ToCharArray(), equationIn.Length);
