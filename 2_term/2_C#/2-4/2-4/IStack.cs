@@ -2,13 +2,13 @@ using System;
 
 namespace Application
 {
-    interface IStack
+    interface IStack <T>
     {
-        void Push(double number) ;
+        void Push(T number) ;
 
-        double Pop();
+        T Pop();
 
-        double Top();
+        T Top();
 
         bool IsEmpty();
     }

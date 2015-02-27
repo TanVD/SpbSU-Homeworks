@@ -2,9 +2,9 @@ using System;
 
 namespace Application
 {
-    public class ArrayStack: IStack
+    public class ArrayStack: IStack <int>
     {
-        private double[] array;
+        private int[] array;
         private int capacity;
         private int size;
 
@@ -12,42 +12,46 @@ namespace Application
         {
             capacity = 2;
             size = 0;
-            array = new double[2];
+            array = new int[2];
         }
 
-        public void Push(double number)
+        public void Push(int number)
         {
+
             if (size == capacity)
             {
                 Array.Resize(ref array, capacity * 2);
                 capacity = capacity * 2;
             }
-            for (int i = size; i > 0; i--)
+            for (int i = capacity - 1; i > 0; i--)
             {
                 array[i] = array[i - 1];
             }
             array[0] = number;
             size = size + 1;
+
         }
 
-        public double Pop()
+        public int Pop()
         {
-            double result = array[0];
-            for (int i = 0; i < size - 1; i++)
+
+            int result = array[0];
+            size = size - 1;
+            for (int i = 0; i < capacity - 1; i++)
             {
                 array[i] = array[i + 1];
             }
-            size = size - 1;
             array[size] = 0;
             if (size == capacity / 2 &&
                 capacity % 2 == 0 && capacity / 2 != 0)
             {
                 Array.Resize(ref array, capacity / 2);
+                capacity = capacity / 2;
             }
             return result;
         }
 
-        public double Top()
+        public int Top()
         {
             return array[0];
         }

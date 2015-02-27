@@ -4,8 +4,8 @@ namespace Application
 {
     public class Calculator
     {
-        private char[] equation;
-        private double result;
+        private char[] equation { set; get; }
+        private double result { set; get; }
         private bool valid;
 
         public Calculator()

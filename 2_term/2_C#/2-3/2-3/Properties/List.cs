@@ -60,7 +60,7 @@ namespace Application
 
         private class ListElement
         {
-            public int value;
+            public int value { set; get; }
 
             public ListElement(int value, ListElement lNext)
             {
@@ -68,10 +68,10 @@ namespace Application
                 this.value = value;
             }
 
-            public ListElement lNext;
+            public ListElement lNext { set; get; }
         };
 
-        private ListElement head;
+        private ListElement head { set; get; }
     };
 }
 

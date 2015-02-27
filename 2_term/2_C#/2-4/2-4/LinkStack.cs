@@ -2,7 +2,7 @@ using System;
 
 namespace Application
 {
-    public class LinkStack : IStack
+    public class LinkStack : IStack <double>
     {
         public LinkStack()
         {
@@ -33,8 +33,8 @@ namespace Application
 
         private class StackElement
         {
-            public double value;
-            public StackElement next;
+            public double value { set; get; }
+            public StackElement next { set; get; }
 
             public StackElement(double value, StackElement next)
             {
@@ -43,7 +43,7 @@ namespace Application
             }
         }
 
-        StackElement head;
+        StackElement head { set; get; }
     }
 }
 

@@ -4,7 +4,7 @@ namespace Application
 {
     public class Stack
     {
-        private StackElement head;
+        private StackElement head { set; get; }
 
         public Stack()
         {
@@ -35,8 +35,9 @@ namespace Application
 
         private class StackElement
         {
-            public int value;
-            public StackElement next;
+            public int value { set; get; }
+
+            public StackElement next { set; get; }
 
             public StackElement(int value, StackElement next)
             {

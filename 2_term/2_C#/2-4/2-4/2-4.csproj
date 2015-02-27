@@ -39,8 +39,8 @@
     <Compile Include="LinkStack.cs" />
     <Compile Include="IStack.cs" />
     <Compile Include="Calculator.cs" />
-    <Compile Include="InfToPostForm.cs" />
-    <Compile Include="PostCalculate.cs" />
+    <Compile Include="InfToPostFormTrans.cs" />
+    <Compile Include="PostCalculation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

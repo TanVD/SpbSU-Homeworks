@@ -84,10 +84,12 @@ namespace Application
 
         public static int InfToPostForm(char[] expressionIn, char[] expressionPost, int expressionInEnd)
         {
-            IStack operationalStack = new ArrayStack();
+            IStack <int> operationalStack = new ArrayStack();
             int k = 0;
             for (int i = 0; i < expressionInEnd; i++)
             {
+                if (expressionIn[i] == ' ')
+                    continue;
                 if (Char.IsDigit(expressionIn[i]))
                 {
                     expressionPost[k] = expressionIn[i];
@@ -95,9 +97,8 @@ namespace Application
                     if (i == expressionInEnd - 1)
                     {
                         expressionPost[k++] = '|';
-                        continue;
                     }
-                    if (!Char.IsDigit(expressionIn[i + 1]))
+                    else if (!Char.IsDigit(expressionIn[i + 1]))
                     {
                         expressionPost[k++] = '|';
                     }
@@ -124,7 +125,7 @@ namespace Application
                             break;
                         }
 
-                        expressionPost[k] = OutputOperation((int)operationalStack.Pop());
+                        expressionPost[k] = OutputOperation(operationalStack.Pop());
                         k++;
 
                         if (((operation > operationalStack.Top() + 1) && (operation != (int)OperationsLabels.closedBracket))
@@ -139,8 +140,15 @@ namespace Application
 
             while (!operationalStack.IsEmpty())
             {
-                expressionPost[k] = OutputOperation((int)operationalStack.Pop());
-                k++;
+                if (operationalStack.Top() != 0)
+                {
+                    expressionPost[k] = OutputOperation(operationalStack.Pop());
+                    k++;
+                }
+                else
+                {
+                    operationalStack.Pop();
+                }
             }
             return k;
         }
