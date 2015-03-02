@@ -23,7 +23,7 @@ int main()
     int counter = 0;
     char* equationIn = new char[100];
     getStringConsole(&counter, equationIn);
-    calculator calc;
+    Calculator calc;
     calc.calculate(equationIn, counter);
     if (calc.isResultValid())
         cout << "Output: " << calc.returnResult() << endl;
