@@ -5,7 +5,8 @@ CONFIG -= qt
 
 SOURCES += main.cpp \
     consoleOut.cpp \
-    fileOut.cpp
+    fileOut.cpp \
+    matrix.cpp
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -13,5 +14,6 @@ qtcAddDeployment()
 HEADERS += \
     consoleOut.h \
     outputInterface.h \
-    fileOut.h
+    fileOut.h \
+    matrix.h
 

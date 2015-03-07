@@ -8,17 +8,15 @@ class FileOut : public OutputInterface
 public:
     /**
      * @brief FileOut Constructor which gets all necessary information about file and array
-     * @param filename Name of file output where
      * @param array Array to be written
      * @param lengthArray Length of array to be written
      */
-    FileOut(char* filename, int* array, int lengthArray);
+    FileOut(int* array, int lengthArray);
     /**
      * @brief out The function of outputing into file. Implementation of interface function.
      */
     void out();
 private:
-    char* filename;
     int* array;
     int lengthArray;
 };
