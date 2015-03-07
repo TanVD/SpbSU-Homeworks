@@ -12,7 +12,7 @@ class IComparable
 {
 public:
     /**
-      * @brief ~IComparable Virtual destructor of inteface
+      * @brief ~IComparable Virtual destructor of interface
       */
      virtual ~IComparable() {};
     /**
@@ -22,18 +22,13 @@ public:
       */
      virtual int compareTo(IComparable* that) = 0;
     /**
-      * @brief length Public method for descendant to get value of counter
-      * @return Int value of counter
+      * @brief length Virtual method on result of which comparation decision based
+      * @return Int value for comparation
       */
-     int length() const
-     {
-         return counter;
-     }
+     virtual int length() = 0;
      /**
       * @brief print Virtual method to print IComparable object
       */
      virtual void print() = 0;
- protected:
-     int counter = 0;
 
 };

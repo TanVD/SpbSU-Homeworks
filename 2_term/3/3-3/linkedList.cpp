@@ -1,7 +1,7 @@
 #include "linkedList.h"
 #include <iostream>
 
-LinkedList::LinkedList() : head(nullptr)
+LinkedList::LinkedList() : head(nullptr), counter(0)
 {
 }
 
@@ -67,6 +67,11 @@ int LinkedList::compareTo(IComparable *that)
         return -1;
     }
     return 0;
+}
+
+int LinkedList::length()
+{
+    return counter;
 }
 
 

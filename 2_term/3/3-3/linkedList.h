@@ -30,6 +30,11 @@ public:
      * @return Int (1, 0, -1) 1 if this > that, 0 if this == that, -1 if this < that
      */
     int compareTo(IComparable* that);
+    /**
+     * @brief length Implementation of virtual method returnin length used for comparation
+     * @return Int value used for comparation
+     */
+    int length();
 
 private:
     class ListElement
@@ -39,6 +44,8 @@ private:
         ListElement(int value, ListElement* lNext);
         ListElement* lNext;
     };
+
+    int counter;
     ListElement* head;
 };
 
