@@ -9,38 +9,37 @@ CalculatorUberUI::CalculatorUberUI(QWidget *parent) :
 {
     ui->setupUi(this);
     buttons = new QSignalMapper(this);
-    buttons->setMapping(ui->number0, '0');
-    buttons->setMapping(ui->number1, '1');
-    buttons->setMapping(ui->number2, '2');
-    buttons->setMapping(ui->number3, '3');
-    buttons->setMapping(ui->number4, '4');
-    buttons->setMapping(ui->number5, '5');
-    buttons->setMapping(ui->number6, '6');
-    buttons->setMapping(ui->number7, '7');
-    buttons->setMapping(ui->number8, '8');
-    buttons->setMapping(ui->number9, '9');
+    QPushButton *pushButtons[16];
+    pushButtons[0] = ui->number0;
+    pushButtons[1] = ui->number1;
+    pushButtons[2] = ui->number2;
+    pushButtons[3] = ui->number3;
+    pushButtons[4] = ui->number4;
+    pushButtons[5] = ui->number5;
+    pushButtons[6] = ui->number6;
+    pushButtons[7] = ui->number7;
+    pushButtons[8] = ui->number8;
+    pushButtons[9] = ui->number9;
+    pushButtons[10] = ui->dot;
+    pushButtons[11] = ui->operationDivide;
+    pushButtons[12] = ui->operationEqual;
+    pushButtons[13] = ui->operationMinus;
+    pushButtons[14] = ui->operationMultiply;
+    pushButtons[15] = ui->operationPlus;
+    for (int i = 0; i < 10; i++)
+    {
+        buttons->setMapping(pushButtons[i], '0' + i);
+    }
     buttons->setMapping(ui->dot, '.');
     buttons->setMapping(ui->operationDivide, '/');
     buttons->setMapping(ui->operationMultiply, '*');
     buttons->setMapping(ui->operationEqual, '=');
     buttons->setMapping(ui->operationMinus, '-');
     buttons->setMapping(ui->operationPlus, '+');
-    connect(ui->number0, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->number1, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->number2, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->number3, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->number4, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->number5, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->number6, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->number7, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->number8, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->number9, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->dot, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->operationPlus, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->operationMinus, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->operationDivide, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->operationMultiply, SIGNAL(clicked()), buttons, SLOT(map()));
-    connect(ui->operationEqual, SIGNAL(clicked()), buttons, SLOT(map()));
+    for (int i = 0; i < 16; i++)
+    {
+        connect(pushButtons[i], SIGNAL(clicked()), buttons, SLOT(map()));
+    }
     connect(buttons, SIGNAL(mapped(int)), this, SLOT(newChar(int)));
 }
 
@@ -60,7 +59,7 @@ void CalculatorUberUI::newChar(int value)
     {
         Calculator* calc = new Calculator();
         calc->calculate(ui->lineEdit->text(), ui->lineEdit->text().length());
-        ui->lineEdit->setText(QVariant(calc->returnResult()).toString());
-        equation = QVariant(calc->returnResult()).toString();
+        ui->lineEdit->setText(QString::number(calc->returnResult()));
+        equation = QString::number(calc->returnResult());
     }
 }
