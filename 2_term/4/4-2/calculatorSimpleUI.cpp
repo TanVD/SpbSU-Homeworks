@@ -8,6 +8,9 @@ CalculatorSimpleUI::CalculatorSimpleUI(QWidget *parent) :
     calc(new CalculatorSimple())
 {
     ui->setupUi(this);
+    connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(on_arg1_valueChanged(int)));
+    connect(ui->spinBox_2, SIGNAL(valueChanged(int)), this, SLOT(on_arg2_valueChanged(int)));
+    connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(on_operation_currentIndexChanged(int)));
 }
 
 CalculatorSimpleUI::~CalculatorSimpleUI()
@@ -16,19 +19,19 @@ CalculatorSimpleUI::~CalculatorSimpleUI()
     delete ui;
 }
 
-void CalculatorSimpleUI::on_spinBox_valueChanged(int arg1)
+void CalculatorSimpleUI::on_arg1_valueChanged(int arg1)
 {
     calc->setFirstArgument(arg1);
     ui->lineEdit->setText(QVariant(calc->getResult()).toString());
 }
 
-void CalculatorSimpleUI::on_spinBox_2_valueChanged(int arg1)
+void CalculatorSimpleUI::on_arg2_valueChanged(int arg1)
 {
     calc->setSecondArgument(arg1);
     ui->lineEdit->setText(QVariant(calc->getResult()).toString());
 }
 
-void CalculatorSimpleUI::on_comboBox_currentIndexChanged(int index)
+void CalculatorSimpleUI::on_operation_currentIndexChanged(int index)
 {
     calc->setOperation(index);
     ui->lineEdit->setText(QVariant(calc->getResult()).toString());
