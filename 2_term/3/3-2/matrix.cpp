@@ -34,3 +34,8 @@ int Matrix::getByIndex(int width, int height)
     return matrix[width][height];
 }
 
+int Matrix::getSize()
+{
+    return size;
+}
+

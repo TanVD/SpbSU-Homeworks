@@ -1,4 +1,5 @@
 #pragma once
+#include "matrix.h"
 /**
   * @mainpage OutputInterface makes it easier to work with output in file and console
   */
@@ -9,6 +10,7 @@
 class OutputInterface
 {
 public:
+    OutputInterface();
     /**
      * @brief ~OutputInterface Virtual destructor
      */
@@ -17,5 +19,13 @@ public:
      * @brief out Virtual method of outputing int arrays which makes childs of interface implement outputing
      */
     virtual void out() = 0;
+protected:
+    /**
+     * @brief bypassMatrix Create int array from matrix passing spiral way
+     * @param matrix Matrix to pass
+     */
+    void bypassMatrix(Matrix* matrix);
+    int *array;
+    int lengthArray;
 };
 

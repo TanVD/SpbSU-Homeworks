@@ -1,8 +1,9 @@
 #include "consoleOut.h"
 #include <iostream>
 
-ConsoleOut::ConsoleOut(int *array, int lengthArray) : array(array), lengthArray(lengthArray)
+ConsoleOut::ConsoleOut(Matrix *matrix)
 {
+    bypassMatrix(matrix);
 }
 
 void ConsoleOut::out()
@@ -12,6 +13,12 @@ void ConsoleOut::out()
         std::cout << array[i] << " ";
     }
 
+}
+
+ConsoleOut::~ConsoleOut()
+{
+    if (array != nullptr)
+        delete[] array;
 }
 
 

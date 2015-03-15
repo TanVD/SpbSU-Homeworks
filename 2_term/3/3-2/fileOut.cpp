@@ -1,9 +1,11 @@
 #include "fileOut.h"
+#include "matrix.h"
 #include <fstream>
 #include <iostream>
 
-FileOut::FileOut(int *array, int lengthArray) : array(array), lengthArray(lengthArray)
+FileOut::FileOut(Matrix* matrix)
 {
+    bypassMatrix(matrix);
 }
 
 void FileOut::out()
@@ -19,6 +21,12 @@ void FileOut::out()
         output << array[i] << " ";
     }
     delete[] filename;
+    output.close();
+}
 
+FileOut::~FileOut()
+{
+    if (array != nullptr)
+        delete[] array;
 }
 

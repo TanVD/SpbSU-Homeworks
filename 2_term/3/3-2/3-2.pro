@@ -1,15 +1,13 @@
 TEMPLATE = app
-CONFIG += console
+CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
     consoleOut.cpp \
     fileOut.cpp \
-    matrix.cpp
-
-include(deployment.pri)
-qtcAddDeployment()
+    matrix.cpp \
+    outputInterface.cpp
 
 HEADERS += \
     consoleOut.h \

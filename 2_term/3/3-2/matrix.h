@@ -21,6 +21,11 @@ public:
      * @return Returns int number placed in chosen cell
      */
     int getByIndex(int width, int height);
+    /**
+     * @brief getSize Return height or width of matrix (equal because matrix is square)
+     * @return Int number - size of matrix
+     */
+    int getSize();
 private:
     int** matrix;
     int size;
