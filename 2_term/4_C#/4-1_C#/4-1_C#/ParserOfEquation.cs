@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 
-
 namespace _C
 {
     public class ParserOfEquation
@@ -44,10 +43,9 @@ namespace _C
             }
             tree.SetDefault();
             return tree;
-
         }
-        static private StreamReader sw;
 
+        private static StreamReader sw;
     }
 }
 

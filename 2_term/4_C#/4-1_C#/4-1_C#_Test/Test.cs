@@ -19,6 +19,7 @@ namespace _C_Test
             tree.СreateRightElement('4');
             Assert.AreEqual("1+2-4", tree.PrintTree());
          }
+
         [Test()]
         public void ariphTreeFreeTest()
         {
@@ -27,6 +28,7 @@ namespace _C_Test
             Assert.IsFalse(tree.IsLeftFree());
             Assert.IsFalse(!tree.IsRightFree());
         }
+
         [Test()]
         public void moveTreeTest()
         {
@@ -42,12 +44,14 @@ namespace _C_Test
             tree.DownRight();
             Assert.AreEqual('4', tree.ValueCurrent());
         }
+
         [Test()]
         public void parseTreeTest()
         {
             AriphTree tree = ParserOfEquation.ParseFile("bobuk");
             Assert.AreEqual("1+2-4", tree.PrintTree());
         }
+
         [Test()]
         public void calculateTree()
         {
