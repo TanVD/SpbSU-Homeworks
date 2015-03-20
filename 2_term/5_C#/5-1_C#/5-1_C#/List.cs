@@ -1,0 +1,88 @@
+using System;
+
+namespace _C
+{
+    public class List
+    {
+        public delegate void ModifyThis(int value);
+
+        public List()
+        {
+            head = null;
+        }
+
+        public virtual void Add(int value)
+        {
+            head = new ListElement(value, head);
+        }
+
+        public virtual void Remove(int value)
+        {
+            ListElement current = head;
+            ListElement previous = head;
+            while (current != null && current.value != value)
+            {
+                previous = current;
+                current = current.lNext;
+            }
+            if (current != null)
+            {
+                if (current != head)
+                    previous.lNext = current.lNext;
+                else
+                    head = current.lNext;
+            }
+        }
+
+        public bool IsExists(int value)
+        {
+            ListElement current = head;
+            while (current != null && current.value != value)
+            {
+                current = current.lNext;
+            }
+            if (current != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void Print()
+        {
+            ListElement current = head;
+            while (current != null)
+            {
+                Console.Write("{0} ", current.value);
+                current = current.lNext;
+            }
+        }
+
+        public void ModifyElements(Func <int, int> modifier)
+        {
+            ListElement current = head;
+            while (current != null)
+            {
+                current.value = modifier(current.value);
+                current = current.lNext;
+            }
+        }
+
+        private class ListElement
+        {
+            public int value { set; get; }
+
+            public ListElement(int value, ListElement lNext)
+            {
+                this.lNext = lNext;
+                this.value = value;
+            }
+
+            public ListElement lNext { set; get; }
+        };
+
+        private ListElement head;
+    };
+}
+
+
