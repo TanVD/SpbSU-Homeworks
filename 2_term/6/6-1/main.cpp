@@ -1,0 +1,28 @@
+#include "ariphTree.h"
+#include "parserOfEquation.h"
+#include <iostream>
+#include <string>
+#include <QTextStream>
+#include "parserTest.h"
+
+using namespace std;
+
+int main()
+{
+    ParserTest test;
+    QTest::qExec(&test);
+    cout << "This program will calculate your equation tree.\nEnter the name of file: ";
+    QString filename;
+    QTextStream str(stdin);
+    filename = str.readLine();
+    QFile *file = new QFile(filename);
+    if (!file->exists())
+    {
+        cout << "Oops... Didn't found!";
+        return 1;
+    }
+    AriphTree* tree = ParserOfEquation::ParseFile(file);
+    cout << "Your answer is " << tree->CalculateTree() << endl;
+    delete file;
+    delete tree;
+}
