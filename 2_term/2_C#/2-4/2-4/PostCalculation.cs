@@ -4,10 +4,16 @@ namespace Application
 {
     public class PostCalculation
     {
-        public static double PostCalculate(char[] expressionPost, double expressionEnd, ref bool isValid)
+        public PostCalculation(IStack<double> stack)
+        {
+            operationalStack = stack;
+        }
+
+        private IStack <double> operationalStack;
+
+        public double PostCalculate(char[] expressionPost, double expressionEnd, ref bool isValid)
         {
             double symbol = 0;
-            IStack <double> operationalStack = new LinkStack();
             isValid = true;
             for (int i = 0; i < expressionEnd; i++)
             {

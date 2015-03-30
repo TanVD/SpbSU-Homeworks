@@ -25,7 +25,7 @@ namespace Application
             }
             if (current != null)
             {
-                if (previous != head)
+                if (current != head)
                     previous.lNext = current.lNext;
                 else
                     head = current.lNext;

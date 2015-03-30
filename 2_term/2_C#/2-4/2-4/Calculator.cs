@@ -19,9 +19,11 @@ namespace Application
         {
             this.equation = equationIn;
             char[] equationPost = new char[length * 2 + 1];
-            int newLength = InfToPostFormTrans.InfToPostForm(equation, equationPost, length);
+            InfToPostFormTrans infTrans = new InfToPostFormTrans(new ArrayStack<int>());
+            int newLength = infTrans.InfToPostForm(equation, equationPost, length);
             valid = true;
-            result = PostCalculation.PostCalculate(equationPost, newLength, ref valid);
+            PostCalculation postCalc = new PostCalculation(new LinkStack<double>());
+            result = postCalc.PostCalculate(equationPost, newLength, ref valid);
         }
 
         public double ReturnResult()

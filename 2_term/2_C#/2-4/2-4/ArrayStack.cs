@@ -2,9 +2,9 @@ using System;
 
 namespace Application
 {
-    public class ArrayStack: IStack <int>
+    public class ArrayStack <T>: IStack <T>
     {
-        private int[] array;
+        private T[] array;
         private int capacity;
         private int size;
 
@@ -12,10 +12,10 @@ namespace Application
         {
             capacity = 2;
             size = 0;
-            array = new int[2];
+            array = new T[2];
         }
 
-        public void Push(int number)
+        public void Push(T number)
         {
 
             if (size == capacity)
@@ -32,16 +32,15 @@ namespace Application
 
         }
 
-        public int Pop()
+        public T Pop()
         {
 
-            int result = array[0];
+            T result = array[0];
             size = size - 1;
             for (int i = 0; i < capacity - 1; i++)
             {
                 array[i] = array[i + 1];
             }
-            array[size] = 0;
             if (size == capacity / 2 &&
                 capacity % 2 == 0 && capacity / 2 != 0)
             {
@@ -51,7 +50,7 @@ namespace Application
             return result;
         }
 
-        public int Top()
+        public T Top()
         {
             return array[0];
         }

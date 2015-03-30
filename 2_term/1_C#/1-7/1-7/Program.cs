@@ -6,10 +6,10 @@ namespace Application
     {
         private static void SelectSort(ref int[][] array, int width, int height)
         {
-            for (int i = 0; i < width; i++)
+            for (int i = 0; i < array.Length; i++)
             {
                 int min = i;
-                for (int j = i; j < width; j++)
+                for (int j = i; j < array.Length; j++)
                 {
                     if (array[min][0] > array[j][0])
                     {
@@ -25,9 +25,9 @@ namespace Application
         public static void Main(string[] args)
         {
             Console.WriteLine("This program will sort your matrix by first number of column.\nEnter the width and height of matrix.");
-            Console.WriteLine("Enter the width: ");
+            Console.Write("Enter the width: ");
             int width = Int32.Parse(Console.ReadLine());
-            Console.WriteLine("Enter the height: ");
+            Console.Write("Enter the height: ");
             int height = Int32.Parse(Console.ReadLine());
             Console.WriteLine("Enter matrix: ");
             int[][] matrix = new int[width][];

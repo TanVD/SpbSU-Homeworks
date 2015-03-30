@@ -4,53 +4,48 @@ using TDD;
 
 namespace TDDTest
 {
-    [TestFixture()]
     public class Test
     {
+        private Stack stack;
+
+        [SetUp()]
+        public void Initialize()
+        {
+            stack = new Stack();
+        }
+
         [Test()]
         public void PushPopTest()
         {
-            Stack stack = new Stack();
             stack.Push(1);
             stack.Push(2);
-            int first = stack.Pop();
-            int second = stack.Pop();
-            Assert.AreEqual(2, first);
-            Assert.AreEqual(1, second);
+            Assert.AreEqual(2, stack.Pop());
+            Assert.AreEqual(1, stack.Pop());
         }
 
         [Test()]
         public void IsEmptyTest()
         {
-            Stack stack = new Stack();
-            bool first = stack.IsEmpty();
+            Assert.IsTrue(stack.IsEmpty());
             stack.Push(1);
-            bool second = stack.IsEmpty();
+            Assert.IsFalse(stack.IsEmpty());
             stack.Push(2);
             stack.Pop();
             stack.Pop();
-            bool third = stack.IsEmpty();
-            Assert.IsFalse(!first);
-            Assert.IsFalse(second);
-            Assert.IsFalse(!third);
+            Assert.IsTrue(stack.IsEmpty());
         }
 
         [Test()]
         public void SizeTest()
         {
-            Stack stack = new Stack();
-            int first = stack.Size();
+            Assert.AreEqual(0, stack.Size());
             stack.Push(1);
-            int second = stack.Size();
+            Assert.AreEqual(1, stack.Size());
             stack.Push(2);
-            int third = stack.Size();
+            Assert.AreEqual(2, stack.Size());
             stack.Pop();
             stack.Pop();
-            int fourth = stack.Size();
-            Assert.AreEqual(0, first);
-            Assert.AreEqual(1, second);
-            Assert.AreEqual(2, third);
-            Assert.AreEqual(0 ,fourth);
+            Assert.AreEqual(0 ,stack.Size());
         }
     }
 }

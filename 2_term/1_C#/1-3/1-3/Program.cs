@@ -4,6 +4,8 @@ namespace Application
 {
     class MainClass
     {
+        private static Random rand = new Random();
+
         private static void MySwap(ref int a, ref int b)
         {
             int tmp = a;
@@ -15,8 +17,7 @@ namespace Application
         {
             if (start < end)
             {
-                int sepPoint;
-                sepPoint = MakeParts(a, start, end);
+                int sepPoint = MakeParts(a, start, end);
                 QuickSort(a, start, sepPoint - 1);
                 QuickSort(a, sepPoint + 1, end);
             }
@@ -25,14 +26,13 @@ namespace Application
         private static int MakeParts(int[] a, int start, int strongPoint)
         {
             int[] myArray = new int[3];
-            Random rand = new Random();
             myArray[0] = rand.Next() % (strongPoint - start + 1) + start;
             myArray[1] = rand.Next() % (strongPoint - start + 1) + start;
             myArray[2] = rand.Next() % (strongPoint - start + 1) + start;
 
             for (int i = 0; i < 2; i++)
             {
-                for (int k = 0; k < (2-i); k++)
+                for (int k = 0; k < (2 - i); k++)
                 {
                     if (a[myArray[k]] > a[myArray[k + 1]])
                     {
@@ -53,8 +53,7 @@ namespace Application
                 }
             }
             MySwap(ref a[afterSepElement], ref a[strongPoint]);
-            int result = afterSepElement;
-            return result;
+            return afterSepElement;
         }
 
         public static void Main(string[] args)

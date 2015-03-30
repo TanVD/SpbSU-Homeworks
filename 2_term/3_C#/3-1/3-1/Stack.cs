@@ -4,12 +4,6 @@ namespace TDD
 {
     public class Stack
     {
-        public Stack()
-        {
-            head = null;
-            size = 0;
-        }
-
         public void Push(int value)
         {
             head = new StackElement(value, head);

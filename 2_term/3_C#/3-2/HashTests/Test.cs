@@ -7,27 +7,31 @@ namespace HashTests
     [TestFixture()]
     public class Test
     {
+        private HashTable table;
+
         [Test()]
         public void AddTest()
         {
-            HashTable table = new HashTable(10001);
+            Assert.IsTrue(table.Contains(99));
+            Assert.IsFalse(table.Contains(80));
+            Assert.IsTrue(table.Contains(101));
+        }
+
+        [SetUp()]
+        public void Initialize()
+        {
+            table = new HashTable(10001);
             table.Add(99);
             table.Add(101);
-            Assert.IsFalse(!table.Contains(99));
-            Assert.IsFalse(table.Contains(80));
-            Assert.IsFalse(!table.Contains(101));
         }
 
         [Test()]
         public void RemoveTest()
         {
-            HashTable table = new HashTable(10001);
-            table.Add(99);
-            table.Add(101);
             table.Remove(99);
             Assert.IsFalse(table.Contains(99));
             Assert.IsFalse(table.Remove(102));
-            Assert.IsFalse(!table.Remove(101));
+            Assert.IsTrue(table.Remove(101));
         }
 
         private int HashFunction(int value, int module)
@@ -45,26 +49,30 @@ namespace HashTests
         [Test()]
         public void AddByMyFuncTest()
         {
-            HashTable.UsHash myDelegate = new HashTable.UsHash(HashFunction);
+            HashTable.UsHash myDelegate = HashFunction;
             HashTable table = new HashTable(10001, myDelegate);
             table.Add(99);
             table.Add(101);
-            Assert.IsFalse(!table.Contains(99));
+            Assert.IsTrue(table.Contains(99));
             Assert.IsFalse(table.Contains(80));
-            Assert.IsFalse(!table.Contains(101));
+            Assert.IsTrue(table.Contains(101));
         }
 
         [Test()]
         public void RemoveByMyFuncTest()
         {
-            HashTable.UsHash myDelegate = new HashTable.UsHash(HashFunction);
+            HashTable.UsHash myDelegate = HashFunction;
             HashTable table = new HashTable(10001, myDelegate);
             table.Add(99);
             table.Add(101);
-            table.Remove(99);
+            table.Add(102);
+
+            Assert.IsTrue(table.Remove(102));
+            Assert.IsTrue(table.Remove(101));
+            Assert.IsTrue(table.Remove(99));
             Assert.IsFalse(table.Contains(99));
             Assert.IsFalse(table.Remove(102));
-            Assert.IsFalse(!table.Remove(101));
+
         }
     }
 }

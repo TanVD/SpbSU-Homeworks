@@ -4,12 +4,13 @@ namespace Application
 {
     public class HashTable
     {
-        public delegate int UsHash(int value, int module);
-        private UsHash userHash;
+        public delegate int UsHash(int value,int module);
+
+        private UsHash userHash = HashFunction;
         private int module;
         private List[] array;
 
-        private int HashFunction(int value)
+        private static int HashFunction(int value, int module)
         {
             int factor = 101;
             int result = 0;
@@ -29,7 +30,6 @@ namespace Application
             {
                 array[i] = new List();
             }
-            userHash = null;
         }
 
         public HashTable(int module, UsHash func)
@@ -46,43 +46,21 @@ namespace Application
         public void Add(int value)
         {
             int index = 0;
-            if (userHash == null)
-            {
-                index = HashFunction(value);
-            }
-            else
-            {
-                index = userHash(value, module);
-            }
-
+            index = userHash(value, module);
             array[index].Add(value);
         }
 
         public bool Remove(int value)
         {
             int index = 0;
-            if (userHash == null)
-            {
-                index = HashFunction(value);
-            }
-            else
-            {
-                index = userHash(value, module);
-            }
+            index = userHash(value, module);
             return array[index].Remove(value);
         }
 
         public bool Contains(int value)
         {
             int index = 0;
-            if (userHash == null)
-            {
-                index = HashFunction(value);
-            }
-            else
-            {
-                index = userHash(value, module);
-            }
+            index = userHash(value, module);
             return array[index].IsInList(value);
         }
     }

@@ -2,26 +2,26 @@ using System;
 
 namespace Application
 {
-    public class LinkStack : IStack <double>
+    public class LinkStack<T> : IStack <T>
     {
         public LinkStack()
         {
             head = null;
         }
 
-        public void Push(double value)
+        public void Push(T value)
         {
             head = new StackElement(value, head);
         }
 
-        public double Pop()
+        public T Pop()
         {
-            double result = head.value;
+            T result = head.value;
             head = head.next;
             return result;
         }
 
-        public double Top()
+        public T Top()
         {
             return head.value;
         }
@@ -33,10 +33,10 @@ namespace Application
 
         private class StackElement
         {
-            public double value { set; get; }
+            public T value { set; get; }
             public StackElement next { set; get; }
 
-            public StackElement(double value, StackElement next)
+            public StackElement(T value, StackElement next)
             {
                 this.next = next;
                 this.value = value;

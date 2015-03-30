@@ -4,12 +4,7 @@ namespace Application
 {
     public class Stack
     {
-        private StackElement head;
-
-        public Stack()
-        {
-            head = null;
-        }
+        private StackElement head = null;
 
         public void Push(int value)
         {

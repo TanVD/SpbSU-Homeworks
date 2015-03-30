@@ -38,7 +38,7 @@ namespace Application
         public bool Remove(int value)
         {
             int index = HashFunction(value);
-            return array[index].Remove(value);
+            return array[index].RemoveValue(value);
         }
 
         public bool IsInHashTable(int value)
