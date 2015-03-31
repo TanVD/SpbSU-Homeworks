@@ -18,7 +18,7 @@ namespace _C_Test
         [Test()]
         public void TestListUniqueAddValue()
         {
-            list.Add(5);
+            list.Add(5); 
             list.Add(7);
             Assert.IsTrue(list.IsInList(5));
             Assert.IsTrue(list.IsInList(7));

@@ -2,8 +2,15 @@ using System;
 
 namespace _C
 {
+    /// <summary>
+    /// Implementation of List not keeping equal values (only one of each)
+    /// </summary>
     public class ListUnique : List
     {
+        /// <summary>
+        /// Add the specified value to this instance of List. According to unique rule.
+        /// </summary>
+        /// <param name="value">Value to add.</param>
         public override void Add(int value)
         {
             if (IsInList(value))
@@ -16,6 +23,11 @@ namespace _C
             }
         }
 
+        /// <summary>
+        /// Add the specified value to this instance of List to the place determined by index. According to unique rule.
+        /// </summary>
+        /// <param name="value">Value to add.</param>
+        /// <param name="index">Index.</param>
         public override void Add(int value, int index)
         {
             if (!IsExistsIndex(index))
@@ -32,6 +44,12 @@ namespace _C
             }
         }
 
+        /// <summary>
+        /// Removes the value form this instance of List. According to unique rule.
+        /// </summary>
+        /// <returns>true</returns>
+        /// <c>false</c>
+        /// <param name="value">Value to remove.</param>
         public override void  RemoveValue(int value)
         {
             if (!IsInList(value))
@@ -44,9 +62,15 @@ namespace _C
             }
         }
 
+        /// <summary>
+        /// Removes the value specified by index. According to unique rule.
+        /// </summary>
+        /// <returns>true</returns>
+        /// <c>false</c>
+        /// <param name="index">Index.</param>
         public override void RemoveIndex(int index)
         {
-            if (!IsExistsIndex(index))
+            if (!IsExistsIndex(index + 1))
             {
                 throw new OutOfIndexes();
             }
@@ -57,6 +81,9 @@ namespace _C
         }
     }
 
+    /// <summary>
+    /// This exception maybe thrown when existed element added.
+    /// </summary>
     public class AddExistedElementException : Exception
     {
         public AddExistedElementException()
@@ -64,6 +91,9 @@ namespace _C
         }
     }
 
+    /// <summary>
+    /// This exception maybe thrown when non existed element deleted.
+    /// </summary>
     public class DeleteNonExistedElement : Exception
     {
         public DeleteNonExistedElement()
@@ -71,6 +101,9 @@ namespace _C
         }
     }
 
+    /// <summary>
+    /// This exception maybe thrown when user attempting to reach index out of list.
+    /// </summary>
     public class OutOfIndexes : Exception
     {
         public OutOfIndexes()
