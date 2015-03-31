@@ -3,8 +3,17 @@ using System.IO;
 
 namespace _C
 {
+    /// <summary>
+    /// Class ParserOfEquation implements simple parsing mechanism for text equation into binary tree
+    /// </summary>
     public class ParserOfEquation
     {
+        private static StreamReader sw;
+        /// <summary>
+        /// Parses the file to ariph tree.
+        /// </summary>
+        /// <returns>Ariph tree which is result of parsing</returns>
+        /// <param name="filename">Name of file to parse.</param>
         public static AriphTree ParseFile(string filename)
         {
             sw = new StreamReader(filename);
@@ -29,7 +38,7 @@ namespace _C
                 {
                     tree.Up();
                 }
-                else if (equation[i] >= '0' && equation[i] <= '9')
+                else if (Char.IsDigit(equation[i]))
                 {
                     if (tree.IsLeftFree())
                     {
@@ -44,8 +53,6 @@ namespace _C
             tree.SetDefault();
             return tree;
         }
-
-        private static StreamReader sw;
     }
 }
 
