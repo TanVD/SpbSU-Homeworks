@@ -9,6 +9,7 @@ namespace _C
     public class ParserOfEquation
     {
         private static StreamReader sw;
+
         /// <summary>
         /// Parses the file to ariph tree.
         /// </summary>
