@@ -8,7 +8,7 @@ namespace Application
         {
             Console.WriteLine("Enter the equation: ");
             string equationIn = Console.ReadLine();
-            Calculator calc = new Calculator();
+            Calculator calc = new Calculator(new ArrayStack<int>(), new LinkStack<double>());
             calc.Calculate(equationIn.ToCharArray(), equationIn.Length);
             if (calc.IsResultValid())
             {

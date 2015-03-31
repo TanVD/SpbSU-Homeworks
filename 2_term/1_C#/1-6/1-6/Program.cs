@@ -4,7 +4,7 @@ namespace Application
 {
     class MainClass
     {
-        public static void writeMatrix(int[,] matrix)
+        public static void WriteMatrix(int[,] matrix)
         {
             int centerSize = matrix.GetLength(1) / 2;
             int radius = 1;
@@ -48,7 +48,7 @@ namespace Application
                     matrix[counter++, i] = Int32.Parse(x);
                 }
             }
-            writeMatrix(matrix);
+            WriteMatrix(matrix);
         }
     }
 }

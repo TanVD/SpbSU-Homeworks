@@ -10,6 +10,7 @@ namespace Application
             list.Add(2);
             list.Add(3);
             list.Add(5);
+            Console.WriteLine(list.Index(2));
             list.RemoveValue(5);
             list.RemoveValue(3);
             list.Add(11, 0);

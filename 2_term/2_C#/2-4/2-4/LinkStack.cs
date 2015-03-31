@@ -2,12 +2,9 @@ using System;
 
 namespace Application
 {
-    public class LinkStack<T> : IStack <T>
+    public class LinkStack<T> : IStack<T>
     {
-        public LinkStack()
-        {
-            head = null;
-        }
+        private StackElement head = null;
 
         public void Push(T value)
         {
@@ -16,14 +13,14 @@ namespace Application
 
         public T Pop()
         {
-            T result = head.value;
-            head = head.next;
+            T result = head.Value;
+            head = head.Next;
             return result;
         }
 
         public T Top()
         {
-            return head.value;
+            return head.Value;
         }
 
         public bool IsEmpty()
@@ -33,16 +30,15 @@ namespace Application
 
         private class StackElement
         {
-            public T value { set; get; }
-            public StackElement next { set; get; }
+            public T Value { set; get; }
+            public StackElement Next { set; get; }
 
             public StackElement(T value, StackElement next)
             {
-                this.next = next;
-                this.value = value;
+                this.Next = next;
+                this.Value = value;
             }
         }
-        private StackElement head;
     }
 }
 

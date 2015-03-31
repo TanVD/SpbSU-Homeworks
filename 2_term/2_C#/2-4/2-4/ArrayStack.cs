@@ -2,22 +2,14 @@ using System;
 
 namespace Application
 {
-    public class ArrayStack <T>: IStack <T>
+    public class ArrayStack<T>: IStack<T>
     {
-        private T[] array;
-        private int capacity;
-        private int size;
-
-        public ArrayStack()
-        {
-            capacity = 2;
-            size = 0;
-            array = new T[2];
-        }
+        private T[] array = new T[2];
+        private int capacity = 2;
+        private int size = 0;
 
         public void Push(T number)
         {
-
             if (size == capacity)
             {
                 Array.Resize(ref array, capacity * 2);
@@ -29,12 +21,10 @@ namespace Application
             }
             array[0] = number;
             size = size + 1;
-
         }
 
         public T Pop()
         {
-
             T result = array[0];
             size = size - 1;
             for (int i = 0; i < capacity - 1; i++)

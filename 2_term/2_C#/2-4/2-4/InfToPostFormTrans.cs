@@ -4,25 +4,24 @@ namespace Application
 {
     public class InfToPostFormTrans
     {
+        private IStack<int> priorityOperationsStack;
 
         public InfToPostFormTrans(IStack<int> stack)
         {
-            operationalStack = stack;
+            priorityOperationsStack = stack;
         }
-
-        private IStack <int> operationalStack;
 
         private enum OperationsLabels
         {
-            plus = 11,
-            minus = 12,
-            multiply = 21,
-            divide = 22,
-            openedBracket = 30,
-            closedBracket = 40
+            plus,
+            minus,
+            multiply,
+            divide,
+            openedBracket,
+            closedBracket
         }
 
-        private static int priorityOfOperation(OperationsLabels label)
+        private static int PriorityOfOperation(OperationsLabels label)
         {
             switch (label)
             {
@@ -86,49 +85,49 @@ namespace Application
             return 0;
         }
 
-        private static int InputOperation(char operationChar)
+        private static OperationsLabels InputOperation(char operationChar)
         {
-            int operation = 0;
+            OperationsLabels operation = OperationsLabels.plus;
             switch (operationChar)
             {
                 case '+':
                     {
-                        operation = priorityOfOperation(OperationsLabels.plus);
+                        operation = OperationsLabels.plus;
                         break;
                     }
                 case '-':
                     {
-                        operation = priorityOfOperation(OperationsLabels.minus);
+                        operation = OperationsLabels.minus;
                         break;
                     }
                 case '*':
                     {
-                        operation = priorityOfOperation(OperationsLabels.multiply);
+                        operation = OperationsLabels.multiply;
                         break;
                     }
                 case '/':
                     {
-                        operation = priorityOfOperation(OperationsLabels.divide);
+                        operation = OperationsLabels.divide;
                         break;
                     }
                 case '(':
                     {
-                        operation = priorityOfOperation(OperationsLabels.openedBracket);
+                        operation = OperationsLabels.openedBracket;
                         break;
                     }
                 case ')':
                     {
-                        operation = priorityOfOperation(OperationsLabels.closedBracket);
+                        operation = OperationsLabels.closedBracket;
                         break;
                     }
             }
             return operation;
         }
 
-        private static char OutputOperation(int operationInt)
+        private static char OutputOperation(OperationsLabels operationLabel)
         {
             char operation = ' ';
-            switch (OperationOfPriority(operationInt))
+            switch (operationLabel)
             {
                 case  OperationsLabels.plus:
                     {
@@ -175,49 +174,43 @@ namespace Application
                     }
                     continue;
                 }
-                int operation = InputOperation(expressionIn[i]);
-                if (operation == 0)
-                {
-                    return 0;
-                }
+                OperationsLabels operation = InputOperation(expressionIn[i]);
 
-                if (((operation > operationalStack.Top() + 1) && (operation != priorityOfOperation(OperationsLabels.closedBracket)))
-                    || (operationalStack.Top() == priorityOfOperation(OperationsLabels.openedBracket)))
+                if (((PriorityOfOperation(operation) > priorityOperationsStack.Top() + 1) && (operation != OperationsLabels.closedBracket))
+                    || (priorityOperationsStack.Top() == PriorityOfOperation(OperationsLabels.openedBracket)))
                 {
-                    operationalStack.Push(operation);
+                    priorityOperationsStack.Push(PriorityOfOperation(operation));
                 }
                 else
                 {
-                    while ((operation <= (operationalStack.Top() + 1)) || (operation == priorityOfOperation(OperationsLabels.closedBracket)))
+                    while ((PriorityOfOperation(operation) <= (priorityOperationsStack.Top() + 1)) || (operation == OperationsLabels.closedBracket))
                     {
-                        if ((operationalStack.Top() == priorityOfOperation(OperationsLabels.openedBracket)) && (operation == priorityOfOperation(OperationsLabels.closedBracket)))
+                        if ((priorityOperationsStack.Top() == PriorityOfOperation(OperationsLabels.openedBracket)) && (operation == OperationsLabels.closedBracket))
                         {
-                            operationalStack.Pop();
+                            priorityOperationsStack.Pop();
                             break;
                         }
 
-                        expressionPost[k] = OutputOperation(operationalStack.Pop());
+                        expressionPost[k] = OutputOperation(OperationOfPriority(priorityOperationsStack.Pop()));
                         k++;
 
-                        if (((operation > operationalStack.Top() + 1) && (operation != priorityOfOperation(OperationsLabels.closedBracket)))
-                            || ((operationalStack.Top() == priorityOfOperation(OperationsLabels.openedBracket)) && (operation != priorityOfOperation(OperationsLabels.closedBracket))))
+                        if (((PriorityOfOperation(operation) > priorityOperationsStack.Top() + 1) && (operation != OperationsLabels.closedBracket))
+                            || ((priorityOperationsStack.Top() == PriorityOfOperation(OperationsLabels.openedBracket)) && (operation != OperationsLabels.closedBracket)))
                         {
-                            operationalStack.Push(operation);
+                            priorityOperationsStack.Push(PriorityOfOperation(operation));
                             break;
                         }
                     }
                 }
             }
 
-            while (!operationalStack.IsEmpty())
+            while (!priorityOperationsStack.IsEmpty())
             {
-                expressionPost[k] = OutputOperation(operationalStack.Pop());
+                expressionPost[k] = OutputOperation(OperationOfPriority(priorityOperationsStack.Pop()));
                 k++;
             }
             return k;
         }
-
-
     }
 }
 

@@ -4,12 +4,12 @@ namespace Application
 {
     public class PostCalculation
     {
+        private IStack<double> operationalStack;
+
         public PostCalculation(IStack<double> stack)
         {
             operationalStack = stack;
         }
-
-        private IStack <double> operationalStack;
 
         public double PostCalculate(char[] expressionPost, double expressionEnd, ref bool isValid)
         {

@@ -4,7 +4,7 @@ namespace Application
 {
     public class HashTable
     {
-        public delegate int UsHash(int value,int module);
+        public delegate int UsHash(int value, int module);
 
         private UsHash userHash = HashFunction;
         private int module;
@@ -45,22 +45,19 @@ namespace Application
 
         public void Add(int value)
         {
-            int index = 0;
-            index = userHash(value, module);
+            int index = userHash(value, module);
             array[index].Add(value);
         }
 
         public bool Remove(int value)
         {
-            int index = 0;
-            index = userHash(value, module);
+            int index = userHash(value, module);
             return array[index].Remove(value);
         }
 
         public bool Contains(int value)
         {
-            int index = 0;
-            index = userHash(value, module);
+            int index = userHash(value, module);
             return array[index].IsInList(value);
         }
     }

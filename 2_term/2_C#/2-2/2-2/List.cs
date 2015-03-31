@@ -17,9 +17,9 @@ namespace Application
                 ListElement current = head;
                 for (int i = 0; i < index - 1; i++)
                 {
-                    current = current.lNext;
+                    current = current.LNext;
                 }
-                current.lNext = new ListElement(value, current.lNext);
+                current.LNext = new ListElement(value, current.LNext);
                 length++;
             }
             else
@@ -28,21 +28,31 @@ namespace Application
             }
         }
 
+        public int Index(int index)
+        {
+            ListElement current = head;
+            for (int i = 0; i < index; i++)
+            {
+                current = current.LNext;
+            }
+            return current.Value;
+        }
+
         public bool RemoveValue(int value)
         {
             ListElement current = head;
             ListElement previous = head;
-            while (current != null && current.value != value)
+            while (current != null && current.Value != value)
             {
                 previous = current;
-                current = current.lNext;
+                current = current.LNext;
             }
             if (current != null)
             {
                 if (current != head)
-                    previous.lNext = current.lNext;
+                    previous.LNext = current.LNext;
                 else
-                    head = current.lNext;
+                    head = current.LNext;
                 length--;
                 return true;
             }
@@ -60,14 +70,13 @@ namespace Application
                 ListElement current = head;
                 for (int i = 0; i < index - 1; i++)
                 {
-                    current = current.lNext;
+                    current = current.LNext;
                 }
-                current.lNext = current.lNext.lNext;
-                length++;
+                current.LNext = current.LNext.LNext;
             }
             else
             {
-                head = head.lNext;
+                head = head.LNext;
             }
             length--;
             return true;
@@ -80,9 +89,9 @@ namespace Application
             ListElement current = head;
             for (int i = 0; i < index; i++)
             {
-                if (current.lNext == null)
+                if (current.LNext == null)
                     return false;
-                current = current.lNext;
+                current = current.LNext;
             }
             return true;
         }
@@ -92,8 +101,8 @@ namespace Application
             ListElement current = head;
             while (current != null)
             {
-                Console.Write("{0} ", current.value);
-                current = current.lNext;
+                Console.Write("{0} ", current.Value);
+                current = current.LNext;
             }
         }
 
@@ -104,15 +113,15 @@ namespace Application
 
         private class ListElement
         {
-            public int value { set; get; }
+            public int Value { set; get; }
 
             public ListElement(int value, ListElement lNext)
             {
-                this.lNext = lNext;
-                this.value = value;
+                this.LNext = lNext;
+                this.Value = value;
             }
 
-            public ListElement lNext { set; get; }
+            public ListElement LNext { set; get; }
         };
 
         private ListElement head = null;
