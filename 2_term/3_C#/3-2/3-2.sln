@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3-2", "2-3\3-2.csproj", "{24BD2E03-6B17-4610-91EA-2F844D3DBDCD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HashTests", "HashTests\HashTests.csproj", "{BF4E6968-211C-46DA-BEB4-4AAD8E865BAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3-2", "3-2\3-2.csproj", "{24BD2E03-6B17-4610-91EA-2F844D3DBDCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +21,6 @@ Global
 		{BF4E6968-211C-46DA-BEB4-4AAD8E865BAE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = 2-3\3-2.csproj
+		StartupItem = HashTests\HashTests.csproj
 	EndGlobalSection
 EndGlobal

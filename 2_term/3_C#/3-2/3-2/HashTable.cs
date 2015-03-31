@@ -2,9 +2,12 @@ using System;
 
 namespace Application
 {
+    /// <summary>
+    /// Hash table class which implements Hash table structure using linked lists.
+    /// </summary>
     public class HashTable
     {
-        public delegate int UsHash(int value, int module);
+        public delegate int UsHash(int value,int module);
 
         private UsHash userHash = HashFunction;
         private int module;
@@ -43,18 +46,32 @@ namespace Application
             userHash = func;
         }
 
+        /// <summary>
+        /// Add the specified value to this instance of HashTable.
+        /// </summary>
+        /// <param name="value">Value to add.</param>
         public void Add(int value)
         {
             int index = userHash(value, module);
             array[index].Add(value);
         }
 
+        /// <summary>
+        /// Remove the specified value from this instance of HashTable.
+        /// </summary>
+        /// <param name="value">Value to remove.</param>
+        /// <returns> <c>true</c> if the removal was successfull; otherwise <c>false</c></returns>
         public bool Remove(int value)
         {
             int index = userHash(value, module);
-            return array[index].Remove(value);
+            return array[index].RemoveValue(value);
         }
 
+        /// <summary>
+        /// Determines whether this instance of Hashtable contains the specified value.
+        /// </summary>
+        /// <returns><c>true</c> if this instance contains the specified value; otherwise <c>false</c>.</returns>
+        /// <param name="value">Value to find.</param>
         public bool Contains(int value)
         {
             int index = userHash(value, module);
