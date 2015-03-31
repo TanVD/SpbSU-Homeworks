@@ -96,6 +96,20 @@ namespace Application
             return true;
         }
 
+        public bool IsInList(int value)
+        {
+            ListElement current = head;
+            while (current != null && current.Value != value)
+            {
+                current = current.LNext;
+            }
+            if (current != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void Print()
         {
             ListElement current = head;
