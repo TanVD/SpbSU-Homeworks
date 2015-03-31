@@ -6,7 +6,7 @@ namespace _C
     {
         public override void Add(int value)
         {
-            if (IsExists(value))
+            if (IsInList(value))
             {
                 throw new AddExistedElementException();
             }
@@ -16,15 +16,43 @@ namespace _C
             }
         }
 
-        public override void Remove(int value)
+        public override void Add(int value, int index)
         {
-            if (!IsExists(value))
+            if (!IsExistsIndex(index))
+            {
+                throw new OutOfIndexes();
+            }
+            else if (IsInList(value))
+            {
+                throw new AddExistedElementException();
+            }
+            else
+            {
+                base.Add(value, index);
+            }
+        }
+
+        public override void  RemoveValue(int value)
+        {
+            if (!IsInList(value))
             {
                 throw new DeleteNonExistedElement();
             }
             else
             {
-                base.Remove(value);
+                base.RemoveValue(value);
+            }
+        }
+
+        public override void RemoveIndex(int index)
+        {
+            if (!IsExistsIndex(index))
+            {
+                throw new OutOfIndexes();
+            }
+            else
+            {
+                base.RemoveIndex(index);
             }
         }
     }
@@ -39,6 +67,13 @@ namespace _C
     public class DeleteNonExistedElement : Exception
     {
         public DeleteNonExistedElement()
+        {
+        }
+    }
+
+    public class OutOfIndexes : Exception
+    {
+        public OutOfIndexes()
         {
         }
     }

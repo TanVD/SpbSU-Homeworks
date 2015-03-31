@@ -7,37 +7,53 @@ namespace _C_Test
     [TestFixture()]
     public class Test
     {
-        [Test()]
-        public void TestListUniqueAdd()
+        private ListUnique list;
+
+        [SetUp()]
+        public void Initialize()
         {
-            ListUnique list = new ListUnique();
-            list.Add(5);
-            list.Add(7);
-            Assert.IsTrue(list.IsExists(5));
-            Assert.IsTrue(list.IsExists(7));
-            Assert.IsFalse(list.IsExists(10));
+            list = new ListUnique();
         }
 
         [Test()]
-        public void TestListUniqueRemove()
+        public void TestListUniqueAddValue()
         {
-            ListUnique list = new ListUnique();
             list.Add(5);
             list.Add(7);
-            Assert.IsTrue(list.IsExists(5));
-            list.Remove(5);
+            Assert.IsTrue(list.IsInList(5));
+            Assert.IsTrue(list.IsInList(7));
+            Assert.IsFalse(list.IsInList(10));
+        }
+
+        [Test()]
+        public void TestListUniqueAddRemove()
+        {
+            list.Add(5, 0);
+            list.Add(7, 0);
+            Assert.IsTrue(list.IsInList(5));
+            Assert.IsTrue(list.IsInList(7));
+            Assert.IsFalse(list.IsInList(10));
+        }
+
+        [Test()]
+        public void TestListUniqueRemoveValue()
+        {
+            list.Add(5);
+            list.Add(7);
+            Assert.IsTrue(list.IsInList(5));
+            list.RemoveValue(5);
             try
             {
-                list.Remove(7);
+                list.RemoveValue(7);
             }
             catch (DeleteNonExistedElement)
             {
                 Assert.Fail();
             }
-            Assert.IsFalse(list.IsExists(5));
+            Assert.IsFalse(list.IsInList(5));
             try
             {
-                list.Remove(7);
+                list.RemoveValue(7);
                 Assert.Fail();
             }
             catch (DeleteNonExistedElement)
@@ -45,11 +61,55 @@ namespace _C_Test
             }
             try
             {
-                list.Remove(8);
+                list.RemoveValue(8);
                 Assert.Fail();
             }
             catch (DeleteNonExistedElement)
             {
+            }
+        }
+
+        [Test()]
+        public void TestListUniqueRemoveIndex()
+        {
+            list.Add(5);
+            list.Add(7);
+            Assert.IsTrue(list.IsInList(5));
+            list.RemoveIndex(0);
+            try
+            {
+                list.RemoveIndex(0);
+            }
+            catch (OutOfIndexes)
+            {
+                Assert.Fail();
+            }
+            Assert.IsFalse(list.IsInList(5));
+            try
+            {
+                list.RemoveIndex(0);
+                Assert.Fail();
+            }
+            catch (OutOfIndexes)
+            {
+            }
+
+        }
+
+        [Test()]
+        [ExpectedException("_C.AddExistedElementException")] 
+        public void TestListUniqueExecptionAddIndex()
+        {
+            list.Add(5, 0);
+            list.Add(7, 1);
+            try
+            {
+                list.Add(0, 3);
+                Assert.Fail();
+            }
+            catch (OutOfIndexes)
+            {
+                list.Add(5, 1);
             }
         }
 
@@ -58,9 +118,8 @@ namespace _C_Test
         //In mono other ways (like [ExpectedException(typeof(AddExistedElementException))]  don't work.
         //I don't know why. It gives me an internal error. NullReferenceException : object reference not set to an instance of object
         //Maybe it is somehow linked to typeof?
-        public void TestListUniqueExecptionAdd()
+        public void TestListUniqueExecptionAddValue()
         {
-            ListUnique list = new ListUnique();
             list.Add(5);
             list.Add(7);
             list.Add(5);
