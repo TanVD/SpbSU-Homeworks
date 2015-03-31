@@ -84,16 +84,9 @@ namespace Application
 
         private bool IsExistsIndex(int index)
         {
-            if (head == null)
-                return false;
-            ListElement current = head;
-            for (int i = 0; i < index; i++)
-            {
-                if (current.LNext == null)
-                    return false;
-                current = current.LNext;
-            }
-            return true;
+            if (length >= index)
+                return true;
+            return false;
         }
 
         public bool IsInList(int value)
