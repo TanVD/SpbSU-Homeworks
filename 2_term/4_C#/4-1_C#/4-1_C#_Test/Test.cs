@@ -26,7 +26,7 @@ namespace _C_Test
             AriphTree tree = new AriphTree('-');
             tree.СreateLeftElement('1');
             Assert.IsFalse(tree.IsLeftFree());
-            Assert.IsFalse(!tree.IsRightFree());
+            Assert.IsTrue(tree.IsRightFree());
         }
 
         [Test()]
