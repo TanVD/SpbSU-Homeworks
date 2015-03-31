@@ -2,6 +2,9 @@ using System;
 
 namespace Application
 {
+    /// <summary>
+    /// List class which implements structure of linked list.
+    /// </summary>
     public class List
     {
         /// <summary>

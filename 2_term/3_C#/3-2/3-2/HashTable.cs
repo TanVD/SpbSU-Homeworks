@@ -7,7 +7,7 @@ namespace Application
     /// </summary>
     public class HashTable
     {
-        public delegate int UsHash(int value,int module);
+        public delegate int UsHash(int value, int module);
 
         private UsHash userHash = HashFunction;
         private int module;

@@ -16,6 +16,7 @@ namespace TDD
             head = new StackElement(value, head);
             size++;
         }
+
         /// <summary>
         /// Pop the value from this instance of Stack.
         /// </summary>
@@ -27,6 +28,7 @@ namespace TDD
             size--;
             return result;
         }
+
         /// <summary>
         /// Determines whether this instance of Stack is empty.
         /// </summary>
