@@ -13,6 +13,20 @@ public:
     {
     }
 private slots:
+    void init()
+    {
+        set = new Set<int>();
+        set->add(5);
+        set->add(9);
+        set->add(11);
+        set->add(5);
+    }
+
+    void cleanup()
+    {
+        delete set;
+    }
+
     void addExistsTest()
     {
         QVERIFY(set->isExists(5));
@@ -63,20 +77,6 @@ private slots:
         QVERIFY(result->length() == 4);
         delete setSecond;
         delete result;
-    }
-
-    void init()
-    {
-        set = new Set<int>();
-        set->add(5);
-        set->add(9);
-        set->add(11);
-        set->add(5);
-    }
-
-    void cleanup()
-    {
-        delete set;
     }
 
 private:

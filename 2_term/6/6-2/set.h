@@ -1,7 +1,7 @@
 #pragma once
 
 /**
- * @brief The LinkedList class Implements Linked List structure
+ * @brief The Set class implements Set structure
  */
 template <typename T>
 class Set
@@ -9,9 +9,11 @@ class Set
 public:
     Set() : head(nullptr), counter(0)
     {}
+
     ~Set();
+
     /**
-     * @brief add Method adding new value in head of list
+     * @brief add Method adding new value in a head of set according to unique rule
      * @param value Int value to be added
      */
     void add(T value)
@@ -22,16 +24,19 @@ public:
             counter++;
         }
     }
+
     /**
-     * @brief remove Method deleting specific value in list
+     * @brief remove Method deleting specific value in set
      * @param value Int value to be deleted
-     * @return Return bool. True if value was found and deleted and false if value wasn't found
+     * @return bool. True if value was found and deleted and false if value wasn't found
      */
     bool remove(T value);
+
     /**
-     * @brief print Implementation of virtual method from IComparable. Prints elements of LinkedList.
+     * @brief print Prints elements of Set.
      */
     bool isExists(T value);
+
     /**
      * @brief length Returns number of elements in set as int
      * @return Return int representing number of elements in set
@@ -47,12 +52,14 @@ public:
      * @return Returns set which is association of two
      */
     Set<T> *associationSets(Set<T> *secondSet);
+
     /**
      * @brief intersectSets Intersection of two sets(this and param)
      * @param secondSet Second set to intersect with
      * @return Returns set which is intersection of two
      */
     Set<T> *intersectSets(Set<T> *secondSet);
+
 private:
     class SetElement
     {
@@ -128,7 +135,7 @@ Set<T> *Set<T>::associationSets(Set<T> *secondSet)
         resultSet->add(current->value);
         current = current->lNext;
     }
-    current  = secondSet->head;
+    current = secondSet->head;
     while (current != nullptr)
     {
         resultSet->add(current->value);
