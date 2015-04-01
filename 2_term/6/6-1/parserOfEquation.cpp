@@ -33,7 +33,7 @@ AriphTree *ParserOfEquation::ParseFile(QFile *file)
         {
             tree->Up();
         }
-        else if (equation[i] >= '0' && equation[i] <= '9')
+        else if (equation[i].isDigit())
         {
             if (tree->IsLeftFree())
             {

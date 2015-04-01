@@ -12,9 +12,8 @@ int main()
     ParserTest test;
     QTest::qExec(&test);
     cout << "This program will calculate your equation tree.\nEnter the name of file: ";
-    QString filename;
     QTextStream str(stdin);
-    filename = str.readLine();
+    QString filename = str.readLine();
     QFile *file = new QFile(filename);
     if (!file->exists())
     {

@@ -3,6 +3,9 @@
 #include <string>
 #include <QFile>
 
+/**
+ * @brief The ParserOfEquation class implements simple mechanism of parsint text file with equation to binary tree.
+ */
 class ParserOfEquation
 {
 public:
