@@ -9,7 +9,7 @@ namespace _C
     public class Filter<T>
     {
         /// <summary>
-        /// Filt the specified list by specified predicate.
+        /// Filt the specified list by the specified predicate.
         /// </summary>
         /// <param name="list">List to filt.</param>
         /// <param name="newListPredicate">Predicate for new list.</param>
