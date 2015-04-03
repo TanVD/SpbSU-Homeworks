@@ -2,6 +2,7 @@
 #include <QtCore/QObject>
 #include <QtTest>
 #include "hashTable.h"
+#include <functional>
 
 class HashTableTest : public QObject
 {
@@ -20,7 +21,7 @@ public:
         return result;
     }
 
-    int (*hashDel) (int, int);
+    std::function<int(int, int)> hashDel;
 
 private slots:
    void init()
@@ -68,8 +69,6 @@ private slots:
        table->changeModule(100);
    }
 
-
-
    void testChangeHashFunction()
    {
        hashDel = &hashFunction;
@@ -99,7 +98,4 @@ private slots:
 
 private:
    HashTable *table;
-
-
-
 };

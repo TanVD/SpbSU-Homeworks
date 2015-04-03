@@ -16,11 +16,11 @@ public:
     ~HashTableUI();
 
 private slots:
-    void on_moduleButton_clicked();
+    void onModuleButtonClicked();
 
-    void on_statisticButton_clicked();
+    void onStatisticButtonClicked();
 
-    void on_executeButton_clicked();
+    void onExecuteButtonClicked();
 
 private:
     Ui::HashTableUI *ui;

@@ -1,11 +1,9 @@
 #pragma once
-#include "list.h"
-
 /**
  * @brief The LinkedList class Class of Linked List.
  */
 
-class LinkedList : public List
+class LinkedList
 {
 public:
     LinkedList();

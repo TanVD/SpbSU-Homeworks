@@ -1,5 +1,4 @@
 #include "linkedList.h"
-#include "list.h"
 #include <iostream>
 
 LinkedList::LinkedList() : head(nullptr), lengthField(0)

@@ -9,6 +9,9 @@ HashTableUI::HashTableUI(QWidget *parent) :
     table(new HashTable(10000))
 {
     ui->setupUi(this);
+    connect(ui->moduleButton, SIGNAL(clicked()), this, SLOT(onModuleButtonClicked()));
+    connect(ui->statisticButton, SIGNAL(clicked()), this, SLOT(onStatisticButtonClicked()));
+    connect(ui->executeButton, SIGNAL(clicked()), this, SLOT(onExecuteButtonClicked()));
 }
 
 HashTableUI::~HashTableUI()
@@ -17,13 +20,13 @@ HashTableUI::~HashTableUI()
     delete ui;
 }
 
-void HashTableUI::on_moduleButton_clicked()
+void HashTableUI::onModuleButtonClicked()
 {
     table->changeModule(ui->moduleSpinBox->text().toInt());
 }
 
 
-void HashTableUI::on_statisticButton_clicked()
+void HashTableUI::onStatisticButtonClicked()
 {
     QMessageBox* box = new QMessageBox(this);
     QString string = ("Total cells: " + QString::number(table->getModule()) + "\nLoad factor: " + QString::number(table->getLoadFactor()) +
@@ -34,17 +37,24 @@ void HashTableUI::on_statisticButton_clicked()
     box->show();
 }
 
-void HashTableUI::on_executeButton_clicked()
+enum commands
 {
-    int index = ui->comboBox->currentIndex();
-    switch (index)
+    addCommand = 1,
+    removeCommand = 2,
+    findCommand = 3
+};
+
+void HashTableUI::onExecuteButtonClicked()
+{
+    int command = ui->comboBox->currentIndex();
+    switch (command)
     {
-    case 1:
+    case addCommand:
     {
-         table->addValue(ui->valueLineEdit->text().toInt());
-         break;
+        table->addValue(ui->valueLineEdit->text().toInt());
+        break;
     }
-    case 2:
+    case removeCommand:
     {
         if (!table->removeValue(ui->valueLineEdit->text().toInt()))
         {
@@ -56,7 +66,7 @@ void HashTableUI::on_executeButton_clicked()
         }
         break;
     }
-    case 3:
+    case findCommand:
     {
         if (table->findValue(ui->valueLineEdit->text().toInt()))
         {
@@ -77,11 +87,4 @@ void HashTableUI::on_executeButton_clicked()
         break;
     }
     }
-
-
-
-
-
-
-
 }

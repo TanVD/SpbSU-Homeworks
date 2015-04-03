@@ -9,13 +9,18 @@ HashTable::HashTable(int module) : module(module), array(new LinkedList*[module]
     }
 }
 
-HashTable::~HashTable()
+void HashTable::deleteArray(LinkedList** array, int size)
 {
-    for (int i  = 0; i < module; i++)
+    for (int i  = 0; i < size; i++)
     {
         delete array[i];
     }
     delete[] array;
+}
+
+HashTable::~HashTable()
+{
+    deleteArray(array, module);
 }
 
 int HashTable::hashFunction(int value)
@@ -74,7 +79,7 @@ bool HashTable::findValue(int value)
         return array[hashDelegate(value, module)]->isExists(value);
 }
 
-void HashTable::changeHashFunction(int (*hashDelegate)(int value, int module))
+void HashTable::changeHashFunction(std::function<int(int, int)>)
 {
     this->hashDelegate = hashDelegate;
     LinkedList** newHashTable = new LinkedList*[module];
@@ -94,11 +99,7 @@ void HashTable::changeHashFunction(int (*hashDelegate)(int value, int module))
             this->addValue(value);
         }
     }
-    for (int i  = 0; i < this->module; i++)
-    {
-        delete oldHashTable[i];
-    }
-    delete[] oldHashTable;
+    deleteArray(oldHashTable, this->module);
 }
 
 void HashTable::changeModule(int module)
@@ -122,11 +123,7 @@ void HashTable::changeModule(int module)
             this->addValue(value);
         }
     }
-    for (int i  = 0; i < oldModule; i++)
-    {
-        delete oldHashTable[i];
-    }
-    delete[] oldHashTable;
+    deleteArray(oldHashTable, oldModule);
 }
 
 int HashTable::getModule()
