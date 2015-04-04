@@ -35,7 +35,7 @@ bool LinkedList::remove(int value)
     if (current != nullptr)
     {
         ListElement *toDelete = current;
-        if (current != head)
+        if (previous != head)
             previous->lNext = current->lNext;
         else
             head = current->lNext;

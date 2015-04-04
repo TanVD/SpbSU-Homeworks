@@ -1,11 +1,15 @@
 #include <iostream>
 #include "sortedSet.h"
 #include "linkedList.h"
+#include "QtTest/QtTest"
+#include "testsortedset.h"
 
 using namespace std;
 
 int main()
 {
+    SortedSetTest test;
+    QTest::qExec(&test);
     cout << "Enter ! to add numbers to list.\nEnter * to create new list in set.\nEnter # to end.\nEnter commands: ";
     SortedSet* set = new SortedSet();
     LinkedList* newList = new LinkedList();
