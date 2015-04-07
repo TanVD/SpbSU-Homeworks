@@ -14,60 +14,60 @@ AriphTree::~AriphTree()
     }
 }
 
-void AriphTree::CreateLeftElement(QChar value)
+void AriphTree::createLeftElement(QChar value)
 {
     current->leftElement = new AriphTreeElement(value, current);
 }
 
-void AriphTree::CreateRightElement(QChar value)
+void AriphTree::createRightElement(QChar value)
 {
     current->rightElement = new AriphTreeElement(value, current);
 }
 
-void AriphTree::DownLeft()
+void AriphTree::moveToLeftChild()
 {
     current = current->leftElement;
 }
 
-void AriphTree::DownRight()
+void AriphTree::moveToRightChild()
 {
     current = current->rightElement;
 }
 
-void AriphTree::Up()
+void AriphTree::up()
 {
     current = current->ancestor;
 }
 
-bool AriphTree::IsLeftFree()
+bool AriphTree::isLeftFree()
 {
     return current->leftElement == nullptr;
 }
 
-bool AriphTree::IsRightFree()
+bool AriphTree::isRightFree()
 {
     return current->rightElement == nullptr;
 }
 
-void AriphTree::SetDefault()
+void AriphTree::setDefault()
 {
     current = head;
 }
 
-int AriphTree::CalculateTree()
+int AriphTree::calculateTree()
 {
-    return head->Calculate();
+    return head->calculate();
 }
 
-QChar AriphTree::ValueCurrent()
+QChar AriphTree::valueCurrent()
 {
     return current->value;
 }
 
-QString AriphTree::PrintTree()
+QString AriphTree::printTree()
 {
     QString stringPrint;
-    head->Print(stringPrint);
+    head->print(stringPrint);
     return stringPrint;
 }
 
@@ -91,17 +91,17 @@ AriphTree::AriphTreeElement::~AriphTreeElement()
     }
 }
 
-void AriphTree::AriphTreeElement::Print(QString &stringPrint)
+void AriphTree::AriphTreeElement::print(QString &stringPrint)
 {
     if (leftElement != nullptr)
-        leftElement->Print(stringPrint);
+        leftElement->print(stringPrint);
     stringPrint = stringPrint + value;
     if (rightElement != nullptr)
-        rightElement->Print(stringPrint);
+        rightElement->print(stringPrint);
 
 }
 
-int AriphTree::AriphTreeElement::Calculate()
+int AriphTree::AriphTreeElement::calculate()
 {
     if (leftElement == nullptr && rightElement == nullptr)
     {
@@ -111,19 +111,19 @@ int AriphTree::AriphTreeElement::Calculate()
     {
     case '+':
     {
-        return leftElement->Calculate() + rightElement->Calculate();
+        return leftElement->calculate() + rightElement->calculate();
     }
     case '-':
     {
-        return leftElement->Calculate() - rightElement->Calculate();
+        return leftElement->calculate() - rightElement->calculate();
     }
     case '*':
     {
-        return leftElement->Calculate() * rightElement->Calculate();
+        return leftElement->calculate() * rightElement->calculate();
     }
     case '/':
     {
-        return leftElement->Calculate() / rightElement->Calculate();
+        return leftElement->calculate() / rightElement->calculate();
     }
     }
     return 0;

@@ -14,5 +14,5 @@ public:
      * @param filename Name of file to parse
      * @return QString parsed from file
      */
-    static AriphTree* ParseFile(QFile* file);
+    static AriphTree* parseFile(QFile* file);
 };

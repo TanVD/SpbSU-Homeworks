@@ -20,8 +20,8 @@ int main()
         cout << "Oops... Didn't found!";
         return 1;
     }
-    AriphTree* tree = ParserOfEquation::ParseFile(file);
-    cout << "Your answer is " << tree->CalculateTree() << endl;
+    AriphTree* tree = ParserOfEquation::parseFile(file);
+    cout << "Your answer is " << tree->calculateTree() << endl;
     delete file;
     delete tree;
 }

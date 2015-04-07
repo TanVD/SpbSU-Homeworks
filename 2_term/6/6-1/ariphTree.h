@@ -19,63 +19,63 @@ public:
      * @brief CreateLeftElement Creates left child of node which is current
      * @param value Value to put in node
      */
-    void CreateLeftElement(QChar  value);
+    void createLeftElement(QChar  value);
 
     /**
      * @brief CreateRightElement Creates right child of node which is current
      * @param value Value to put in node
      */
-    void CreateRightElement(QChar value);
+    void createRightElement(QChar value);
 
     /**
      * @brief DownLeft Current node is changed to left child of node current at that moment
      */
-    void DownLeft();
+    void moveToLeftChild();
 
     /**
      * @brief DownRight Current node is changed to right child of node current at that moment
      */
-    void DownRight();
+    void moveToRightChild();
 
     /**
      * @brief Up Current is changed to parent of node which was current
      */
-    void Up();
+    void up();
 
     /**
      * @brief IsLeftFree Checks if the left child is nullptr
      * @return Bool. True if the left child is nullptr, otherwise false.
      */
-    bool IsLeftFree();
+    bool isLeftFree();
 
     /**
      * @brief IsRightFree Checks if the right child is nullptr
      * @return Bool. True if the right child is nullptr, otherwise false.
      */
-    bool IsRightFree();
+    bool isRightFree();
 
     /**
      * @brief SetDefault Sets current node to head of tree
      */
-    void SetDefault();
+    void setDefault();
 
     /**
      * @brief CalculateTree Returns value of equation of tree
      * @return Int value equal to equation of tree
      */
-    int CalculateTree();
+    int calculateTree();
 
     /**
      * @brief ValueCurrent Returns char value of current node
      * @return Char value of current node
      */
-    QChar ValueCurrent();
+    QChar valueCurrent();
 
     /**
      * @brief PrintTree Prints equation of tree
      * @return QString which represents equation of tree
      */
-    QString PrintTree();
+    QString printTree();
 
 private:
     class AriphTreeElement
@@ -88,9 +88,9 @@ private:
         AriphTreeElement *ancestor;
         QChar value;
 
-        void Print(QString &stringPrint);
+        void print(QString &stringPrint);
 
-        int Calculate();
+        int calculate();
     };
 
     AriphTreeElement *current;

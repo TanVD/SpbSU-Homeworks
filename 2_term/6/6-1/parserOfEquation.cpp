@@ -4,7 +4,7 @@
 #include <QTextStream>
 using namespace std;
 
-AriphTree *ParserOfEquation::ParseFile(QFile *file)
+AriphTree *ParserOfEquation::parseFile(QFile *file)
 {
     file->open(QIODevice::ReadOnly);
     QTextStream in(file);
@@ -18,33 +18,33 @@ AriphTree *ParserOfEquation::ParseFile(QFile *file)
     {
         if (equation[i] == '(')
         {
-            if (tree->IsLeftFree())
+            if (tree->isLeftFree())
             {
-                tree->CreateLeftElement(equation[i + 1]);
-                tree->DownLeft();
+                tree->createLeftElement(equation[i + 1]);
+                tree->moveToLeftChild();
             }
             else
             {
-                tree->CreateRightElement(equation[i + 1]);
-                tree->DownRight();
+                tree->createRightElement(equation[i + 1]);
+                tree->moveToRightChild();
             }
         }
         else if (equation[i] == ')')
         {
-            tree->Up();
+            tree->up();
         }
         else if (equation[i].isDigit())
         {
-            if (tree->IsLeftFree())
+            if (tree->isLeftFree())
             {
-                tree->CreateLeftElement(equation[i]);
+                tree->createLeftElement(equation[i]);
             }
             else
             {
-                tree->CreateRightElement(equation[i]);
+                tree->createRightElement(equation[i]);
             }
         }
     }
-    tree->SetDefault();
+    tree->setDefault();
     return tree;
 }
