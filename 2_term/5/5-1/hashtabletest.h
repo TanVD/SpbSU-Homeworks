@@ -21,8 +21,6 @@ public:
         return result;
     }
 
-    std::function<int(int, int)> hashDel;
-
 private slots:
    void init()
    {
@@ -98,4 +96,5 @@ private slots:
 
 private:
    HashTable *table;
+   std::function<int(int, int)> hashDel;
 };
