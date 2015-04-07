@@ -1,5 +1,4 @@
 #include "calculator.h"
-#include "infToPostForm.h"
 #include "stack.h"
 #include "arrayStack.h"
 #include "stackDouble.h"

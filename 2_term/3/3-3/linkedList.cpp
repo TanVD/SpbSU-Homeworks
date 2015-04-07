@@ -1,8 +1,7 @@
 #include "linkedList.h"
-#include "list.h"
 #include <iostream>
 
-LinkedList::LinkedList() : head(nullptr)
+LinkedList::LinkedList() : head(nullptr), counter(0)
 {
 }
 
@@ -21,6 +20,7 @@ LinkedList::~LinkedList()
 void LinkedList::add(int value)
 {
     head = new ListElement(value, head);
+    counter++;
 }
 
 bool LinkedList::remove(int value)
@@ -35,11 +35,12 @@ bool LinkedList::remove(int value)
     if (current != nullptr)
     {
         ListElement *toDelete = current;
-        if (current != head)
+        if (previous != head)
             previous->lNext = current->lNext;
         else
             head = current->lNext;
         delete toDelete;
+        counter--;
         return true;
     }
     return false;
@@ -50,13 +51,30 @@ void LinkedList::print()
     ListElement *current = head;
     while (current != nullptr)
     {
-        std::cout << current->value << std::endl;
+        std::cout << current->value << " " ;
         current = current->lNext;
     }
 }
 
-LinkedList::ListElement::ListElement(int value, ListElement *lNext)
+int LinkedList::compareTo(IComparable *that)
 {
-    this->lNext = lNext;
-    this->value = value;
+    if (length() > that->length())
+    {
+        return 1;
+    }
+    else if (length() < that->length())
+    {
+        return -1;
+    }
+    return 0;
+}
+
+int LinkedList::length()
+{
+    return counter;
+}
+
+
+LinkedList::ListElement::ListElement(int value, ListElement *lNext) : lNext(lNext), value(value)
+{
 }

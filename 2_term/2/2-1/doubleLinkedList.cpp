@@ -40,7 +40,8 @@ bool DoubleLinkedList::remove(int value)
         if (current != head)
         {
             current->lPrevious->lNext = current->lNext;
-            current->lNext->lPrevious = current->lPrevious;
+            if (current->lNext != nullptr)
+                current->lNext->lPrevious = current->lPrevious;
         }
         else
         {
