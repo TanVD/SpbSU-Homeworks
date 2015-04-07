@@ -16,7 +16,7 @@ public:
      * @brief add Method adding new value in a head of set according to unique rule
      * @param value Int value to be added
      */
-    void add(T value)
+    void add(const T &value)
     {
         if (!isExists(value))
         {
@@ -30,12 +30,12 @@ public:
      * @param value Int value to be deleted
      * @return bool. True if value was found and deleted and false if value wasn't found
      */
-    bool remove(T value);
+    bool remove(const T &value);
 
     /**
      * @brief print Prints elements of Set.
      */
-    bool isExists(T value);
+    bool isExists(const T &value);
 
     /**
      * @brief length Returns number of elements in set as int
@@ -87,7 +87,7 @@ Set<T>::~Set()
 }
 
 template <typename T>
-bool Set<T>::remove(T value)
+bool Set<T>::remove(const T &value)
 {
     SetElement *current  = head;
     SetElement *previous  = head;
@@ -111,18 +111,14 @@ bool Set<T>::remove(T value)
 }
 
 template <typename T>
-bool Set<T>::isExists(T value)
+bool Set<T>::isExists(const T &value)
 {
     SetElement *current  = head;
     while (current != nullptr && current->value != value)
     {
         current = current->lNext;
     }
-    if (current != nullptr)
-    {
-        return true;
-    }
-    return false;
+    return current != nullptr;
 }
 
 template <typename T>
