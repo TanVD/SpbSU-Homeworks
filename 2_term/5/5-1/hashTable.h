@@ -64,8 +64,8 @@ private:
     int largestCollision;
     LinkedList** array;
     int module;
-    int hashFunction(int value);
+    static int hashFunction(int value, int module);
     std::function<int(int, int)> hashDelegate;
-    void deleteArray(LinkedList **array, int size);
+    void deleteListsArray(LinkedList **array, int size);
 };
 

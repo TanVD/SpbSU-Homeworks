@@ -1,7 +1,7 @@
 #include "hashTable.h"
 
 HashTable::HashTable(int module) : module(module), array(new LinkedList*[module]),
-    hashDelegate(nullptr), largestCollision(0), loadFactor(0)
+    hashDelegate(&HashTable::hashFunction), largestCollision(0), loadFactor(0)
 {
     for (int i = 0; i < module; i++)
     {
@@ -9,7 +9,7 @@ HashTable::HashTable(int module) : module(module), array(new LinkedList*[module]
     }
 }
 
-void HashTable::deleteArray(LinkedList** array, int size)
+void HashTable::deleteListsArray(LinkedList** array, int size)
 {
     for (int i  = 0; i < size; i++)
     {
@@ -20,10 +20,10 @@ void HashTable::deleteArray(LinkedList** array, int size)
 
 HashTable::~HashTable()
 {
-    deleteArray(array, module);
+    deleteListsArray(array, module);
 }
 
-int HashTable::hashFunction(int value)
+int HashTable::hashFunction(int value, int module)
 {
     int factor = 101;
     int result = 0;
@@ -37,11 +37,7 @@ int HashTable::hashFunction(int value)
 
 void HashTable::addValue(int value)
 {
-    int index = 0;
-    if (hashDelegate == nullptr)
-        index = hashFunction(value);
-    else
-        index = hashDelegate(value, module);
+    int index = hashDelegate(value, module);
     if (array[index]->isEmpty())
         loadFactor++;
     array[index]->add(value);
@@ -51,11 +47,7 @@ void HashTable::addValue(int value)
 
 bool HashTable::removeValue(int value)
 {
-    int index = 0;
-    if (hashDelegate == nullptr)
-        index = hashFunction(value);
-    else
-        index = hashDelegate(value, module);
+    int index = hashDelegate(value, module);
     bool result = array[index]->remove(value);
     if (result)
     {
@@ -73,10 +65,7 @@ bool HashTable::removeValue(int value)
 
 bool HashTable::findValue(int value)
 {
-    if (hashDelegate == nullptr)
-        return array[hashFunction(value)]->isExists(value);
-    else
-        return array[hashDelegate(value, module)]->isExists(value);
+    return array[hashDelegate(value, module)]->isExists(value);
 }
 
 void HashTable::changeHashFunction(std::function<int(int, int)>)
@@ -99,7 +88,7 @@ void HashTable::changeHashFunction(std::function<int(int, int)>)
             this->addValue(value);
         }
     }
-    deleteArray(oldHashTable, this->module);
+    deleteListsArray(oldHashTable, this->module);
 }
 
 void HashTable::changeModule(int module)
@@ -123,7 +112,7 @@ void HashTable::changeModule(int module)
             this->addValue(value);
         }
     }
-    deleteArray(oldHashTable, oldModule);
+    deleteListsArray(oldHashTable, oldModule);
 }
 
 int HashTable::getModule()
@@ -140,5 +129,3 @@ int HashTable::getLargestCollision()
 {
     return largestCollision;
 }
-
-
