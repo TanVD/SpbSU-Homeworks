@@ -10,7 +10,8 @@ Calculator::Calculator() : result(0), valid(true), equation(nullptr)
 
 Calculator::~Calculator()
 {
-    delete[] equation;
+    if (equation != nullptr)
+        delete[] equation;
 }
 
 void Calculator::calculate(char *equationIn, int length)

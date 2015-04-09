@@ -14,18 +14,17 @@ private slots:
         calc = new Calculator();
     }
 
-    void testCalc()
+    void testCalcValidResult()
     {
         calc->calculate("1+1", 3);
         QVERIFY(calc->returnResult() == 2);
         QVERIFY(calc->isResultValid());
+
+    }
+    void testCalcInvalidResult()
+    {
         calc->calculate("1/0", 3);
         QVERIFY(!calc->isResultValid());
-    }
-
-    void cleanup()
-    {
-        delete calc;
     }
 
 private:
