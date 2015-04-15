@@ -42,32 +42,33 @@ namespace _C_Test
             list.Add(7);
             Assert.IsTrue(list.IsInList(5));
             list.RemoveValue(5);
-            try
-            {
-                list.RemoveValue(7);
-            }
-            catch (DeleteNonExistedElement)
-            {
-                Assert.Fail();
-            }
             Assert.IsFalse(list.IsInList(5));
-            try
-            {
-                list.RemoveValue(7);
-                Assert.Fail();
-            }
-            catch (DeleteNonExistedElement)
-            {
-            }
-            try
-            {
-                list.RemoveValue(8);
-                Assert.Fail();
-            }
-            catch (DeleteNonExistedElement)
-            {
-            }
         }
+
+        [Test()]
+        [ExpectedException("_C.DeleteNonExistedElement")]
+        public void TestListUniqueRemoveValueException()
+        {
+            list.Add(5);
+            list.Add(7);
+            Assert.IsTrue(list.IsInList(5));
+            list.RemoveValue(5);
+            list.RemoveValue(9);
+
+        }
+
+        [Test()]
+        [ExpectedException("_C.DeleteNonExistedElement")]
+        public void TestListUniqueRemoveValueTwiceException()
+        {
+            list.Add(5);
+            list.Add(7);
+            Assert.IsTrue(list.IsInList(5));
+            list.RemoveValue(7);
+            list.RemoveValue(7);
+
+        }
+
 
         [Test()]
         public void TestListUniqueRemoveIndex()
@@ -75,42 +76,32 @@ namespace _C_Test
             list.Add(5);
             list.Add(7);
             Assert.IsTrue(list.IsInList(5));
-            list.RemoveIndex(0);
-            try
-            {
-                list.RemoveIndex(0);
-            }
-            catch (OutOfIndexes)
-            {
-                Assert.Fail();
-            }
-            Assert.IsFalse(list.IsInList(5));
-            try
-            {
-                list.RemoveIndex(0);
-                Assert.Fail();
-            }
-            catch (OutOfIndexes)
-            {
-            }
-
         }
 
         [Test()]
-        [ExpectedException("_C.AddExistedElementException")] 
+        [ExpectedException("_C.OutOfIndexes")]
+        public void TestListUniqueRemoveIndexException()
+        {
+            list.Add(5);
+            list.Add(7);
+            Assert.IsTrue(list.IsInList(5));
+            list.RemoveIndex(9);
+        }
+
+        [Test()]
+        [ExpectedException("_C.AddExistedElementException")]
         public void TestListUniqueExecptionAddIndex()
         {
             list.Add(5, 0);
             list.Add(7, 1);
-            try
-            {
-                list.Add(0, 3);
-                Assert.Fail();
-            }
-            catch (OutOfIndexes)
-            {
-                list.Add(5, 1);
-            }
+            list.Add(5, 1);
+        }
+
+        [Test()]
+        [ExpectedException("_C.OutOfIndexes")]
+        public void TestAddOutOfIndex()
+        {
+            list.Add(0, 3);
         }
 
         [Test()]

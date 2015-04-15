@@ -80,35 +80,5 @@ namespace _C
             }
         }
     }
-
-    /// <summary>
-    /// This exception maybe thrown when existed element added.
-    /// </summary>
-    public class AddExistedElementException : Exception
-    {
-        public AddExistedElementException()
-        {
-        }
-    }
-
-    /// <summary>
-    /// This exception maybe thrown when non existed element deleted.
-    /// </summary>
-    public class DeleteNonExistedElement : Exception
-    {
-        public DeleteNonExistedElement()
-        {
-        }
-    }
-
-    /// <summary>
-    /// This exception maybe thrown when user attempting to reach index out of list.
-    /// </summary>
-    public class OutOfIndexes : Exception
-    {
-        public OutOfIndexes()
-        {
-        }
-    }
 }
 

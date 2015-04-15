@@ -38,6 +38,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ListUnique.cs" />
     <Compile Include="List.cs" />
+    <Compile Include="AddExistedElementException.cs" />
+    <Compile Include="DeleteNonExistedElementException.cs" />
+    <Compile Include="OutOfIndexes.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

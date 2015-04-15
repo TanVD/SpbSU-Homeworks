@@ -108,9 +108,7 @@ namespace _C
         /// <param name="index">Index to find.</param>
         public bool IsExistsIndex(int index)
         {
-            if (length >= index)
-                return true;
-            return false;
+            return (length >= index);
         }
 
         /// <summary>
@@ -125,11 +123,7 @@ namespace _C
             {
                 current = current.LNext;
             }
-            if (current != null)
-            {
-                return true;
-            }
-            return false;
+            return current != null;
         }
 
         /// <summary>
