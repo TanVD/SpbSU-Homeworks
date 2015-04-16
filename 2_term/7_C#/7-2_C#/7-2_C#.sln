@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7-2_C#", "7-2_C#\7-2_C#.csproj", "{1375F330-77A8-4A1E-B777-B6399A04EA60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSet", "TestSet\TestSet.csproj", "{D62CD4DF-CFDF-4697-9E6F-6BF1D566483B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1375F330-77A8-4A1E-B777-B6399A04EA60}.Debug|x86.ActiveCfg = Debug|x86
+		{1375F330-77A8-4A1E-B777-B6399A04EA60}.Debug|x86.Build.0 = Debug|x86
+		{1375F330-77A8-4A1E-B777-B6399A04EA60}.Release|x86.ActiveCfg = Release|x86
+		{1375F330-77A8-4A1E-B777-B6399A04EA60}.Release|x86.Build.0 = Release|x86
+		{D62CD4DF-CFDF-4697-9E6F-6BF1D566483B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D62CD4DF-CFDF-4697-9E6F-6BF1D566483B}.Debug|x86.Build.0 = Debug|Any CPU
+		{D62CD4DF-CFDF-4697-9E6F-6BF1D566483B}.Release|x86.ActiveCfg = Release|Any CPU
+		{D62CD4DF-CFDF-4697-9E6F-6BF1D566483B}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = 7-2_C#\7-2_C#.csproj
+	EndGlobalSection
+EndGlobal
