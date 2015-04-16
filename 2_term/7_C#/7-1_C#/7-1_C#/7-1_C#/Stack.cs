@@ -6,15 +6,19 @@ namespace Application
     {
         private StackElement head = null;
 
+        private int size = 0;
+
         public void Push(T value)
         {
             head = new StackElement(value, head);
+            size++;
         }
 
         public T Pop()
         {
             T result = head.value;
             head = head.next;
+            size--;
             return result;
         }
 
@@ -26,6 +30,11 @@ namespace Application
         public bool IsEmpty()
         {
             return head == null;
+        }
+
+        public int Size()
+        {
+            return size;
         }
 
         private class StackElement

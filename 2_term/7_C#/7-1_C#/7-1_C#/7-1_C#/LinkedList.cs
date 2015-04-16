@@ -16,6 +16,10 @@ namespace Application
 
         public void Add(T value, int index)
         {
+            if (!IsExistsIndex(index))
+            {
+                throw new IndexOutOfRangeException();
+            }
             if (index != 0)
             {
                 ListElement current = head;
@@ -63,11 +67,11 @@ namespace Application
             return false;
         }
 
-        public bool RemoveIndex(int index)
+        public void RemoveIndex(int index)
         {
             if (!IsExistsIndex(index))
             {
-                return false;
+                throw new IndexOutOfRangeException();
             }
             if (index != 0)
             {
@@ -83,14 +87,21 @@ namespace Application
                 head = head.LNext;
             }
             length--;
-            return true;
         }
 
         private bool IsExistsIndex(int index)
         {
-            if (length >= index)
-                return true;
-            return false;
+            return length >= index;
+        }
+
+        public bool IsInList(T value)
+        {
+            ListElement current = head;
+            while (current != null && !Equals(current.Value, value))
+            {
+                current = current.LNext;
+            }
+            return current != null;
         }
 
         public void Print()
