@@ -6,14 +6,26 @@ using System.Threading.Tasks;
 
 namespace Application
 {
+    /// <summary>
+    /// Generic linked list.
+    /// </summary>
     public class LinkedList<T> : IEnumerable<T> 
     {
+        /// <summary>
+        /// Add the specified value.
+        /// </summary>
+        /// <param name="value">Value.</param>
         public void Add(T value)
         {
             head = new ListElement(value, head);
             length++;
         }
 
+        /// <summary>
+        /// Add the specified value by index.
+        /// </summary>
+        /// <param name="value">Value.</param>
+        /// <param name="index">Index.</param>
         public void Add(T value, int index)
         {
             if (!IsExistsIndex(index))
@@ -36,6 +48,10 @@ namespace Application
             }
         }
 
+        /// <summary>
+        /// Returns value specified by index
+        /// </summary>
+        /// <param name="index">Index.</param>
         public T Index(int index)
         {
             ListElement current = head;
@@ -46,6 +62,11 @@ namespace Application
             return current.Value;
         }
 
+        /// <summary>
+        /// Removes the value.
+        /// </summary>
+        /// <returns><c>true</c>, if value was removed, <c>false</c> otherwise.</returns>
+        /// <param name="value">Value to remove.</param>
         public bool RemoveValue(T value)
         {
             ListElement current = head;
@@ -67,6 +88,10 @@ namespace Application
             return false;
         }
 
+        /// <summary>
+        /// Removes the value specified by index.
+        /// </summary>
+        /// <param name="index">Index.</param>
         public void RemoveIndex(int index)
         {
             if (!IsExistsIndex(index))
@@ -89,11 +114,21 @@ namespace Application
             length--;
         }
 
+        /// <summary>
+        /// Determines whether in this instance exists index.
+        /// </summary>
+        /// <returns><c>true</c> if in this instance exists index; otherwise, <c>false</c>.</returns>
+        /// <param name="index">Index.</param>
         private bool IsExistsIndex(int index)
         {
             return length >= index;
         }
 
+        /// <summary>
+        /// Determines whether in this list exists the specified value.
+        /// </summary>
+        /// <returns><c>true</c> if in this list exists the specified value; otherwise, <c>false</c>.</returns>
+        /// <param name="value">Value.</param>
         public bool IsInList(T value)
         {
             ListElement current = head;
@@ -104,6 +139,9 @@ namespace Application
             return current != null;
         }
 
+        /// <summary>
+        /// Print this instance.
+        /// </summary>
         public void Print()
         {
             ListElement current = head;
@@ -114,16 +152,27 @@ namespace Application
             }
         }
 
+        /// <summary>
+        /// Returns length of this instance.
+        /// </summary>
         public int Length()
         {
             return length;
         }
 
+        /// <summary>
+        /// Gets the enumerator for generic.
+        /// </summary>
+        /// <returns>The enumerator.</returns>
         public IEnumerator<T> GetEnumerator()
         {
             return new LinkedListEnumerator(this);
         }
 
+        /// <summary>
+        /// Gets the enumerator.
+        /// </summary>
+        /// <returns>The enumerator.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
@@ -139,17 +188,28 @@ namespace Application
                 this.list = list;
             }
 
+            /// <summary>
+            /// Moves to the next value.
+            /// </summary>
+            /// <returns><c>true</c>, if it was possible to move to the next value, <c>false</c> otherwise.</returns>
             public bool MoveNext()
             {
                 currentPosition++;
                 return (currentPosition < this.list.Length());
             }
 
+            /// <summary>
+            /// Reset current value of this instance.
+            /// </summary>
             public void Reset()
             {
                 currentPosition = -1;
             }
 
+            /// <summary>
+            /// Gets the current value for generic.
+            /// </summary>
+            /// <value>The current.</value>
             public object Current
             {
                 get
@@ -158,6 +218,10 @@ namespace Application
                 }
             }
 
+            /// <summary>
+            /// Gets the current value.
+            /// </summary>
+            /// <value>The current value.</value>
             T IEnumerator<T>.Current
             {
                 get { return list.Index(currentPosition); }
