@@ -55,7 +55,7 @@ bool SortedSet::remove(IComparable *value)
     if (current != nullptr)
     {
         SetElement *toDelete = current;
-        if (previous != head)
+        if (current != head)
             previous->sNext = current->sNext;
         else
             head = current->sNext;
