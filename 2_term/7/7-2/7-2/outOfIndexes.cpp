@@ -2,11 +2,5 @@
 
 OutOfIndexes::OutOfIndexes()
 {
-
-}
-
-OutOfIndexes::~OutOfIndexes()
-{
-
 }
 

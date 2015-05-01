@@ -1,12 +1,8 @@
-#ifndef OUTOFINDEXES_H
-#define OUTOFINDEXES_H
-
+#pragma once
 
 class OutOfIndexes
 {
 public:
     OutOfIndexes();
-    ~OutOfIndexes();
 };
 
-#endif // OUTOFINDEXES_H
