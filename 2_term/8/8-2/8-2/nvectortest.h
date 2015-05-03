@@ -161,13 +161,13 @@ private slots:
         NVector<NVector<int> > firstRow;
         firstRow.append(vectorFirstRow1);
         firstRow.append(vectorSecondRow1);
-        NVector<NVector <int> > result = firstRow * 2;
-        QCOMPARE(result[0][0], 2);
-        QCOMPARE(result[0][1], 4);
-        QCOMPARE(result[0][2], 6);
-        QCOMPARE(result[1][0], 10);
-        QCOMPARE(result[1][1], 12);
-        QCOMPARE(result[1][2], 14);
+        NVector<NVector <int> > result = firstRow * 3;
+        QCOMPARE(result[0][0], 3);
+        QCOMPARE(result[0][1], 6);
+        QCOMPARE(result[0][2], 9);
+        QCOMPARE(result[1][0], 15);
+        QCOMPARE(result[1][1], 18);
+        QCOMPARE(result[1][2], 21);
     }
 
     void nVectorNullTest()
