@@ -1,5 +1,8 @@
 #pragma once
 #include "list.h"
+#include "addExistedElementException.h"
+#include "outofindexes.h"
+#include "deleteNonExistedElementException.h"
 
 class ListUnique : public List
 {

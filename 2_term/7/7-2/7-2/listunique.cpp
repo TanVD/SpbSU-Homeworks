@@ -1,7 +1,4 @@
 #include "listunique.h"
-#include "addexistedelementexception.h"
-#include "outofindexes.h"
-#include "deletenonexistedelementexception.h"
 
 void ListUnique::add(int value)
 {

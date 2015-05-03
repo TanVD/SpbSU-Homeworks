@@ -1,6 +1,5 @@
 #include "list.h"
 
-
 List::List() : lengthField(0), head(nullptr)
 {
 }

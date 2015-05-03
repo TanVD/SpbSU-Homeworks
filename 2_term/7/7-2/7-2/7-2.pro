@@ -25,9 +25,9 @@ SOURCES += main.cpp \
     outOfIndexes.cpp
 
 HEADERS += \
-    addexistedelementexception.h \
-    deletenonexistedelementexception.h \
     list.h \
     listunique.h \
     outofindexes.h \
-    testlistunique.h
+    testlistunique.h \
+    addExistedElementException.h \
+    deleteNonExistedElementException.h

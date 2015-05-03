@@ -1,14 +1,16 @@
 #pragma once
 #include "listunique.h"
 #include "list.h"
-#include "addexistedelementexception.h"
-#include "deletenonexistedelementexception.h"
+#include "addExistedElementException.h"
+#include "deleteNonExistedElementException.h"
 #include "outofindexes.h"
 #include <QtTest/QtTest>
 #include <QtCore/QObject>
+
 class TestListUnique : public QObject
 {
     Q_OBJECT
+
 public:
     explicit TestListUnique(QObject *parent = 0) : QObject(parent) {}
 
@@ -91,6 +93,7 @@ private slots:
     {
         delete list;
     }
+
 private:
     ListUnique* list;
 };
