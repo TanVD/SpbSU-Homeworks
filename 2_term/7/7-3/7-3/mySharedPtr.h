@@ -50,7 +50,7 @@ public:
             this->rawPointer = that.rawPointer;
             *(this->linksCounter) += 1;
         }
-        return *this;//todo
+        return *this;
     }
 
     /**
