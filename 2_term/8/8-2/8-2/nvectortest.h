@@ -32,8 +32,6 @@ private slots:
         {
             vectorSecond.append(i);
         }
-
-
         NVector<int> result = vectorFirst + vectorSecond;
         QCOMPARE(result[0], 6);
         QCOMPARE(result[1], 8);
@@ -65,7 +63,6 @@ private slots:
         {
             vectorFirst.append(i);
         }
-
         NVector<int> result = vectorFirst * 2;
         QCOMPARE(result[0], 2);
         QCOMPARE(result[1], 4);

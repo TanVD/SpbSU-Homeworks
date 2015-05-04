@@ -5,10 +5,10 @@ template<class T>
 class NVector
 {
 public:
-    NVector() : array(QVector<T>())
+    NVector()
     {}
 
-    NVector(QVector<T> vector) : array(vector)
+    NVector(const QVector<T> &vector) : array(vector)
     {}
 
     NVector(const NVector<T> &that)
@@ -20,7 +20,7 @@ public:
      * @brief append Appends new object to vector
      * @param object Object to append
      */
-    void append(T object)
+    void append(const T &object)
     {
         array.append(object);
     }
@@ -30,7 +30,7 @@ public:
      * @param vector Vector to add
      * @return Result of adding
      */
-    NVector<T> operator+(NVector<T> vector)
+    NVector<T> operator+(const NVector<T> &vector)
     {
         NVector<T> result;
         if (this->size() == vector.size())
@@ -46,7 +46,7 @@ public:
      * @param vector Vector to deduct
      * @return Result of deducting
      */
-    NVector<T> operator-(NVector<T> vector)
+    NVector<T> operator-(const NVector<T> &vector)
     {
         NVector<T> result;
         if (this->size() == vector.size())
@@ -100,7 +100,7 @@ public:
 
 private:
     QVector<T> array;
-    int size()
+    int size() const
     {
         return array.size();
     }
