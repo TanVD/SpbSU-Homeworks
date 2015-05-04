@@ -17,6 +17,12 @@ private slots:
        stackDouble = new StackDouble();
    }
 
+   void cleanup()
+   {
+       delete arrayStack;
+       delete stackDouble;
+   }
+
    void testArrayIsEmptyAfterInit()
    {
        QVERIFY(arrayStack->isEmpty());
@@ -169,11 +175,6 @@ private slots:
        QVERIFY(stackDouble->isEmpty());
    }
 
-   void cleanup()
-   {
-       delete arrayStack;
-       delete stackDouble;
-   }
 private:
    Stack* arrayStack;
    Stack* stackDouble;
