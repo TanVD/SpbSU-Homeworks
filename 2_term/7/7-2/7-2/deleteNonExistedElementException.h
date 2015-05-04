@@ -3,6 +3,7 @@
 class DeleteNonExistedElement
 {
 public:
-    DeleteNonExistedElement();
+    DeleteNonExistedElement()
+    {}
 };
 

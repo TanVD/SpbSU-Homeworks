@@ -19,10 +19,7 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     list.cpp \
-    listunique.cpp \
-    addExistedElementException.cpp \
-    deleteNonExistedElementException.cpp \
-    outOfIndexes.cpp
+    listunique.cpp
 
 HEADERS += \
     list.h \

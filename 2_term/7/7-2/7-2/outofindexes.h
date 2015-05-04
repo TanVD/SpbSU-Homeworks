@@ -3,6 +3,7 @@
 class OutOfIndexes
 {
 public:
-    OutOfIndexes();
+    OutOfIndexes()
+    {}
 };
 

@@ -6,10 +6,7 @@ void ListUnique::add(int value)
     {
         throw AddExistedElement();
     }
-    else
-    {
-        List::add(value);
-    }
+    List::add(value);
 }
 
 void ListUnique::add(int value, int index)
@@ -22,10 +19,7 @@ void ListUnique::add(int value, int index)
     {
         throw AddExistedElement();
     }
-    else
-    {
-        List::add(value, index);
-    }
+    List::add(value, index);
 }
 
 void ListUnique::removeValue(int value)
@@ -34,10 +28,7 @@ void ListUnique::removeValue(int value)
     {
         throw DeleteNonExistedElement();
     }
-    else
-    {
-        List::removeValue(value);
-    }
+    List::removeValue(value);
 }
 
 void ListUnique::removeIndex(int index)
@@ -46,8 +37,5 @@ void ListUnique::removeIndex(int index)
     {
         throw OutOfIndexes();
     }
-    else
-    {
-        List::removeIndex(index);
-    }
+    List::removeIndex(index);
 }

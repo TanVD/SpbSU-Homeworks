@@ -3,5 +3,6 @@
 class AddExistedElement
 {
 public:
-    AddExistedElement();
+    AddExistedElement()
+    {}
 };
