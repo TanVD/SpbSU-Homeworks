@@ -13,6 +13,7 @@ public:
      * @param lengthArray Length of array to be written
      */
     ConsoleOut(Matrix* matrix);
+
     /**
      * @brief out The function of outputing to console. Implementation of interface function.
      */

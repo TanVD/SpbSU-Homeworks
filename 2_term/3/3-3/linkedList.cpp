@@ -23,6 +23,20 @@ void LinkedList::add(int value)
     counter++;
 }
 
+bool LinkedList::isInList(int value)
+{
+    ListElement* current  = head;
+    while (current != nullptr && current->value != value)
+    {
+        current = current->lNext;
+    }
+    if (current != nullptr)
+    {
+        return true;
+    }
+    return false;
+}
+
 bool LinkedList::remove(int value)
 {
     ListElement *current  = head;

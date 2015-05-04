@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2015-03-14T22:24:16
+# Project created by QtCreator 2015-03-14T20:41:54
 #
 #-------------------------------------------------
 
@@ -8,21 +8,23 @@ QT       += core
 
 QT       -= gui
 
-QT      += testlib
+QT       += testlib
 
-TARGET = 3-3
+TARGET = 2-1
 CONFIG   += console
 CONFIG   -= app_bundle
 CONFIG   += c++11
 
 TEMPLATE = app
 
-SOURCES += main.cpp \
+
+SOURCES += \
+    doubleLinkedList.cpp \
     linkedList.cpp \
-    sortedSet.cpp
+    main.cpp
 
 HEADERS += \
-    IComparable.h \
+    doubleLinkedList.h \
     linkedList.h \
-    sortedSet.h \
-    testsortedset.h
+    list.h \
+    testlist.h
