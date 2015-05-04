@@ -82,7 +82,7 @@ private:
     {
     public:
         AriphTreeElement(QChar value, AriphTreeElement *ancestor);
-        ~AriphTreeElement();
+        virtual ~AriphTreeElement();
         AriphTreeElement *leftElement;
         AriphTreeElement *rightElement;
         AriphTreeElement *ancestor;
@@ -90,10 +90,57 @@ private:
 
         void print(QString &stringPrint);
 
+        virtual int calculate() = 0;
+    };
+
+    class AriphTreeElementMultiply : public AriphTreeElement
+    {
+    public:
+        AriphTreeElementMultiply(QChar value, AriphTreeElement *ancestor) : AriphTreeElement(value, ancestor)
+        {
+        }
+        int calculate();
+    };
+
+    class AriphTreeElementPlus : public AriphTreeElement
+    {
+    public:
+        AriphTreeElementPlus(QChar value, AriphTreeElement *ancestor) : AriphTreeElement(value, ancestor)
+        {
+        }
+        int calculate();
+    };
+
+    class AriphTreeElementMinus : public AriphTreeElement
+    {
+    public:
+        AriphTreeElementMinus(QChar value, AriphTreeElement *ancestor) : AriphTreeElement(value, ancestor)
+        {
+        }
+        int calculate();
+    };
+
+    class AriphTreeElementDivide : public AriphTreeElement
+    {
+    public:
+        AriphTreeElementDivide(QChar value, AriphTreeElement *ancestor) : AriphTreeElement(value, ancestor)
+        {
+        }
+        int calculate();
+    };
+
+    class AriphTreeElementDigit : public AriphTreeElement
+    {
+    public:
+        AriphTreeElementDigit(QChar value, AriphTreeElement *ancestor) : AriphTreeElement(value, ancestor)
+        {
+        }
         int calculate();
     };
 
     AriphTreeElement *current;
+
+    AriphTreeElement* chooseChild(QChar value, AriphTreeElement* ancestor);
 
 public:
     AriphTreeElement *head;

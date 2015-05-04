@@ -2,7 +2,7 @@
 
 AriphTree::AriphTree(QChar value)
 {
-    head = new AriphTreeElement(value, nullptr);
+    head = chooseChild(value, nullptr);
     current = head;
 }
 
@@ -14,14 +14,15 @@ AriphTree::~AriphTree()
     }
 }
 
+
 void AriphTree::createLeftElement(QChar value)
 {
-    current->leftElement = new AriphTreeElement(value, current);
+    current->leftElement = chooseChild(value, current);
 }
 
 void AriphTree::createRightElement(QChar value)
 {
-    current->rightElement = new AriphTreeElement(value, current);
+    current->rightElement = chooseChild(value, current);
 }
 
 void AriphTree::moveToLeftChild()
@@ -71,6 +72,31 @@ QString AriphTree::printTree()
     return stringPrint;
 }
 
+AriphTree::AriphTreeElement *AriphTree::chooseChild(QChar value, AriphTree::AriphTreeElement *ancestor)
+{
+    if (value.isDigit())
+        return new AriphTreeElementDigit(value, ancestor);
+    switch (value.toLatin1())
+    {
+    case '+':
+    {
+        return new AriphTreeElementPlus(value, ancestor);
+    }
+    case '-':
+    {
+        return new AriphTreeElementMinus(value, ancestor);
+    }
+    case '*':
+    {
+        return new AriphTreeElementMultiply(value, ancestor);
+    }
+    case '/':
+    {
+        return new AriphTreeElementDivide(value, ancestor);
+    }
+    }
+}
+
 AriphTree::AriphTreeElement::AriphTreeElement(QChar value, AriphTree::AriphTreeElement *ancestor)
 {
     this->value = value;
@@ -101,32 +127,29 @@ void AriphTree::AriphTreeElement::print(QString &stringPrint)
 
 }
 
-int AriphTree::AriphTreeElement::calculate()
+int AriphTree::AriphTreeElementPlus::calculate()
 {
-    if (leftElement == nullptr && rightElement == nullptr)
-    {
-        return value.toLatin1() - '0';
-    }
-    switch (value.toLatin1())
-    {
-    case '+':
-    {
-        return leftElement->calculate() + rightElement->calculate();
-    }
-    case '-':
-    {
-        return leftElement->calculate() - rightElement->calculate();
-    }
-    case '*':
-    {
-        return leftElement->calculate() * rightElement->calculate();
-    }
-    case '/':
-    {
-        return leftElement->calculate() / rightElement->calculate();
-    }
-    }
-    return 0;
+    return leftElement->calculate() + rightElement->calculate();
 }
 
+int AriphTree::AriphTreeElementMultiply::calculate()
+{
+    return leftElement->calculate() * rightElement->calculate();
 
+}
+
+int AriphTree::AriphTreeElementMinus::calculate()
+{
+    return leftElement->calculate() - rightElement->calculate();
+}
+
+int AriphTree::AriphTreeElementDivide::calculate()
+{
+    return leftElement->calculate() / rightElement->calculate();
+
+}
+
+int AriphTree::AriphTreeElementDigit::calculate()
+{
+    return value.toLatin1() - '0';
+}
