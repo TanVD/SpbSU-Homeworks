@@ -4,37 +4,37 @@ template <typename T>
 class MySharedPtr
 {
 public:
-    MySharedPtr(T* obj) : rawPointer(obj), linksCounter(new int(1))
+    MySharedPtr(T* obj) : pointerData(new SharedData(obj, 1))
     {
+
     }
 
     /**
      * @brief MySharedPtr Constructor of copying
      * @param that Object to copy
      */
-    MySharedPtr(const MySharedPtr &that) : rawPointer(that.rawPointer), linksCounter(that.linksCounter)
+    MySharedPtr(const MySharedPtr &that) : pointerData(that.pointerData)
     {
-        *linksCounter += 1;
+        pointerData->linksCounter += 1;
     }
 
     ~MySharedPtr()
     {
-        *linksCounter -= 1;
-        if (*linksCounter == 0)
+        pointerData->linksCounter -= 1;
+        if (pointerData->linksCounter == 0)
         {
-            delete rawPointer;
-            delete linksCounter;
+            delete pointerData;
         }
     }
 
     T* operator->()
     {
-        return rawPointer;
+        return pointerData->rawPointer;
     }
 
     T& operator* ()
     {
-        return *rawPointer;
+        return *(pointerData->rawPointer);
     }
 
     /**
@@ -44,11 +44,11 @@ public:
      */
     MySharedPtr<T>& operator=(MySharedPtr<T> that)
     {
-        if (this->rawPointer != that.rawPointer)
+        this->~MySharedPtr();
+        if (this->pointerData != that.pointerData)
         {
-            this->linksCounter = that.linksCounter;
-            this->rawPointer = that.rawPointer;
-            *(this->linksCounter) += 1;
+            this->pointerData = that.pointerData;
+            this->pointerData->linksCounter += 1;
         }
         return *this;
     }
@@ -59,10 +59,25 @@ public:
      */
     int copyCounter()
     {
-        return *linksCounter;
+        return pointerData->linksCounter;
     }
 
 private:
-    T* rawPointer;
-    int* linksCounter;
+    struct SharedData
+    {
+    public:
+        T* rawPointer;
+        int linksCounter;
+
+        SharedData(T* rawPointer, int linksCounter) : rawPointer(rawPointer), linksCounter(linksCounter)
+        {
+        }
+
+        ~SharedData()
+        {
+            delete rawPointer;
+        }
+    };
+
+    SharedData* pointerData;
 };

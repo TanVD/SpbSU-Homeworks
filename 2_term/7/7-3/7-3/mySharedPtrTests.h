@@ -11,7 +11,6 @@ class MySharedPtrTests : public QObject
     Q_OBJECT
 public:
     explicit MySharedPtrTests(QObject *parent = 0) : QObject(parent) {}
-private:
 private slots:
 
     void createPointerTest()
