@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2015-04-03T09:37:20
+# Project created by QtCreator 2015-03-29T12:41:56
 #
 #-------------------------------------------------
 
@@ -10,15 +10,20 @@ QT       -= gui
 
 QT       += testlib
 
-TARGET = Test-1
+TARGET = 6-1
 CONFIG   += console c++11
 CONFIG   -= app_bundle
 
 TEMPLATE = app
 
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    ariphTree.cpp \
+    parserOfEquation.cpp
+
+DISTFILES +=
 
 HEADERS += \
-    queue.h \
-    queueTest.h
+    ariphTree.h \
+    parserOfEquation.h \
+    parserTest.h
