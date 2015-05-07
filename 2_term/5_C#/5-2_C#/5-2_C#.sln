@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5-2_C#", "5-2_C#\5-2_C#.csproj", "{B564BA0D-70B3-4390-B140-29C2798D416B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5-2_C#_Test", "5-2_C#_Test\5-2_C#_Test.csproj", "{E3766A25-A97D-46ED-9B55-7F724D4F3FEB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B564BA0D-70B3-4390-B140-29C2798D416B}.Debug|x86.ActiveCfg = Debug|x86
+		{B564BA0D-70B3-4390-B140-29C2798D416B}.Debug|x86.Build.0 = Debug|x86
+		{B564BA0D-70B3-4390-B140-29C2798D416B}.Release|x86.ActiveCfg = Release|x86
+		{B564BA0D-70B3-4390-B140-29C2798D416B}.Release|x86.Build.0 = Release|x86
+		{E3766A25-A97D-46ED-9B55-7F724D4F3FEB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E3766A25-A97D-46ED-9B55-7F724D4F3FEB}.Debug|x86.Build.0 = Debug|Any CPU
+		{E3766A25-A97D-46ED-9B55-7F724D4F3FEB}.Release|x86.ActiveCfg = Release|Any CPU
+		{E3766A25-A97D-46ED-9B55-7F724D4F3FEB}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = 5-2_C#\5-2_C#.csproj
+	EndGlobalSection
+EndGlobal

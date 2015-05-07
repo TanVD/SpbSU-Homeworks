@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5-1_C#", "5-1_C#\5-1_C#.csproj", "{DB9116F6-D229-49A0-90DA-A95F3A9386CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5-1_C#_Test", "5-1_C#_Test\5-1_C#_Test.csproj", "{A9EAA947-174B-4996-9CD8-3FB4A741C9E2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9EAA947-174B-4996-9CD8-3FB4A741C9E2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A9EAA947-174B-4996-9CD8-3FB4A741C9E2}.Debug|x86.Build.0 = Debug|Any CPU
+		{A9EAA947-174B-4996-9CD8-3FB4A741C9E2}.Release|x86.ActiveCfg = Release|Any CPU
+		{A9EAA947-174B-4996-9CD8-3FB4A741C9E2}.Release|x86.Build.0 = Release|Any CPU
+		{DB9116F6-D229-49A0-90DA-A95F3A9386CC}.Debug|x86.ActiveCfg = Debug|x86
+		{DB9116F6-D229-49A0-90DA-A95F3A9386CC}.Debug|x86.Build.0 = Debug|x86
+		{DB9116F6-D229-49A0-90DA-A95F3A9386CC}.Release|x86.ActiveCfg = Release|x86
+		{DB9116F6-D229-49A0-90DA-A95F3A9386CC}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = 5-1_C#\5-1_C#.csproj
+	EndGlobalSection
+EndGlobal
