@@ -6,6 +6,8 @@
 
 QT       += core gui
 
+QT       += testlib
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = 4-2
@@ -23,6 +25,8 @@ HEADERS  += calculatorUberUI.h \
     arrayStack.h \
     calculator.h \
     stack.h \
-    stackDouble.h
+    stackDouble.h \
+    testCalc.h \
+    testStack.h
 
 FORMS    += calculatorUberUI.ui

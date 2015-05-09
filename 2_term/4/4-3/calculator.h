@@ -5,7 +5,6 @@ class Calculator
 {
 public:
     Calculator();
-    ~Calculator();
     void calculate(QString equation, int length);
     double returnResult();
     bool isResultValid();
