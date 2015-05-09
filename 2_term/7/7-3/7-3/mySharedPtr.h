@@ -20,11 +20,7 @@ public:
 
     ~MySharedPtr()
     {
-        pointerData->linksCounter -= 1;
-        if (pointerData->linksCounter == 0)
-        {
-            delete pointerData;
-        }
+        decrementObject();
     }
 
     T* operator->()
@@ -44,7 +40,7 @@ public:
      */
     MySharedPtr<T>& operator=(MySharedPtr<T> that)
     {
-        this->~MySharedPtr();
+        this->decrementObject();
         if (this->pointerData != that.pointerData)
         {
             this->pointerData = that.pointerData;
@@ -80,4 +76,13 @@ private:
     };
 
     SharedData* pointerData;
+
+    void decrementObject()
+    {
+        pointerData->linksCounter -= 1;
+        if (pointerData->linksCounter == 0)
+        {
+            delete pointerData;
+        }
+    }
 };
