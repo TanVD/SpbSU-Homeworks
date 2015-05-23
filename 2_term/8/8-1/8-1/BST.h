@@ -1,17 +1,17 @@
 #pragma once
 #include <QString>
 
-class Set
+class BST
 {
 public:
-    Set();
-    ~Set();
+    BST();
+    ~BST();
 
     /**
      * @brief addNodeInSet Adds new value in set
      * @param value Value to add
      */
-    void addNodeInSet(int value);
+     virtual void addNodeInSet(int value);
 
     /**
      * @brief isExistsInSet Determines if value is in set
@@ -25,7 +25,7 @@ public:
      * @param value Value to delete, specified by index
      * @return True if value was deleted, otherwise false
      */
-    bool deleteNodeInSet(int value);
+    virtual bool deleteNodeInSet(int value);
 
     /**
      * @brief printInorderSet Prints set inorder
@@ -42,38 +42,50 @@ public:
      */
     QString printReverseInorderSet();
 
-private:
-    class SetNode
+protected:
+
+    enum modesElement
+    {
+        noDescendant = 0,
+        oneDescendant = 1,
+        twoDescendant = 2
+    };
+
+    class TreeNode
     {
     public:
-        static void addNode(int value, SetNode *&element);
         int value;
-        int counter;
-        SetNode* right;
-        SetNode* left;
         void updateHeight();
         int height();
         int heightField;
-        SetNode(int value);
+        TreeNode(int value);
         int balanceFactor();
-        SetNode* balance();
-        bool deleteNode(int value);
-        SetNode *rotateRight();
-        SetNode *rotateLeft();
+        virtual TreeNode* balance();
+        virtual TreeNode *rotateRight();
+        virtual TreeNode *rotateLeft();
         bool isExists(int value);
-        int modeOfElement();
+        virtual int modeOfElement();
         int findMinimum();
+        virtual TreeNode* getRight();
+        virtual TreeNode* getLeft();
+        static void addNode(int value, TreeNode *&element);
+        static bool deleteNode(int value, BST::TreeNode *&element);
+    private:
+        TreeNode* right;
+        TreeNode* left;
     };
-    SetNode* root;
 
-    static void deleteOneDescendant(Set::SetNode *&element);
-    static void deleteCellWithMoreThanOneIn(Set::SetNode *&element);
-    static void deleteTwoDescendant(Set::SetNode *&element);
-    static void deleteNoDescendant(Set::SetNode *&element);
-    static bool deleteNode(int value, Set::SetNode *&element);
-    void deleteBST(SetNode *element);
-    QString printStructBST(SetNode *element, QString result);
-    QString printInorderBST(SetNode *element, QString result);
-    QString printReverseInorderBST(SetNode *element, QString result);
+    void deleteBST(TreeNode *element);
+    QString printStructBST(TreeNode *element, QString result);
+    QString printInorderBST(TreeNode *element, QString result);
+    QString printReverseInorderBST(TreeNode *element, QString result);
+    virtual TreeNode* getRoot();
+private:
+    TreeNode* root;
+
+    static void deleteOneDescendant(BST::TreeNode *&element);
+    static void deleteCellWithMoreThanOneIn(BST::TreeNode *&element);
+    static void deleteTwoDescendant(BST::TreeNode *&element);
+    static void deleteNoDescendant(BST::TreeNode *&element);
 
 };

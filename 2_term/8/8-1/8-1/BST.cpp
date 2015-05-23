@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include "BST.h"
 
-int Set::SetNode::height()
+int BST::TreeNode::height()
 {
    return (this != nullptr) ? this->heightField : 0;
 }
 
-void Set::SetNode::updateHeight()
+void BST::TreeNode::updateHeight()
 {
    int heightLeft = this->left->height();
    int heightRight = this->right->height();
    this->heightField = ((heightLeft > heightRight) ? heightLeft : heightRight) + 1;
 }
 
-Set::SetNode* Set::SetNode::rotateRight()
+BST::TreeNode* BST::TreeNode::rotateRight()
 {
-   SetNode* pivot = this->left;
+   TreeNode* pivot = this->left;
    this->left = pivot->right;
    pivot->right = this;
    this->updateHeight();
@@ -23,9 +23,9 @@ Set::SetNode* Set::SetNode::rotateRight()
    return pivot;
 }
 
-Set::SetNode* Set::SetNode::rotateLeft()
+BST::TreeNode* BST::TreeNode::rotateLeft()
 {
-   SetNode* pivot = this->right;
+   TreeNode* pivot = this->right;
    this->right = pivot->left;
    pivot->left = this;
    this->updateHeight();
@@ -33,12 +33,12 @@ Set::SetNode* Set::SetNode::rotateLeft()
    return pivot;
 }
 
-int Set::SetNode::balanceFactor()
+int BST::TreeNode::balanceFactor()
 {
    return this->right->height() - this->left->height();
 }
 
-Set::SetNode* Set::SetNode::balance()
+BST::TreeNode* BST::TreeNode::balance()
 {
     this->updateHeight();
     if (this->balanceFactor() == 2)
@@ -56,21 +56,20 @@ Set::SetNode* Set::SetNode::balance()
     return this;
 }
 
-Set::SetNode::SetNode(int value)
+BST::TreeNode::TreeNode(int value)
 {
     this->value = value;
     heightField = 1;
     left = nullptr;
     right = nullptr;
-    counter = 1;
 }
 
-Set::Set()
+BST::BST()
 {
     this->root = nullptr;
 }
 
-void Set::SetNode::addNode(int value, SetNode *&element)
+void BST::TreeNode::addNode(int value, TreeNode *&element)
 {
     if (element != nullptr)
     {
@@ -82,25 +81,21 @@ void Set::SetNode::addNode(int value, SetNode *&element)
         {
             addNode(value, element->left);
         }
-        else if (value == element->value)
-        {
-            element->counter += 1;
-        }
         element = element->balance();
     }
     else
     {
-        element = new SetNode(value);
+        element = new TreeNode(value);
     }
     return;
 }
 
-void Set::addNodeInSet(int value)
+void BST::addNodeInSet(int value)
 {
-    SetNode::addNode(value, this->root);
+    TreeNode::addNode(value, root);
 }
 
-bool Set::SetNode::isExists(int value)
+bool BST::TreeNode::isExists(int value)
 {
     if (this == nullptr)
     {
@@ -108,32 +103,24 @@ bool Set::SetNode::isExists(int value)
     }
     else if (value < this->value)
     {
-        return this->left->isExists(value);
+        return this->getLeft()->isExists(value);
     }
     else if (value > this->value)
     {
-        return this->right->isExists(value);
+        return this->getRight()->isExists(value);
     }
     return true;
 }
 
-bool Set::isExistsInSet(int value)
+bool BST::isExistsInSet(int value)
 {
-    return this->root->isExists(value);
+    return this->getRoot()->isExists(value);
 }
 
-enum modesElement
-{
-    noDescendant = 0,
-    oneDescendant = 1,
-    twoDescendant = 2,
-    moreThanOneInCell = 3
-};
 
-int Set::SetNode::modeOfElement()
+
+int BST::TreeNode::modeOfElement()
 {
-    if (this->counter > 1)
-        return moreThanOneInCell;
     if ((this->left == nullptr) && (this->right == nullptr))
     {
         return noDescendant;
@@ -145,49 +132,54 @@ int Set::SetNode::modeOfElement()
     return twoDescendant;
 }
 
-int Set::SetNode::findMinimum()
+int BST::TreeNode::findMinimum()
 {
-    SetNode* iter = this;
-    while (iter->left != nullptr)
+    TreeNode* iter = this;
+    while (iter->getLeft() != nullptr)
     {
-        iter = iter->left;
+        iter = iter->getLeft();
     }
     return iter->value;
 }
 
-void Set::deleteCellWithMoreThanOneIn(Set::SetNode *&element)
+BST::TreeNode *BST::TreeNode::getRight()
 {
-    element->counter -= 1;
+    return right;
 }
 
-void Set::deleteOneDescendant(Set::SetNode *&element)
+BST::TreeNode *BST::TreeNode::getLeft()
 {
-    SetNode* tempElement = element;
-    if (element->left != nullptr)
+    return left;
+}
+
+void BST::deleteOneDescendant(BST::TreeNode *&element)
+{
+    TreeNode* tempElement = element;
+    if (element->getLeft() != nullptr)
     {
-        element = element->left;
+        element = element->getLeft();
     }
-    else if (element->right != nullptr)
+    else if (element->getRight() != nullptr)
     {
-        element = element->right;
+        element = element->getRight();
     }
     delete tempElement;
 }
 
-void Set::deleteTwoDescendant(Set::SetNode *&element)
+void BST::deleteTwoDescendant(BST::TreeNode *&element)
 {
-    int valueMin = element->right->findMinimum();
-    deleteNode(valueMin, element);
+    int valueMin = element->getRight()->findMinimum();
+    TreeNode::deleteNode(valueMin, element);
     element->value = valueMin;
 }
 
-void Set::deleteNoDescendant(Set::SetNode *&element)
+void BST::deleteNoDescendant(BST::TreeNode *&element)
 {
     delete element;
     element = nullptr;
 }
 
-bool Set::deleteNode(int value, Set::SetNode *&element)
+bool BST::TreeNode::deleteNode(int value, BST::TreeNode *&element)
 {
     if (element == nullptr)
     {
@@ -207,11 +199,6 @@ bool Set::deleteNode(int value, Set::SetNode *&element)
     {
         switch (element->modeOfElement())
         {
-        case moreThanOneInCell:
-        {
-            deleteCellWithMoreThanOneIn(element);
-            break;
-        }
         case oneDescendant:
         {
             deleteOneDescendant(element);
@@ -232,30 +219,30 @@ bool Set::deleteNode(int value, Set::SetNode *&element)
     return true;
 }
 
-bool Set::deleteNodeInSet(int value)
+bool BST::deleteNodeInSet(int value)
 {
-    return deleteNode(value, this->root);
+    return TreeNode::deleteNode(value, this->root);
 }
 
-void Set::deleteBST(SetNode *element)
+void BST::deleteBST(TreeNode *element)
 {
     if (element == nullptr)
     {
         return;
     }
-    deleteBST(element->left);
-    deleteBST(element->right);
+    deleteBST(element->getLeft());
+    deleteBST(element->getRight());
     delete element;
     return;
 
 }
 
-Set::~Set()
+BST::~BST()
 {
-    deleteBST(this->root);
+    deleteBST(this->getRoot());
 }
 
-QString Set::printStructBST(SetNode *element, QString result)
+QString BST::printStructBST(TreeNode *element, QString result)
 {
     if (element != nullptr)
     {
@@ -267,53 +254,58 @@ QString Set::printStructBST(SetNode *element, QString result)
         return result;
     }
     result += "(";
-    result = printStructBST(element->left, result);
-    result = printStructBST(element->right, result);
+    result = printStructBST(element->getLeft(), result);
+    result = printStructBST(element->getRight(), result);
     result += ")";
     return result;
 
 }
 
-QString Set::printStructOfSet()
+QString BST::printStructOfSet()
 {
     QString result;
-    return printStructBST(this->root, result);
+    return printStructBST(this->getRoot(), result);
 }
 
-QString Set::printInorderBST(SetNode *element, QString result)
+QString BST::printInorderBST(TreeNode *element, QString result)
 {
     if (element == nullptr)
     {
         return result;
     }
-    result = printInorderBST(element->left, result);
+    result = printInorderBST(element->getLeft(), result);
     result += QString::number(element->value) + " ";
-    result = printInorderBST(element->right, result);
+    result = printInorderBST(element->getRight(), result);
     return result;
 
 }
 
-QString Set::printInorderSet()
+QString BST::printInorderSet()
 {
     QString result;
-    return printInorderBST(this->root, result);
+    return printInorderBST(this->getRoot(), result);
 }
 
-QString Set::printReverseInorderBST(SetNode *element, QString result)
+QString BST::printReverseInorderBST(TreeNode *element, QString result)
 {
     if (element == nullptr)
     {
         return result;
     }
-    result = printReverseInorderBST(element->right, result);
+    result = printReverseInorderBST(element->getRight(), result);
     result += QString::number(element->value) + " ";
-    result = printReverseInorderBST(element->left, result);
+    result = printReverseInorderBST(element->getLeft(), result);
     return result;
 }
 
-QString Set::printReverseInorderSet()
+BST::TreeNode *BST::getRoot()
+{
+    return root;
+}
+
+QString BST::printReverseInorderSet()
 {
     QString result;
-    return printReverseInorderBST(this->root, result);
+    return printReverseInorderBST(this->getRoot(), result);
 }
 

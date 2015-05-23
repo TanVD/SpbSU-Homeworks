@@ -1,7 +1,7 @@
 #pragma once
 #include <QtCore/QObject>
 #include <QtTest/QtTest>
-#include "BST.h"
+#include "set.h"
 
 class SetTest : public QObject
 {
@@ -66,6 +66,16 @@ private slots:
         QVERIFY(!tree->isExistsInSet(5));
         QVERIFY(tree->deleteNodeInSet(59));
         QVERIFY(!tree->isExistsInSet(59));
+    }
+
+    void deleteTwoEqualElements()
+    {
+        tree->addNodeInSet(5);
+        tree->addNodeInSet(5);
+        QVERIFY(tree->deleteNodeInSet(5));
+        QVERIFY(tree->isExistsInSet(5));
+        QVERIFY(tree->deleteNodeInSet(5));
+        QVERIFY(!tree->isExistsInSet(5));
     }
 
     void deleteSeveralElement()

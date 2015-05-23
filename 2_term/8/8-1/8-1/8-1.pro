@@ -5,12 +5,11 @@ CONFIG += qt
 QT     += testlib
 
 SOURCES += main.cpp \
-    BST.cpp
-
-include(deployment.pri)
-qtcAddDeployment()
+    BST.cpp \
+    set.cpp
 
 HEADERS += \
     BST.h \
-    settest.h
+    settest.h \
+    set.h
 
