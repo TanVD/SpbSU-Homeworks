@@ -5,8 +5,8 @@ class Set : public BST
 {
 public:
     Set();
-    virtual void addNodeInSet(int value);
-    virtual bool deleteNodeInSet(int value);
+    virtual void addNode(int value);
+    virtual bool deleteNode(int value);
 
 private:
     class SetNode : public TreeNode
@@ -17,8 +17,8 @@ private:
         SetNode* left;
         SetNode* right;
         SetNode* balance();
-        SetNode *rotateRight();
-        SetNode *rotateLeft();
+        SetNode* rotateRight();
+        SetNode* rotateLeft();
         TreeNode* getLeft();
         TreeNode* getRight();
         int modeOfElement();
@@ -30,6 +30,7 @@ private:
     {
         moreThanInOneCell = 3
     };
+
     SetNode* root;
     TreeNode* getRoot();
     static void deleteCellWithMoreThanOneIn(SetNode *&element);

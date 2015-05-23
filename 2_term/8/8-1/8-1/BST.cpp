@@ -90,7 +90,7 @@ void BST::TreeNode::addNode(int value, TreeNode *&element)
     return;
 }
 
-void BST::addNodeInSet(int value)
+void BST::addNode(int value)
 {
     TreeNode::addNode(value, root);
 }
@@ -112,7 +112,7 @@ bool BST::TreeNode::isExists(int value)
     return true;
 }
 
-bool BST::isExistsInSet(int value)
+bool BST::isExists(int value)
 {
     return this->getRoot()->isExists(value);
 }
@@ -219,7 +219,7 @@ bool BST::TreeNode::deleteNode(int value, BST::TreeNode *&element)
     return true;
 }
 
-bool BST::deleteNodeInSet(int value)
+bool BST::deleteNode(int value)
 {
     return TreeNode::deleteNode(value, this->root);
 }

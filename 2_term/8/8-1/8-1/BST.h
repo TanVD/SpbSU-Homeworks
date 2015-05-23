@@ -11,21 +11,21 @@ public:
      * @brief addNodeInSet Adds new value in set
      * @param value Value to add
      */
-     virtual void addNodeInSet(int value);
+     virtual void addNode(int value);
 
     /**
      * @brief isExistsInSet Determines if value is in set
      * @param value Value to find
      * @return True if value is in set, otherwise false
      */
-    bool isExistsInSet(int value);
+    bool isExists(int value);
 
     /**
      * @brief deleteNodeInSet Deletes node of set specified by value, if there are more than one equal value in set, it decrements counter of node.
      * @param value Value to delete, specified by index
      * @return True if value was deleted, otherwise false
      */
-    virtual bool deleteNodeInSet(int value);
+    virtual bool deleteNode(int value);
 
     /**
      * @brief printInorderSet Prints set inorder
@@ -82,7 +82,6 @@ protected:
     virtual TreeNode* getRoot();
 private:
     TreeNode* root;
-
     static void deleteOneDescendant(BST::TreeNode *&element);
     static void deleteCellWithMoreThanOneIn(BST::TreeNode *&element);
     static void deleteTwoDescendant(BST::TreeNode *&element);

@@ -21,112 +21,112 @@ private slots:
 
     void addOneElement()
     {
-        tree->addNodeInSet(6);
-        QVERIFY(tree->isExistsInSet(6));
+        tree->addNode(6);
+        QVERIFY(tree->isExists(6));
     }
 
     void addTwoElements()
     {
-        tree->addNodeInSet(6);
-        tree->addNodeInSet(5);
-        QVERIFY(tree->isExistsInSet(6));
-        QVERIFY(tree->isExistsInSet(5));
+        tree->addNode(6);
+        tree->addNode(5);
+        QVERIFY(tree->isExists(6));
+        QVERIFY(tree->isExists(5));
     }
 
     void addSeveralElements()
     {
-        tree->addNodeInSet(6);
-        tree->addNodeInSet(5);
-        tree->addNodeInSet(7);
-        tree->addNodeInSet(22);
-        QVERIFY(tree->isExistsInSet(6));
-        QVERIFY(tree->isExistsInSet(5));
-        QVERIFY(tree->isExistsInSet(7));
-        QVERIFY(tree->isExistsInSet(22));
+        tree->addNode(6);
+        tree->addNode(5);
+        tree->addNode(7);
+        tree->addNode(22);
+        QVERIFY(tree->isExists(6));
+        QVERIFY(tree->isExists(5));
+        QVERIFY(tree->isExists(7));
+        QVERIFY(tree->isExists(22));
     }
 
     void checkIsExistsNonExisted()
     {
-        tree->addNodeInSet(3);
-        QVERIFY(!tree->isExistsInSet(5));
+        tree->addNode(3);
+        QVERIFY(!tree->isExists(5));
     }
 
     void deleteOneElement()
     {
-        tree->addNodeInSet(5);
-        QVERIFY(tree->deleteNodeInSet(5));
-        QVERIFY(!tree->isExistsInSet(5));
+        tree->addNode(5);
+        QVERIFY(tree->deleteNode(5));
+        QVERIFY(!tree->isExists(5));
     }
 
     void deleteTwoElement()
     {
-        tree->addNodeInSet(5);
-        tree->addNodeInSet(59);
-        QVERIFY(tree->deleteNodeInSet(5));
-        QVERIFY(!tree->isExistsInSet(5));
-        QVERIFY(tree->deleteNodeInSet(59));
-        QVERIFY(!tree->isExistsInSet(59));
+        tree->addNode(5);
+        tree->addNode(59);
+        QVERIFY(tree->deleteNode(5));
+        QVERIFY(!tree->isExists(5));
+        QVERIFY(tree->deleteNode(59));
+        QVERIFY(!tree->isExists(59));
     }
 
     void deleteTwoEqualElements()
     {
-        tree->addNodeInSet(5);
-        tree->addNodeInSet(5);
-        QVERIFY(tree->deleteNodeInSet(5));
-        QVERIFY(tree->isExistsInSet(5));
-        QVERIFY(tree->deleteNodeInSet(5));
-        QVERIFY(!tree->isExistsInSet(5));
+        tree->addNode(5);
+        tree->addNode(5);
+        QVERIFY(tree->deleteNode(5));
+        QVERIFY(tree->isExists(5));
+        QVERIFY(tree->deleteNode(5));
+        QVERIFY(!tree->isExists(5));
     }
 
     void deleteSeveralElement()
     {
-        tree->addNodeInSet(5);
-        tree->addNodeInSet(59);
-        tree->addNodeInSet(-5);
-        tree->addNodeInSet(3);
-        QVERIFY(tree->deleteNodeInSet(5));
-        QVERIFY(!tree->isExistsInSet(5));
-        QVERIFY(tree->deleteNodeInSet(59));
-        QVERIFY(!tree->isExistsInSet(59));
-        QVERIFY(tree->deleteNodeInSet(-5));
-        QVERIFY(!tree->isExistsInSet(-5));
-        QVERIFY(tree->deleteNodeInSet(3));
-        QVERIFY(!tree->isExistsInSet(3));
+        tree->addNode(5);
+        tree->addNode(59);
+        tree->addNode(-5);
+        tree->addNode(3);
+        QVERIFY(tree->deleteNode(5));
+        QVERIFY(!tree->isExists(5));
+        QVERIFY(tree->deleteNode(59));
+        QVERIFY(!tree->isExists(59));
+        QVERIFY(tree->deleteNode(-5));
+        QVERIFY(!tree->isExists(-5));
+        QVERIFY(tree->deleteNode(3));
+        QVERIFY(!tree->isExists(3));
     }
 
     void addSeveralEqualElements()
     {
-        tree->addNodeInSet(5);
-        tree->addNodeInSet(5);
-        QVERIFY(tree->isExistsInSet(5));
-        tree->deleteNodeInSet(5);
-        tree->deleteNodeInSet(5);
-        QVERIFY(!tree->isExistsInSet(5));
+        tree->addNode(5);
+        tree->addNode(5);
+        QVERIFY(tree->isExists(5));
+        tree->deleteNode(5);
+        tree->deleteNode(5);
+        QVERIFY(!tree->isExists(5));
     }
 
     void printInorderElements()
     {
-        tree->addNodeInSet(8);
-        tree->addNodeInSet(3);
-        tree->addNodeInSet(7);
+        tree->addNode(8);
+        tree->addNode(3);
+        tree->addNode(7);
         QString answer = "3 7 8 ";
         QCOMPARE(tree->printInorderSet(), answer);
     }
 
     void printReverseInorderElements()
     {
-        tree->addNodeInSet(8);
-        tree->addNodeInSet(3);
-        tree->addNodeInSet(7);
+        tree->addNode(8);
+        tree->addNode(3);
+        tree->addNode(7);
         QString answer = "8 7 3 ";
         QCOMPARE(tree->printReverseInorderSet(), answer);
     }
 
     void printStructElements()
     {
-        tree->addNodeInSet(8);
-        tree->addNodeInSet(3);
-        tree->addNodeInSet(7);
+        tree->addNode(8);
+        tree->addNode(3);
+        tree->addNode(7);
         QString answer = "7 (3 (NULL NULL )8 (NULL NULL ))";
         QCOMPARE(tree->printStructOfSet(), answer);
     }

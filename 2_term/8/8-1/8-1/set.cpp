@@ -102,12 +102,12 @@ Set::Set() : root(nullptr)
 {
 }
 
-void Set::addNodeInSet(int value)
+void Set::addNode(int value)
 {
     SetNode::addNode(value, root);
 }
 
-bool Set::deleteNodeInSet(int value)
+bool Set::deleteNode(int value)
 {
     SetNode::deleteNode(value, root);
 }
