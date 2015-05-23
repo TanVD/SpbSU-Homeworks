@@ -1,7 +1,7 @@
 #include "linkedList.h"
 #include <iostream>
 
-LinkedList::LinkedList() : head(nullptr), counter(0)
+LinkedList::LinkedList() : head(nullptr), lengthField(0)
 {
 }
 
@@ -20,7 +20,7 @@ LinkedList::~LinkedList()
 void LinkedList::add(int value)
 {
     head = new ListElement(value, head);
-    counter++;
+    lengthField++;
 }
 
 bool LinkedList::isInList(int value)
@@ -54,7 +54,7 @@ bool LinkedList::remove(int value)
         else
             head = current->lNext;
         delete toDelete;
-        counter--;
+        lengthField--;
         return true;
     }
     return false;
@@ -65,30 +65,47 @@ void LinkedList::print()
     ListElement *current = head;
     while (current != nullptr)
     {
-        std::cout << current->value << " " ;
+        std::cout << current->value << std::endl;
         current = current->lNext;
     }
 }
 
-int LinkedList::compareTo(IComparable *that)
+bool LinkedList::isEmpty()
 {
-    if (length() > that->length())
-    {
-        return 1;
-    }
-    else if (length() < that->length())
-    {
-        return -1;
-    }
-    return 0;
+    return head == nullptr;
+}
+
+int LinkedList::pop()
+{
+    int result = this->head->value;
+    this->remove(this->head->value);
+    lengthField--;
+    return result;
 }
 
 int LinkedList::length()
 {
-    return counter;
+    return lengthField;
 }
 
-
-LinkedList::ListElement::ListElement(int value, ListElement *lNext) : lNext(lNext), value(value)
+bool LinkedList::isExists(int value)
 {
+    ListElement *current  = head;
+    ListElement *previous  = head;
+    while (current != nullptr && current->value != value)
+    {
+        previous = current;
+        current = current->lNext;
+    }
+    if (current != nullptr)
+    {
+        return true;
+    }
+    return false;
+}
+
+LinkedList::ListElement::ListElement(int value, ListElement *lNext)
+{
+    this->lNext = lNext;
+    this->value = value;
 }
