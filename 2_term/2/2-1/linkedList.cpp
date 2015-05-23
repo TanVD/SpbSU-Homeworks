@@ -35,7 +35,7 @@ bool LinkedList::remove(int value)
     if (current != nullptr)
     {
         ListElement *toDelete = current;
-        if (previous != head)
+        if (current != head)
             previous->lNext = current->lNext;
         else
             head = current->lNext;
@@ -53,6 +53,20 @@ void LinkedList::print()
         std::cout << current->value << std::endl;
         current = current->lNext;
     }
+}
+
+bool LinkedList::isInList(int value)
+{
+    ListElement* current  = head;
+    while (current != nullptr && current->value != value)
+    {
+        current = current->lNext;
+    }
+    if (current != nullptr)
+    {
+        return true;
+    }
+    return false;
 }
 
 LinkedList::ListElement::ListElement(int value, ListElement *lNext)

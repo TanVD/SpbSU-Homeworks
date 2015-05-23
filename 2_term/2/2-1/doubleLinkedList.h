@@ -9,6 +9,7 @@ public:
     void add(int value);
     bool remove(int value);
     void print();
+    bool isInList(int value);
 
 private:
     class ListElement
