@@ -10,6 +10,7 @@ TicTacToeUI::TicTacToeUI(QWidget *parent) :
     ui(new Ui::TicTacToeUI)
 {
     ui->setupUi(this);
+    ui->centralWidget->setLayout(ui->gridLayout);
     QInputDialog inputFromUser(this);
     int lengthOfField = inputFromUser.getInt(this, "Input", "Input length of field");
 
@@ -54,7 +55,9 @@ void TicTacToeUI::mappedButtonAction(int value)
     model->newMove(value);
     if (model->checkVictory(3))
     {
-        ui->whoWonLabel->setText(currentMove + " won!");
+        QMessageBox box(this);
+        box.setText(currentMove + " won!");
+        box.exec();
         model->makeAllDisabled();
     }
 }

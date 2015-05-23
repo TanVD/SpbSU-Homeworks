@@ -20,7 +20,7 @@
       <x>10</x>
       <y>0</y>
       <width>381</width>
-      <height>261</height>
+      <height>271</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -28,19 +28,6 @@
       <enum>QLayout::SetMaximumSize</enum>
      </property>
     </layout>
-   </widget>
-   <widget class="QLabel" name="whoWonLabel">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>270</y>
-      <width>241</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
    </widget>
   </widget>
  </widget>
