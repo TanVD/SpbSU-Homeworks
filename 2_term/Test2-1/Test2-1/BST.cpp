@@ -1,21 +1,21 @@
 #include <stdio.h>
 #include "BST.h"
 
-int Set::SetNode::height()
+int Tree::TreeNode::height()
 {
    return (this != nullptr) ? this->heightField : 0;
 }
 
-void Set::SetNode::updateHeight()
+void Tree::TreeNode::updateHeight()
 {
    int heightLeft = this->left->height();
    int heightRight = this->right->height();
    this->heightField = ((heightLeft > heightRight) ? heightLeft : heightRight) + 1;
 }
 
-Set::SetNode* Set::SetNode::rotateRight()
+Tree::TreeNode* Tree::TreeNode::rotateRight()
 {
-   SetNode* pivot = this->left;
+   TreeNode* pivot = this->left;
    this->left = pivot->right;
    pivot->right = this;
    this->updateHeight();
@@ -23,9 +23,9 @@ Set::SetNode* Set::SetNode::rotateRight()
    return pivot;
 }
 
-Set::SetNode* Set::SetNode::rotateLeft()
+Tree::TreeNode* Tree::TreeNode::rotateLeft()
 {
-   SetNode* pivot = this->right;
+   TreeNode* pivot = this->right;
    this->right = pivot->left;
    pivot->left = this;
    this->updateHeight();
@@ -33,12 +33,12 @@ Set::SetNode* Set::SetNode::rotateLeft()
    return pivot;
 }
 
-int Set::SetNode::balanceFactor()
+int Tree::TreeNode::balanceFactor()
 {
    return this->right->height() - this->left->height();
 }
 
-Set::SetNode* Set::SetNode::balance()
+Tree::TreeNode* Tree::TreeNode::balance()
 {
     this->updateHeight();
     if (this->balanceFactor() == 2)
@@ -56,7 +56,7 @@ Set::SetNode* Set::SetNode::balance()
     return this;
 }
 
-Set::SetNode::SetNode(int value)
+Tree::TreeNode::TreeNode(int value)
 {
     this->value = value;
     heightField = 1;
@@ -64,12 +64,12 @@ Set::SetNode::SetNode(int value)
     right = nullptr;
 }
 
-Set::Set()
+Tree::Tree()
 {
     this->root = nullptr;
 }
 
-void Set::SetNode::addNode(int value, SetNode *&element)
+void Tree::TreeNode::addNode(int value, TreeNode *&element)
 {
     if (element != nullptr)
     {
@@ -85,17 +85,17 @@ void Set::SetNode::addNode(int value, SetNode *&element)
     }
     else
     {
-        element = new SetNode(value);
+        element = new TreeNode(value);
     }
     return;
 }
 
-void Set::addNodeInSet(int value)
+void Tree::addNodeInSet(int value)
 {
-    SetNode::addNode(value, this->root);
+    TreeNode::addNode(value, this->root);
 }
 
-bool Set::SetNode::isExists(int value)
+bool Tree::TreeNode::isExists(int value)
 {
     if (this == nullptr)
     {
@@ -112,7 +112,7 @@ bool Set::SetNode::isExists(int value)
     return true;
 }
 
-bool Set::isExistsInSet(int value)
+bool Tree::isExistsInSet(int value)
 {
     return this->root->isExists(value);
 }
@@ -124,7 +124,7 @@ enum modesElement
     twoDescendant = 2,
 };
 
-int Set::SetNode::modeOfElement()
+int Tree::TreeNode::modeOfElement()
 {
     if ((this->left == nullptr) && (this->right == nullptr))
     {
@@ -137,9 +137,9 @@ int Set::SetNode::modeOfElement()
     return twoDescendant;
 }
 
-int Set::SetNode::findMinimum()
+int Tree::TreeNode::findMinimum()
 {
-    SetNode* iter = this;
+    TreeNode* iter = this;
     while (iter->left != nullptr)
     {
         iter = iter->left;
@@ -147,9 +147,9 @@ int Set::SetNode::findMinimum()
     return iter->value;
 }
 
-void Set::deleteOneDescendant(Set::SetNode *&element)
+void Tree::deleteOneDescendant(Tree::TreeNode *&element)
 {
-    SetNode* tempElement = element;
+    TreeNode* tempElement = element;
     if (element->left != nullptr)
     {
         element = element->left;
@@ -161,20 +161,20 @@ void Set::deleteOneDescendant(Set::SetNode *&element)
     delete tempElement;
 }
 
-void Set::deleteTwoDescendant(Set::SetNode *&element)
+void Tree::deleteTwoDescendant(Tree::TreeNode *&element)
 {
     int valueMin = element->right->findMinimum();
     deleteNode(valueMin, element);
     element->value = valueMin;
 }
 
-void Set::deleteNoDescendant(Set::SetNode *&element)
+void Tree::deleteNoDescendant(Tree::TreeNode *&element)
 {
     delete element;
     element = nullptr;
 }
 
-bool Set::deleteNode(int value, Set::SetNode *&element)
+bool Tree::deleteNode(int value, Tree::TreeNode *&element)
 {
     if (element == nullptr)
     {
@@ -214,12 +214,12 @@ bool Set::deleteNode(int value, Set::SetNode *&element)
     return true;
 }
 
-bool Set::deleteNodeInSet(int value)
+bool Tree::deleteNodeInSet(int value)
 {
     return deleteNode(value, this->root);
 }
 
-void Set::deleteBST(SetNode *element)
+void Tree::deleteBST(TreeNode *element)
 {
     if (element == nullptr)
     {
@@ -232,12 +232,12 @@ void Set::deleteBST(SetNode *element)
 
 }
 
-Set::~Set()
+Tree::~Tree()
 {
     deleteBST(this->root);
 }
 
-QString Set::printStructBST(SetNode *element, QString result)
+QString Tree::printStructBST(TreeNode *element, QString result)
 {
     if (element != nullptr)
     {
@@ -256,13 +256,13 @@ QString Set::printStructBST(SetNode *element, QString result)
 
 }
 
-QString Set::printStructOfSet()
+QString Tree::printStructOfSet()
 {
     QString result;
     return printStructBST(this->root, result);
 }
 
-QString Set::printInorderBST(SetNode *element, QString result)
+QString Tree::printInorderBST(TreeNode *element, QString result)
 {
     if (element == nullptr)
     {
@@ -275,13 +275,13 @@ QString Set::printInorderBST(SetNode *element, QString result)
 
 }
 
-QString Set::printInorderSet()
+QString Tree::printInorderSet()
 {
     QString result;
     return printInorderBST(this->root, result);
 }
 
-QString Set::printReverseInorderBST(SetNode *element, QString result)
+QString Tree::printReverseInorderBST(TreeNode *element, QString result)
 {
     if (element == nullptr)
     {
@@ -293,9 +293,56 @@ QString Set::printReverseInorderBST(SetNode *element, QString result)
     return result;
 }
 
-QString Set::printReverseInorderSet()
+QString Tree::printReverseInorderSet()
 {
     QString result;
     return printReverseInorderBST(this->root, result);
 }
 
+IteratorInterface<int> *Tree::getEnumerator()
+{
+   return new IteratorBST(this->root);
+}
+
+Tree::IteratorBST::IteratorBST(TreeNode *root) : root(root), current(0)
+{
+    QVector<TreeNode*> bypass;
+    vectorOfBypass = makeBypass(root, bypass);
+}
+
+int Tree::IteratorBST::next()
+{
+    return vectorOfBypass[current++]->value;
+}
+
+bool Tree::IteratorBST::isEmpty()
+{
+    return current == vectorOfBypass.length();
+}
+
+void Tree::IteratorBST::reset()
+{
+    current = 0;
+}
+
+void Tree::IteratorBST::remove()
+{
+    deleteNode(vectorOfBypass[current]->value, root);
+    vectorOfBypass.clear();
+    vectorOfBypass = makeBypass(root, vectorOfBypass);
+    if (current == vectorOfBypass.length() && current > 0)
+        current--;
+
+}
+
+QVector<Tree::TreeNode *> Tree::IteratorBST::makeBypass(TreeNode *element, QVector<TreeNode *> arrayBypass)
+{
+    if (element == nullptr)
+    {
+        return arrayBypass;
+    }
+    arrayBypass = makeBypass(element->left, arrayBypass);
+    arrayBypass.append(element);
+    arrayBypass = makeBypass(element->right, arrayBypass);
+    return arrayBypass;
+}

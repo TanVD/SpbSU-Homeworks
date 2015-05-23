@@ -20,4 +20,5 @@ SOURCES += main.cpp \
 
 HEADERS += \
     BST.h \
-    settest.h
+    iteratorinterface.h \
+    treetest.h

@@ -2,6 +2,7 @@
 #include <QtCore/QObject>
 #include <QtTest/QtTest>
 #include "BST.h"
+#include "iteratorinterface.h"
 
 class SetTest : public QObject
 {
@@ -11,7 +12,7 @@ public:
 private slots:
     void init()
     {
-        tree = new Set;
+        tree = new Tree;
     }
 
     void cleanup()
@@ -83,17 +84,85 @@ private slots:
         QVERIFY(tree->deleteNodeInSet(3));
         QVERIFY(!tree->isExistsInSet(3));
     }
-/*
-    void addSeveralEqualElements()
+
+    void iterationThroughTree()
     {
-        tree->addNodeInSet(5);
-        tree->addNodeInSet(5);
-        QVERIFY(tree->isExistsInSet(5));
-        tree->deleteNodeInSet(5);
-        tree->deleteNodeInSet(5);
-        QVERIFY(!tree->isExistsInSet(5));
+        tree->addNodeInSet(8);
+        tree->addNodeInSet(3);
+        tree->addNodeInSet(7);
+        IteratorInterface<int>* iter = tree->getEnumerator();
+        QCOMPARE(iter->next(), 3);
+        QCOMPARE(iter->next(), 7);
+        QCOMPARE(iter->next(), 8);
     }
-*/
+
+    void enumaretorGetLast()
+    {
+        tree->addNodeInSet(8);
+        tree->addNodeInSet(3);
+        tree->addNodeInSet(7);
+        IteratorInterface<int>* iter = tree->getEnumerator();
+        iter->next();
+        iter->next();
+        iter->next();
+        QVERIFY(iter->isEmpty());
+    }
+
+    void enumaratorReset()
+    {
+        tree->addNodeInSet(8);
+        tree->addNodeInSet(3);
+        tree->addNodeInSet(7);
+        IteratorInterface<int>* iter = tree->getEnumerator();
+        iter->next();
+        iter->next();
+        iter->next();
+        iter->reset();
+        QCOMPARE(iter->next(), 3);
+        QCOMPARE(iter->next(), 7);
+        QCOMPARE(iter->next(), 8);
+    }
+
+    void enumaretorRemoveOne()
+    {
+        tree->addNodeInSet(8);
+        tree->addNodeInSet(3);
+        tree->addNodeInSet(7);
+        IteratorInterface<int>* iter = tree->getEnumerator();
+        iter->next();
+        iter->next();
+        iter->remove();
+        iter->reset();
+        QCOMPARE(iter->next(), 3);
+        QCOMPARE(iter->next(), 7);
+        QVERIFY(iter->isEmpty());
+    }
+
+    void enumeratorRemoveOneAndGoToSecond()
+    {
+        tree->addNodeInSet(8);
+        tree->addNodeInSet(3);
+        tree->addNodeInSet(7);
+        IteratorInterface<int>* iter = tree->getEnumerator();
+        iter->next();
+        iter->remove();
+        QCOMPARE(iter->next(), 8);
+        QVERIFY(iter->isEmpty());
+    }
+
+    void enumaretorRemoveTwo()
+    {
+        tree->addNodeInSet(8);
+        tree->addNodeInSet(3);
+        tree->addNodeInSet(7);
+        IteratorInterface<int>* iter = tree->getEnumerator();
+        iter->remove();
+        iter->reset();
+        iter->remove();
+        QCOMPARE(iter->next(), 8);
+        QVERIFY(iter->isEmpty());
+    }
+
     void printInorderElements()
     {
         tree->addNodeInSet(8);
@@ -101,6 +170,20 @@ private slots:
         tree->addNodeInSet(7);
         QString answer = "3 7 8 ";
         QCOMPARE(tree->printInorderSet(), answer);
+    }
+
+    void printInorderElementsByEnumerator()
+    {
+        tree->addNodeInSet(8);
+        tree->addNodeInSet(3);
+        tree->addNodeInSet(7);
+        IteratorInterface<int>* iter = tree->getEnumerator();
+        QString variant;
+        variant += QString::number(iter->next()) + " ";
+        variant += QString::number(iter->next()) + " ";
+        variant += QString::number(iter->next()) + " ";
+        QString answer = "3 7 8 ";
+        QCOMPARE(variant, answer);
     }
 
     void printReverseInorderElements()
@@ -122,5 +205,5 @@ private slots:
     }
 
 private:
-    Set* tree;
+    Tree* tree;
 };

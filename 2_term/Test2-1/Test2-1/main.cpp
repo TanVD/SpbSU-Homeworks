@@ -1,6 +1,6 @@
 #include <QCoreApplication>
 #include <QTest>
-#include "settest.h"
+#include "treetest.h"
 
 int main(int argc, char *argv[])
 {

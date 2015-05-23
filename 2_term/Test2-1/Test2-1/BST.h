@@ -1,11 +1,13 @@
 #pragma once
 #include <QString>
+#include <QVector>
+#include "iteratorinterface.h"
 
-class Set
+class Tree
 {
 public:
-    Set();
-    ~Set();
+    Tree();
+    ~Tree();
 
     /**
      * @brief addNodeInSet Adds new value in set
@@ -42,36 +44,57 @@ public:
      */
     QString printReverseInorderSet();
 
+    /**
+     * @brief getEnumerator Returns inorder enumerator of tree
+     * @return IteratorInterface object
+     */
+    IteratorInterface<int>* getEnumerator();
+
 private:
-    class SetNode
+    class TreeNode
     {
     public:
-        static void addNode(int value, SetNode *&element);
+        static void addNode(int value, TreeNode *&element);
         int value;
-        SetNode* right;
-        SetNode* left;
+        TreeNode* right;
+        TreeNode* left;
         void updateHeight();
         int height();
         int heightField;
-        SetNode(int value);
+        TreeNode(int value);
         int balanceFactor();
-        SetNode* balance();
+        TreeNode* balance();
         bool deleteNode(int value);
-        SetNode *rotateRight();
-        SetNode *rotateLeft();
+        TreeNode *rotateRight();
+        TreeNode *rotateLeft();
         bool isExists(int value);
         int modeOfElement();
         int findMinimum();
     };
-    SetNode* root;
+    TreeNode* root;
 
-    static void deleteOneDescendant(Set::SetNode *&element);
-    static void deleteTwoDescendant(Set::SetNode *&element);
-    static void deleteNoDescendant(Set::SetNode *&element);
-    static bool deleteNode(int value, Set::SetNode *&element);
-    void deleteBST(SetNode *element);
-    QString printStructBST(SetNode *element, QString result);
-    QString printInorderBST(SetNode *element, QString result);
-    QString printReverseInorderBST(SetNode *element, QString result);
+    static void deleteOneDescendant(Tree::TreeNode *&element);
+    static void deleteTwoDescendant(Tree::TreeNode *&element);
+    static void deleteNoDescendant(Tree::TreeNode *&element);
+    static bool deleteNode(int value, Tree::TreeNode *&element);
+    void deleteBST(TreeNode *element);
+    QString printStructBST(TreeNode *element, QString result);
+    QString printInorderBST(TreeNode *element, QString result);
+    QString printReverseInorderBST(TreeNode *element, QString result);
+
+    class IteratorBST : public IteratorInterface<int>
+    {
+    public:
+        IteratorBST(TreeNode* root);
+        int next();
+        bool isEmpty();
+        void reset();
+        void remove();
+    private:
+        QVector<TreeNode*> makeBypass(TreeNode* element, QVector<TreeNode*> arrayBypass);
+        int current;
+        QVector<TreeNode*> vectorOfBypass;
+        TreeNode* root;
+    };
 
 };
