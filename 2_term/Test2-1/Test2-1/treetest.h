@@ -157,8 +157,8 @@ private slots:
         tree->addNodeInSet(7);
         IteratorInterface<int>* iter = tree->getEnumerator();
         iter->remove();
-        iter->reset();
         iter->remove();
+        iter->reset();
         QCOMPARE(iter->next(), 8);
         QVERIFY(iter->isEmpty());
     }

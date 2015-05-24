@@ -304,7 +304,7 @@ IteratorInterface<int> *Tree::getEnumerator()
    return new IteratorBST(this->root);
 }
 
-Tree::IteratorBST::IteratorBST(TreeNode *root) : root(root), current(0)
+Tree::IteratorBST::IteratorBST(TreeNode *&root) : root(root), current(0)
 {
     QVector<TreeNode*> bypass;
     vectorOfBypass = makeBypass(root, bypass);

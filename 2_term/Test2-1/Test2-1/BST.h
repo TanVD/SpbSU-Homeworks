@@ -85,7 +85,7 @@ private:
     class IteratorBST : public IteratorInterface<int>
     {
     public:
-        IteratorBST(TreeNode* root);
+        IteratorBST(TreeNode*& root);
         int next();
         bool isEmpty();
         void reset();
@@ -94,7 +94,7 @@ private:
         QVector<TreeNode*> makeBypass(TreeNode* element, QVector<TreeNode*> arrayBypass);
         int current;
         QVector<TreeNode*> vectorOfBypass;
-        TreeNode* root;
+        TreeNode*& root;
     };
 
 };
