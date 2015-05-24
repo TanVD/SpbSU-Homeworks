@@ -2,7 +2,7 @@
 #include "IComparable.h"
 #include "iostream"
 
-SortedSet::SortedSet() : head(nullptr), counter(0)
+SortedSet::SortedSet() : head(nullptr), current(head), counter(0)
 {
 }
 
@@ -26,6 +26,7 @@ void SortedSet::add(IComparable *value)
     if (current == nullptr || current->value->compareTo(value) > 0)
     {
         head = new SetElement(value, head);
+        this->current = head;
         return;
     }
     while ((current->sNext != nullptr) && (current->value->compareTo(value) < 0))
@@ -41,6 +42,7 @@ void SortedSet::add(IComparable *value)
     {
         current->sNext = new SetElement(value, current->sNext);
     }
+    this->current = head;
 }
 
 bool SortedSet::remove(IComparable *value)
@@ -55,12 +57,27 @@ bool SortedSet::remove(IComparable *value)
     if (current != nullptr)
     {
         SetElement *toDelete = current;
-        if (previous != head)
+        if (current != head)
             previous->sNext = current->sNext;
         else
             head = current->sNext;
         delete toDelete;
         counter--;
+        this->current = head;
+        return true;
+    }
+    return false;
+}
+
+bool SortedSet::isInSet(IComparable *value)
+{
+    SetElement* current  = head;
+    while (current != nullptr && current->value != value)
+    {
+        current = current->sNext;
+    }
+    if (current != nullptr)
+    {
         return true;
     }
     return false;
@@ -80,8 +97,14 @@ void SortedSet::print()
     }
 }
 
+IComparable *SortedSet::next()
+{
+    SetElement* result = current;
+    current = current->sNext;
+    return result->value;
+}
+
 
 SortedSet::SetElement::SetElement(IComparable *list, SortedSet::SetElement *sNext) : sNext(sNext), value(list)
 {
-
 }
