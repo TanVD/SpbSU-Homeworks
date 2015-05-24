@@ -10,14 +10,14 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = 9-1
 TEMPLATE = app
-
+CONFIG += c++11
 
 SOURCES += main.cpp\
         myserver.cpp \
-    transmissionCoder.cpp
+    ../transmissionCoder.cpp
 
 HEADERS  += myserver.h \
-    transmissionCoder.h \
-    unreliableTransmission.h
+    ../transmissionCoder.h \
+    unreliableTransmission.h \
 
 FORMS    += myserver.ui

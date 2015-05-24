@@ -8,14 +8,18 @@ myclient::myclient(QWidget *parent) :
     blockSize(0)
 {
     ui->setupUi(this);
-    serverConnection = new QTcpSocket;//TODO
+    serverConnection = new QTcpSocket;
     connect(ui->sendButton, SIGNAL(clicked(bool)), this, SLOT(sendTextMessage()));
     connect(serverConnection, SIGNAL(readyRead()), this, SLOT(readTextMsg()));
     connect(ui->connectButton, SIGNAL(clicked(bool)), this, SLOT(connectToServer()));
+    connect(serverConnection, SIGNAL(disconnected()), this, SLOT(disconnected()));
+    connect(serverConnection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(disconnected()));
+    disconnected();
 }
 
 myclient::~myclient()
 {
+    delete serverConnection;
     delete ui;
 }
 
@@ -24,16 +28,7 @@ void myclient::sendTextMessage()
     QString stringToCode = ui->sendText->toPlainText();
     QByteArray block = TransmissionCoder::codeForTransmission(stringToCode);
     serverConnection->write(block);
-    QString addingInf;
-    if (ui->historyText->toPlainText() == "")
-    {
-        addingInf = "Я: ";
-    }
-    else
-    {
-         addingInf = "\nЯ: ";
-    }
-    ui->historyText->setText(ui->historyText->toPlainText() + addingInf + ui->sendText->toPlainText());
+    ui->historyText->append("Я: " + ui->sendText->toPlainText());
     ui->sendText->clear();
 }
 
@@ -48,27 +43,26 @@ void myclient::readTextMsg()
     {
         return;
     }
-    QString addingInf;
-    if (ui->historyText->toPlainText() == "")
-    {
-        addingInf = "Собеседник: ";
-    }
-    else
-    {
-         addingInf = "\nСобеседник: ";
-    }
-    ui->historyText->setText(ui->historyText->toPlainText() + addingInf + newText);
+    ui->historyText->append("Собеседник: " + newText);
     blockSize = 0;
 }
 
 void myclient::connectToServer()
 {
+    serverConnection->disconnectFromHost();
     blockSize = 0;
     serverConnection->connectToHost(ui->ipText->text(), ui->portText->text().toInt());
-    connect(serverConnection, SIGNAL(connected()), this, SLOT(testConnect()));
+    connect(serverConnection, SIGNAL(connected()), this, SLOT(connected()));
 }
 
-void myclient::testConnect()
+void myclient::connected()
 {
+    ui->sendButton->setEnabled(true);
     ui->connectionLabel->setText("Connected");
+}
+
+void myclient::disconnected()
+{
+    ui->sendButton->setEnabled(false);
+    ui->connectionLabel->setText("Disconnected");
 }

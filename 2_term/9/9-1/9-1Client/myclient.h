@@ -20,7 +20,8 @@ private slots:
     void sendTextMessage();
     void readTextMsg();
     void connectToServer();
-    void testConnect();
+    void connected();
+    void disconnected();
 
 private:
     Ui::myclient *ui;

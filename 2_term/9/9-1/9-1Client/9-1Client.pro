@@ -14,10 +14,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         myclient.cpp \
-    transmissionCoder.cpp
+    ../transmissionCoder.cpp
 
 HEADERS  += myclient.h \
-    transmissionCoder.h \
+    ../transmissionCoder.h \
     unreliableTransmission.h
 
 FORMS    += myclient.ui

@@ -5,32 +5,32 @@
 MyServer::MyServer(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MyServer),
-    blockSize(0)
+    blockSize(0),
+    clientConnection(nullptr)
 {
     ui->setupUi(this);
     tcpServer = new QTcpServer(this);
     tcpServer->listen();
     connect(tcpServer, SIGNAL(newConnection()), this, SLOT(sessionOpened()));
     connect(ui->sendButton, SIGNAL(clicked(bool)), this, SLOT(sendTextMessage()));
+    connect(ui->ipComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(changeIpAddress(int)));
 
-    QString ipAddress;
-    QList<QHostAddress> ipAddressesList = QNetworkInterface::allAddresses();
-    for (int i = 0; i < ipAddressesList.size(); i++) {
-        if (ipAddressesList.at(i) != QHostAddress::LocalHost &&
-            ipAddressesList.at(i).toIPv4Address()) {
-            ipAddress = ipAddressesList.at(i).toString();
-            break;
-        }
+    ipAddressesList = QNetworkInterface::allAddresses();
+    QStringList ipList;
+    for (int i = 0; i < ipAddressesList.size(); i++)
+    {
+        ipList.append(ipAddressesList[i].toString());
     }
-    if (ipAddress.isEmpty())
-        ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
-
-    ui->IpLabel->setText(ipAddress);
+    ui->ipComboBox->addItems(ipList);
     ui->portLabel->setText(QString::number(tcpServer->serverPort()));
+    ui->sendButton->setEnabled(false);
 }
 
 MyServer::~MyServer()
 {
+    delete tcpServer;
+    if (clientConnection != nullptr)
+        delete clientConnection;
     delete ui;
 }
 
@@ -38,6 +38,7 @@ void MyServer::sessionOpened()
 {
     clientConnection = tcpServer->nextPendingConnection();
     connect(clientConnection, SIGNAL(readyRead()), this, SLOT(readTextMsg()));
+    ui->sendButton->setEnabled(true);
 }
 
 void MyServer::sendTextMessage()
@@ -45,16 +46,7 @@ void MyServer::sendTextMessage()
     QString stringToCode = ui->sendText->toPlainText();
     QByteArray block = TransmissionCoder::codeForTransmission(stringToCode);
     clientConnection->write(block);
-    QString addingInf;
-    if (ui->historyText->toPlainText() == "")
-    {
-        addingInf = "Я: ";
-    }
-    else
-    {
-         addingInf = "\nЯ: ";
-    }
-    ui->historyText->setText(ui->historyText->toPlainText() + addingInf + ui->sendText->toPlainText());
+    ui->historyText->append("Я: " + ui->sendText->toPlainText());
     ui->sendText->clear();
 
 }
@@ -70,16 +62,20 @@ void MyServer::readTextMsg()
     {
         return;
     }
-
-    QString addingInf;
-    if (ui->historyText->toPlainText() == "")
-    {
-        addingInf = "Собеседник: ";
-    }
-    else
-    {
-         addingInf = "\nСобеседник: ";
-    }
-    ui->historyText->setText(ui->historyText->toPlainText() + addingInf + newText);
+    ui->historyText->append("Собеседник: " + newText);
     blockSize = 0;
+}
+
+void MyServer::changeIpAddress(int index)
+{
+    if (clientConnection != nullptr)
+    {
+        clientConnection->disconnectFromHost();
+        delete clientConnection;
+        clientConnection = nullptr;
+    }
+    tcpServer->close();
+    tcpServer->listen(ipAddressesList[index]);
+    ui->portLabel->setText(QString::number(tcpServer->serverPort()));
+    ui->sendButton->setEnabled(false);
 }

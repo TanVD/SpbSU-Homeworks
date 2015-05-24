@@ -14,19 +14,6 @@
    <string>MyServer</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLabel" name="IpLabel">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>20</y>
-      <width>121</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="portLabel">
     <property name="geometry">
      <rect>
@@ -74,6 +61,16 @@
     </property>
     <property name="text">
      <string>Send</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="ipComboBox">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>20</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
     </property>
    </widget>
   </widget>

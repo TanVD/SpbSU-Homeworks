@@ -5,6 +5,7 @@
 #include <QNetworkSession>
 #include <QDataStream>
 
+
 namespace Ui {
 class MyServer;
 }
@@ -19,15 +20,15 @@ public:
     QTcpServer* tcpServer;
     quint16 blockSize;
     QTcpSocket* clientConnection;
-    QStringList fortunes;
-    QNetworkSession *networkSession;
 
 private slots:
     void sessionOpened();
     void sendTextMessage();
     void readTextMsg();
+    void changeIpAddress(int index);
 
 private:
     Ui::MyServer *ui;
+    QList<QHostAddress> ipAddressesList;
 };
 
