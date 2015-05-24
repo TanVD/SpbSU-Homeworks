@@ -1,6 +1,6 @@
 #include "myserver.h"
 #include "ui_myserver.h"
-#include "transmissionCoder.h"
+#include "../transmissionCoder.h"
 
 MyServer::MyServer(QWidget *parent) :
     QMainWindow(parent),

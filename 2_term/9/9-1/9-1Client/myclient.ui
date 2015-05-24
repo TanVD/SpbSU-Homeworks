@@ -83,7 +83,7 @@
    <widget class="QLabel" name="portLabel">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>430</x>
       <y>50</y>
       <width>67</width>
       <height>17</height>
@@ -96,7 +96,7 @@
    <widget class="QLabel" name="ipLabel">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>430</x>
       <y>0</y>
       <width>67</width>
       <height>17</height>
