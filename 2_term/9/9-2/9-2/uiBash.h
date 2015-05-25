@@ -22,6 +22,7 @@ private slots:
 
 private:
     Ui::uiBash *ui;
-    BashAsker* ask;
+    BashAsker *ask;
+    void fillText(QStringList list);
 };
 

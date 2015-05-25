@@ -22,52 +22,44 @@ void uiBash::getMainPage()
 {
     QString html = ask->getMainPage();
     QStringList citList = ParseCitations::parseFromHtmlQuotes(html);
-    for (int i = 0; i < citList.length(); i++)
+    fillText(citList);
+    //here doesn't work positioning of slider
+}
+
+void uiBash::fillText(QStringList list)
+{
+    ui->textEdit->clear();
+    for (int i = 0; i < list.length(); i++)
     {
-        ui->textEdit->append("№" + QString::number(i + 1) + " on list<br>" + citList[i] + "<br>");
+        ui->textEdit->append("№" + QString::number(i + 1) + " on list<br>" + list[i] + "<br>");
     }
     ui->textEdit->verticalScrollBar()->setSliderPosition(0);
-    //doesnt work the proper way
 }
 
 uiBash::~uiBash()
 {
     delete ui;
+    delete ask;
 }
 
 void uiBash::getNextPage()
 {
     QString html = ask->getNextPage();
     QStringList citList = ParseCitations::parseFromHtmlQuotes(html);
-    ui->textEdit->clear();
-    for (int i = 0; i < citList.length(); i++)
-    {
-        ui->textEdit->append(citList[i] + "<br>" + "№" + QString::number(i) + "on list" + "<br>");
-    }
-    ui->textEdit->verticalScrollBar()->setSliderPosition(0);
+    fillText(citList);
 }
 
 void uiBash::getPreviousPage()
 {
     QString html = ask->getPreviousPage();
     QStringList citList = ParseCitations::parseFromHtmlQuotes(html);
-    ui->textEdit->clear();
-    for (int i = 0; i < citList.length(); i++)
-    {
-        ui->textEdit->append(citList[i] + "<br>" + "№" + QString::number(i) + "on list" + "<br>");
-    }
-    ui->textEdit->verticalScrollBar()->setSliderPosition(0);
+    fillText(citList);
 }
 
 void uiBash::getRandomPage()
 {
     QString html = ask->getRandomPage();
     QStringList citList = ParseCitations::parseFromHtmlQuotes(html);
-    ui->textEdit->clear();
-    for (int i = 0; i < citList.length(); i++)
-    {
-        ui->textEdit->append(citList[i] + "<br>" + "№" + QString::number(i) + "on list" + "<br>");
-    }
-    ui->textEdit->verticalScrollBar()->setSliderPosition(0);
+    fillText(citList);
 }
 
