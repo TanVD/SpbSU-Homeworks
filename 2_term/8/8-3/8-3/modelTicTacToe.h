@@ -38,5 +38,7 @@ private:
     bool move;
     int lengthOfField;
 
+    bool lineChecking(bool horizontal, int length, int conditionLength);
+    bool diagonalChecking(bool mainDiagonal, int length, int conditionLength);
 };
 
