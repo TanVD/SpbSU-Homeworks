@@ -1,43 +1,25 @@
 #pragma once
 #include <BST.h>
+#include <QPair>
+#include <QVector>
 
-class Set : public BST
+class Set :public BST
 {
 public:
-    Set();
+    /**
+     * @brief addNode Adds node in set, maybe more than one
+     * @param value value to add
+     */
     virtual void addNode(int value);
+
+    /**
+     * @brief deleteNode Deletes node from set
+     * @param value value to delete
+     * @return true if deleted successfull
+     */
     virtual bool deleteNode(int value);
 
 private:
-    class SetNode : public TreeNode
-    {
-    public:
-        int counter;
-        SetNode(int value);
-        SetNode* left;
-        SetNode* right;
-        SetNode* balance();
-        SetNode* rotateRight();
-        SetNode* rotateLeft();
-        TreeNode* getLeft();
-        TreeNode* getRight();
-        int modeOfElement();
-        static void addNode(int value, SetNode *&element);
-        static bool deleteNode(int value, SetNode *&element);
-    };
-
-    enum modesElementAdd
-    {
-        moreThanInOneCell = 3
-    };
-
-    SetNode* root;
-    TreeNode* getRoot();
-    static void deleteCellWithMoreThanOneIn(SetNode *&element);
-
-    static void deleteOneDescendant(SetNode *&element);
-    static void deleteTwoDescendant(SetNode *&element);
-    static void deleteNoDescendant(SetNode *&element);
-
-
+    QVector<int> valueVector;
+    QVector<int> valueHowMuchTimeVector;
 };

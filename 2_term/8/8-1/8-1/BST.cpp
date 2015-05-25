@@ -103,18 +103,18 @@ bool BST::TreeNode::isExists(int value)
     }
     else if (value < this->value)
     {
-        return this->getLeft()->isExists(value);
+        return this->left->isExists(value);
     }
     else if (value > this->value)
     {
-        return this->getRight()->isExists(value);
+        return this->right->isExists(value);
     }
     return true;
 }
 
 bool BST::isExists(int value)
 {
-    return this->getRoot()->isExists(value);
+    return this->root->isExists(value);
 }
 
 
@@ -135,40 +135,30 @@ int BST::TreeNode::modeOfElement()
 int BST::TreeNode::findMinimum()
 {
     TreeNode* iter = this;
-    while (iter->getLeft() != nullptr)
+    while (iter->left != nullptr)
     {
-        iter = iter->getLeft();
+        iter = iter->left;
     }
     return iter->value;
-}
-
-BST::TreeNode *BST::TreeNode::getRight()
-{
-    return right;
-}
-
-BST::TreeNode *BST::TreeNode::getLeft()
-{
-    return left;
 }
 
 void BST::deleteOneDescendant(BST::TreeNode *&element)
 {
     TreeNode* tempElement = element;
-    if (element->getLeft() != nullptr)
+    if (element->left != nullptr)
     {
-        element = element->getLeft();
+        element = element->left;
     }
-    else if (element->getRight() != nullptr)
+    else if (element->right != nullptr)
     {
-        element = element->getRight();
+        element = element->right;
     }
     delete tempElement;
 }
 
 void BST::deleteTwoDescendant(BST::TreeNode *&element)
 {
-    int valueMin = element->getRight()->findMinimum();
+    int valueMin = element->right->findMinimum();
     TreeNode::deleteNode(valueMin, element);
     element->value = valueMin;
 }
@@ -230,8 +220,8 @@ void BST::deleteBST(TreeNode *element)
     {
         return;
     }
-    deleteBST(element->getLeft());
-    deleteBST(element->getRight());
+    deleteBST(element->left);
+    deleteBST(element->right);
     delete element;
     return;
 
@@ -239,7 +229,7 @@ void BST::deleteBST(TreeNode *element)
 
 BST::~BST()
 {
-    deleteBST(this->getRoot());
+    deleteBST(this->root);
 }
 
 QString BST::printStructBST(TreeNode *element, QString result)
@@ -254,8 +244,8 @@ QString BST::printStructBST(TreeNode *element, QString result)
         return result;
     }
     result += "(";
-    result = printStructBST(element->getLeft(), result);
-    result = printStructBST(element->getRight(), result);
+    result = printStructBST(element->left, result);
+    result = printStructBST(element->right, result);
     result += ")";
     return result;
 
@@ -264,7 +254,7 @@ QString BST::printStructBST(TreeNode *element, QString result)
 QString BST::printStructOfSet()
 {
     QString result;
-    return printStructBST(this->getRoot(), result);
+    return printStructBST(this->root, result);
 }
 
 QString BST::printInorderBST(TreeNode *element, QString result)
@@ -273,9 +263,9 @@ QString BST::printInorderBST(TreeNode *element, QString result)
     {
         return result;
     }
-    result = printInorderBST(element->getLeft(), result);
+    result = printInorderBST(element->left, result);
     result += QString::number(element->value) + " ";
-    result = printInorderBST(element->getRight(), result);
+    result = printInorderBST(element->right, result);
     return result;
 
 }
@@ -283,7 +273,7 @@ QString BST::printInorderBST(TreeNode *element, QString result)
 QString BST::printInorderSet()
 {
     QString result;
-    return printInorderBST(this->getRoot(), result);
+    return printInorderBST(this->root, result);
 }
 
 QString BST::printReverseInorderBST(TreeNode *element, QString result)
@@ -292,20 +282,15 @@ QString BST::printReverseInorderBST(TreeNode *element, QString result)
     {
         return result;
     }
-    result = printReverseInorderBST(element->getRight(), result);
+    result = printReverseInorderBST(element->right, result);
     result += QString::number(element->value) + " ";
-    result = printReverseInorderBST(element->getLeft(), result);
+    result = printReverseInorderBST(element->left, result);
     return result;
-}
-
-BST::TreeNode *BST::getRoot()
-{
-    return root;
 }
 
 QString BST::printReverseInorderSet()
 {
     QString result;
-    return printReverseInorderBST(this->getRoot(), result);
+    return printReverseInorderBST(this->root, result);
 }
 

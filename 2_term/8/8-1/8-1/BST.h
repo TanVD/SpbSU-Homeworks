@@ -5,7 +5,7 @@ class BST
 {
 public:
     BST();
-    ~BST();
+    virtual ~BST();
 
     /**
      * @brief addNodeInSet Adds new value in set
@@ -42,7 +42,7 @@ public:
      */
     QString printReverseInorderSet();
 
-protected:
+private:
 
     enum modesElement
     {
@@ -60,17 +60,14 @@ protected:
         int heightField;
         TreeNode(int value);
         int balanceFactor();
-        virtual TreeNode* balance();
-        virtual TreeNode *rotateRight();
-        virtual TreeNode *rotateLeft();
+        TreeNode* balance();
+        TreeNode *rotateRight();
+        TreeNode *rotateLeft();
         bool isExists(int value);
-        virtual int modeOfElement();
+        int modeOfElement();
         int findMinimum();
-        virtual TreeNode* getRight();
-        virtual TreeNode* getLeft();
         static void addNode(int value, TreeNode *&element);
         static bool deleteNode(int value, BST::TreeNode *&element);
-    private:
         TreeNode* right;
         TreeNode* left;
     };
@@ -79,7 +76,6 @@ protected:
     QString printStructBST(TreeNode *element, QString result);
     QString printInorderBST(TreeNode *element, QString result);
     QString printReverseInorderBST(TreeNode *element, QString result);
-    virtual TreeNode* getRoot();
 private:
     TreeNode* root;
     static void deleteOneDescendant(BST::TreeNode *&element);
