@@ -9,7 +9,7 @@ namespace Application
     /// <summary>
     /// Generic linked list.
     /// </summary>
-    public class LinkedList<T> : IEnumerable<T> 
+    public class LinkedList<T> : IEnumerable<T>
     {
         /// <summary>
         /// Add the specified value.
@@ -160,21 +160,21 @@ namespace Application
             return length;
         }
 
-		private class ListElement
-		{
-			public T Value { set; get; }
+        private class ListElement
+        {
+            public T Value { set; get; }
 
-			public ListElement(T value, ListElement lNext)
-			{
-				this.LNext = lNext;
-				this.Value = value;
-			}
+            public ListElement(T value, ListElement lNext)
+            {
+                this.LNext = lNext;
+                this.Value = value;
+            }
 
-			public ListElement LNext { set; get; }
-		};
+            public ListElement LNext { set; get; }
+        };
 
-		private ListElement head = null;
-		private int length = 0;
+        private ListElement head = null;
+        private int length = 0;
 
         /// <summary>
         /// Gets the enumerator for generic.
@@ -198,38 +198,38 @@ namespace Application
         {
             private ListElement currentPosition = null;
             private LinkedList<T> list;
-			private int move;
+            private int move;
 
             public LinkedListEnumerator(LinkedList<T> list)
             {
                 this.list = list;
-			}
+            }
 
-			/// <summary>
-			/// Moves to the next value.
-			/// </summary>
-			/// <returns><c>true</c>, if it was possible to move to the next value, <c>false</c> otherwise.</returns>
-			public bool MoveNext()
-			{
-				if (currentPosition != null)
-				{
-					currentPosition = currentPosition.LNext;
-				}
-				else
-				{
-					currentPosition = list.head;
-				}
-				move++;
-				return (move < this.list.Length());
-			}
+            /// <summary>
+            /// Moves to the next value.
+            /// </summary>
+            /// <returns><c>true</c>, if it was possible to move to the next value, <c>false</c> otherwise.</returns>
+            public bool MoveNext()
+            {
+                if (currentPosition != null)
+                {
+                    currentPosition = currentPosition.LNext;
+                }
+                else
+                {
+                    currentPosition = list.head;
+                }
+                move++;
+                return (move < this.list.Length());
+            }
 
-			/// <summary>
-			/// Reset current value of this instance.
-			/// </summary>
-			public void Reset()
-			{
+            /// <summary>
+            /// Reset current value of this instance.
+            /// </summary>
+            public void Reset()
+            {
                 currentPosition = null;
-				move = 0;
+                move = 0;
             }
 
             /// <summary>
@@ -240,7 +240,7 @@ namespace Application
             {
                 get
                 {
-					return this.currentPosition.Value;
+                    return this.currentPosition.Value;
                 }
             }
 
@@ -250,7 +250,7 @@ namespace Application
             /// <value>The current value.</value>
             T IEnumerator<T>.Current
             {
-				get { return this.currentPosition.Value; }
+                get { return this.currentPosition.Value; }
             }
 
 
