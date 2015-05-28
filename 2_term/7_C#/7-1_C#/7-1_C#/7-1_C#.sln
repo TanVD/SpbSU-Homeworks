@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7-1_C#", "7-1_C#\7-1_C#.csproj", "{BD081378-5D49-4CB5-BE54-DDC4C536877C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListTest", "7-1_C#\ListTest\ListTest\ListTest.csproj", "{6D23EF74-EED6-4C68-A599-CA7B94F84873}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D23EF74-EED6-4C68-A599-CA7B94F84873}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6D23EF74-EED6-4C68-A599-CA7B94F84873}.Debug|x86.Build.0 = Debug|Any CPU
+		{6D23EF74-EED6-4C68-A599-CA7B94F84873}.Release|x86.ActiveCfg = Release|Any CPU
+		{6D23EF74-EED6-4C68-A599-CA7B94F84873}.Release|x86.Build.0 = Release|Any CPU
+		{BD081378-5D49-4CB5-BE54-DDC4C536877C}.Debug|x86.ActiveCfg = Debug|x86
+		{BD081378-5D49-4CB5-BE54-DDC4C536877C}.Debug|x86.Build.0 = Debug|x86
+		{BD081378-5D49-4CB5-BE54-DDC4C536877C}.Release|x86.ActiveCfg = Release|x86
+		{BD081378-5D49-4CB5-BE54-DDC4C536877C}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = 7-1_C#\7-1_C#.csproj
+	EndGlobalSection
+EndGlobal
