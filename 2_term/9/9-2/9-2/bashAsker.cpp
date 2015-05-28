@@ -34,7 +34,7 @@ QString BashAsker::passQueryToServer()
 QString BashAsker::getPreviousPage()
 {
     QString server = "bash.im";
-    url = "http://"+ server;
+    url = "http://" + server;
     if (currentPage != 1)
     {
         url += "/index/" + QString::number(currentPage - 1);
@@ -47,10 +47,9 @@ QString BashAsker::getPreviousPage()
 QString BashAsker::getMainPage()
 {
     QString server = "bash.im";
-    url = "http://"+ server;
+    url = "http://" + server;
     passQueryToServer();
-    QString tmp = reply;
-    maxPage = ParseCitations::parseFromHtmlCurrentPage(tmp);
+    maxPage = ParseCitations::parseFromHtmlCurrentPage(reply);
     currentPage = maxPage;
     return reply;
 }
@@ -58,7 +57,7 @@ QString BashAsker::getMainPage()
 QString BashAsker::getNextPage()
 {
     QString server = "bash.im";
-    url = "http://"+ server;
+    url = "http://" + server;
     if (currentPage < maxPage)
     {
         url += "/index/" + QString::number(currentPage + 1);
