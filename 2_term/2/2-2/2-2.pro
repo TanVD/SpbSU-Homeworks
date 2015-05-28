@@ -1,20 +1,32 @@
+#-------------------------------------------------
+#
+# Project created by QtCreator 2015-03-14T21:01:11
+#
+#-------------------------------------------------
+
+QT       += core
+
+QT       -= gui
+
+QT       += testlib
+
+
+TARGET = 2-2
+CONFIG   += console c++11
+CONFIG   -= app_bundle
+
 TEMPLATE = app
-CONFIG += console
-CONFIG -= app_bundle
-CONFIG -= qt
-CONFIG += c++11
+
 
 SOURCES += main.cpp \
-    stackDouble.cpp \
     arrayStack.cpp \
-    calculator.cpp
-
-include(deployment.pri)
-qtcAddDeployment()
+    calculator.cpp \
+    stackDouble.cpp
 
 HEADERS += \
-    stackDouble.h \
-    stack.h \
     arrayStack.h \
-    calculator.h
-
+    calculator.h \
+    stack.h \
+    stackDouble.h \
+    testStack.h \
+    testCalc.h

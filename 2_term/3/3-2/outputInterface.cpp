@@ -4,6 +4,11 @@ OutputInterface::OutputInterface() : array(nullptr), lengthArray(0)
 {
 }
 
+int *OutputInterface::returnBypass()
+{
+    return array;
+}
+
 void OutputInterface::bypassMatrix(Matrix* matrix)
 {
     int centerSize = matrix->getSize() / 2;

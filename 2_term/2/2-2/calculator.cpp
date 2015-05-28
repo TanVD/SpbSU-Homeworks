@@ -1,5 +1,4 @@
 #include "calculator.h"
-#include "infToPostForm.h"
 #include "stack.h"
 #include "arrayStack.h"
 #include "stackDouble.h"
@@ -11,7 +10,8 @@ Calculator::Calculator() : result(0), valid(true), equation(nullptr)
 
 Calculator::~Calculator()
 {
-    delete[] equation;
+    if (equation != nullptr)
+        delete[] equation;
 }
 
 void Calculator::calculate(char *equationIn, int length)

@@ -13,6 +13,7 @@ public:
      * @param lengthArray Length of array to be written
      */
     FileOut(Matrix *matrix);
+
     /**
      * @brief out The function of outputing into file. Implementation of interface function.
      */
