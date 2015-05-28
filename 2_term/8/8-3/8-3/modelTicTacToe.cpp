@@ -97,6 +97,10 @@ bool ModelTicTacToe::diagonalChecking(bool mainDiagonal, int length, int conditi
 
 bool ModelTicTacToe::checkVictory(int conditionLength)
 {
+    if (conditionLength > lengthOfField)
+    {
+        conditionLength = lengthOfField;
+    }
     if (lineChecking(true, lengthOfField, conditionLength) || lineChecking(false, lengthOfField, conditionLength))
     {
         return true;

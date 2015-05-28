@@ -12,7 +12,12 @@ TicTacToeUI::TicTacToeUI(QWidget *parent) :
     ui->setupUi(this);
     ui->centralWidget->setLayout(ui->gridLayout);
     QInputDialog inputFromUser(this);
-    int lengthOfField = inputFromUser.getInt(this, "Input", "Input length of field");
+    int lengthOfField = inputFromUser.getInt(this, "Input", "Input length of field", 0 , 2, 1000);
+    if (lengthOfField == 0)
+    {
+        parent->close();
+        return;
+    }
 
     arrayOfButtons = new QPushButton*[lengthOfField]();
     for (int j = 0; j < lengthOfField; j++)
