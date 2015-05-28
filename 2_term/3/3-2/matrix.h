@@ -10,10 +10,19 @@ public:
      * @param size Matrix will be size * size of int numbers
      */
     Matrix(int size);
+
+    /**
+     * @brief Matrix Invokes existing matrix
+     * @param matrix Matrix to invoke
+     * @param size Size of matrix to invoke
+     */
+    Matrix(int** matrix, int size);
+
     /**
      * @brief Destructor of matrix
      */
     ~Matrix();
+
     /**
      * @brief getByIndex Getting number placed in width*height cell
      * @param width Width of cell
@@ -21,6 +30,7 @@ public:
      * @return Returns int number placed in chosen cell
      */
     int getByIndex(int width, int height);
+
     /**
      * @brief getSize Return height or width of matrix (equal because matrix is square)
      * @return Int number - size of matrix

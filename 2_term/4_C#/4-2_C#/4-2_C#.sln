@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4-2_C#", "4-2_C#\4-2_C#.csproj", "{663C6C15-E759-4690-9908-4F15D9E97CEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4-2_C#_Test", "4-2_C#_Test\4-2_C#_Test.csproj", "{27572DB9-83ED-485F-BCFA-8C942C06557B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27572DB9-83ED-485F-BCFA-8C942C06557B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{27572DB9-83ED-485F-BCFA-8C942C06557B}.Debug|x86.Build.0 = Debug|Any CPU
+		{27572DB9-83ED-485F-BCFA-8C942C06557B}.Release|x86.ActiveCfg = Release|Any CPU
+		{27572DB9-83ED-485F-BCFA-8C942C06557B}.Release|x86.Build.0 = Release|Any CPU
+		{663C6C15-E759-4690-9908-4F15D9E97CEF}.Debug|x86.ActiveCfg = Debug|x86
+		{663C6C15-E759-4690-9908-4F15D9E97CEF}.Debug|x86.Build.0 = Debug|x86
+		{663C6C15-E759-4690-9908-4F15D9E97CEF}.Release|x86.ActiveCfg = Release|x86
+		{663C6C15-E759-4690-9908-4F15D9E97CEF}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = 4-2_C#\4-2_C#.csproj
+	EndGlobalSection
+EndGlobal

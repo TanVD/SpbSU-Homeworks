@@ -40,7 +40,8 @@ bool DoubleLinkedList::remove(int value)
         if (current != head)
         {
             current->lPrevious->lNext = current->lNext;
-            current->lNext->lPrevious = current->lPrevious;
+            if (current->lNext != nullptr)
+                current->lNext->lPrevious = current->lPrevious;
         }
         else
         {
@@ -60,6 +61,20 @@ void DoubleLinkedList::print()
         std::cout << current->value << std::endl;
         current = current->lNext;
     }
+}
+
+bool DoubleLinkedList::isInList(int value)
+{
+    ListElement* current  = head;
+    while (current != nullptr && current->value != value)
+    {
+        current = current->lNext;
+    }
+    if (current != nullptr)
+    {
+        return true;
+    }
+    return false;
 }
 
 

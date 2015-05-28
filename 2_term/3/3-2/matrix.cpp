@@ -20,6 +20,12 @@ Matrix::Matrix(int size) : size(size)
     }
 }
 
+Matrix::Matrix(int **matrix, int size)
+{
+    this->matrix = matrix;
+    this->size = size;
+}
+
 Matrix::~Matrix()
 {
     for (int i = 0; i < size; i++)
@@ -38,4 +44,3 @@ int Matrix::getSize()
 {
     return size;
 }
-
