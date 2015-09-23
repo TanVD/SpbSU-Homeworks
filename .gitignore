@@ -1,0 +1,7 @@
+Debug/
+PluginXMPP/
+moc*
+*.o
+*.user
+Makefile
+*.zip
