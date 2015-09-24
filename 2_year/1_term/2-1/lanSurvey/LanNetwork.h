@@ -9,6 +9,7 @@ class LanNetwork
 public:
     LanNetwork(int columns, int rows);
     void createFromStdin();
+    void createFromQStringList(QStringList list);
     QVector<int> getConnectedComputers(int idOfComputer);
 private:
     bool** networkMatrix;

@@ -4,17 +4,19 @@
 #include <QStringList>
 #include <QString>
 #include <QTextStream>
+#include <iostream>
 #include <QVector>
 #include "LanNetwork.h"
 
-class ComputerList
+class VirusModel
 {
 public:
-    ComputerList(int numberOfComputers, LanNetwork network);
+    VirusModel(int numberOfComputers, LanNetwork network);
     void createFromStdin();
-    bool infectComputer(int idOfComputer);
-    int findNearestAbleToInfect(int idOfComputer);
+    void createFromQStringList(QStringList list);
+    void makeInfectionStep();
     void printOutStatus();
+    bool findIfIsInfected(int idOfComputer);
 
 private:
     bool isAbleToInfect(int idOfComputer);

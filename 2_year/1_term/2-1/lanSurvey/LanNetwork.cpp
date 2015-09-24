@@ -45,3 +45,16 @@ void LanNetwork::createFromStdin()
     }
 }
 
+void LanNetwork::createFromQStringList(QStringList list)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        QString newInput = list[i];
+        QStringList numbers = newInput.split(" ");
+        for (int j = 0; j < numbers.length(); j++)
+        {
+            networkMatrix[i][j] = numbers[j].toInt();
+        }
+    }
+}
+

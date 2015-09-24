@@ -1,23 +1,25 @@
-QT += core
+QT += core testlib
 QT -= gui
 
 TARGET = lanSurvey
-CONFIG += console
+CONFIG += console с++11
+
 CONFIG -= app_bundle
 
 TEMPLATE = app
 
 SOURCES += main.cpp \
     Computer.cpp \
-    ComputerList.cpp \
     LanNetwork.cpp \
     OS.cpp \
-    RandomGenerator.cpp
+    RandomGenerator.cpp \
+    VirusModel.cpp
 
 HEADERS += \
     RandomGenerator.h \
     OS.h \
     LanNetwork.h \
-    ComputerList.h \
-    Computer.h
+    Computer.h \
+    VirusModel.h \
+    virusmodeltests.h
 

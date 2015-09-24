@@ -1,34 +1,30 @@
 #include <QCoreApplication>
-#include "ComputerList.h"
+#include "VirusModel.h"
 #include "LanNetwork.h"
+#include <iostream>
 #include <time.h>
 #include <QtGlobal>
 #include <QTextStream>
+#include <QTest>
+#include "virusmodeltests.h"
 
 int main(int argc, char *argv[])
 {
-    QTextStream consoleOutput(stdout); // перехватывает поток?
+    VirusModelTest test;
+    QTest::qExec(&test);
     LanNetwork network(4, 4);
-    consoleOutput << "Enter your network as a connectivity matrix: \n";
+    std::cout << "Enter your network as a connectivity matrix: \n";
     network.createFromStdin();
-    ComputerList list(4, network);
-    consoleOutput << "Enter OS names of your computers: \n";
+    VirusModel list(4, network);
+    std::cout << "Enter OS names of your computers: \n";
     list.createFromStdin();
     int steps = 5;
     qsrand(time(NULL));
     for (int i = 0; i < steps; i++)
     {
-        consoleOutput << "Step" << steps << "of experiment: \n";
-        int computerToInfect = qrand() % 4;
-        int nearestAbleToInfect = list.findNearestAbleToInfect(computerToInfect);
-        if (nearestAbleToInfect == -1)
-        {
-            consoleOutput << "Every computer is infected \n";
-            break;
-        }
-        list.infectComputer(nearestAbleToInfect);
+        std::cout << "Step " << i + 1 << " of experiment: \n";
+        list.makeInfectionStep();
         list.printOutStatus();
-
     }
 }
 

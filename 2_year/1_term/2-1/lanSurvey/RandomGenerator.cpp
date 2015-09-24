@@ -1,10 +1,16 @@
 #include "RandomGenerator.h"
 
+int RandomGenerator::makeFakingPercent = 0;
+
 bool RandomGenerator::tryChance(int percent)
 {
-    qsrand(time(NULL));
     int randomNumber = qrand() % 100;
-    if (randomNumber < percent)
+    if (randomNumber < percent || percent == makeFakingPercent)
         return true;
     return false;
+}
+
+void RandomGenerator::makeFake(int percent)
+{
+    makeFakingPercent = percent;
 }
