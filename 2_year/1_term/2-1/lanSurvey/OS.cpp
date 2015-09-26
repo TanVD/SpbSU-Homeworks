@@ -1,9 +1,9 @@
 #include "OS.h"
 
-OS::OS(OSName name) : name(name)
+OS::OS(const OSName &name) : name(name)
 {}
 
-OS::OS(QString name)
+OS::OS(const QString &name)
 {
     if (name.toLower() == "linux")
     {
@@ -19,17 +19,17 @@ OS::OS(QString name)
     }
 }
 
-OSName OS::getOSName()
+OSName OS::getOSName() const
 {
     return name;
 }
 
-int OS::getOSChance()
+int OS::getOSChance() const
 {
     return getChance(name);
 }
 
-int OS::getChance(OSName name)
+int OS::getChance(OSName name) const
 {
     int chance = 0;
     switch (name)

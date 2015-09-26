@@ -1,22 +1,25 @@
 #include "VirusModel.h"
 
-VirusModel::VirusModel(int numberOfComputers, LanNetwork network)
+VirusModel::VirusModel(int numberOfComputers, LanNetwork *network)
     : numberOfComputers(numberOfComputers), network(network)
+{}
+
+VirusModel::~VirusModel()
 {}
 
 void VirusModel::createFromStdin()
 {
+    QTextStream consoleInput(stdin);
     for (int i = 0; i < numberOfComputers; i++)
     {
-        QTextStream consoleInput(stdin);
-        std::cout << "Enter os of " << i + 1 << "computer:\n";
+        std::cout << "Enter os of " << i + 1 << " computer:\n";
         QString newInput = consoleInput.readLine();
         archive.append(Computer(OS(newInput)));
     }
     archive[0].infectForced();
 }
 
-void VirusModel::createFromQStringList(QStringList list)
+void VirusModel::createFromQStringList(const QStringList &list)
 {
     foreach (QString name, list)
     {
@@ -32,7 +35,7 @@ void VirusModel::makeInfectionStep()
     {
         if (isAbleToInfect(i))
         {
-            infectionQueue.append(network.getConnectedComputers(i));
+            infectionQueue.append(network->getConnectedComputers(i));
         }
     }
     foreach(int computer, infectionQueue)
@@ -41,33 +44,39 @@ void VirusModel::makeInfectionStep()
     }
 }
 
-void VirusModel::printOutStatus()
+void VirusModel::printOutStatus() const
 {
     for (int i = 0; i < numberOfComputers; i++)
     {
         std::cout << i << " ";
         if (archive[i].isInfected())
+        {
             std::cout << "infected";
+        }
         else
+        {
             std::cout << "not infected";
+        }
         std::cout << "\n";
     }
 }
 
-bool VirusModel::findIfIsInfected(int idOfComputer)
+bool VirusModel::findIfIsInfected(int idComputer) const
 {
-    return archive[idOfComputer].isInfected();
+    return archive[idComputer].isInfected();
 }
 
-bool VirusModel::isAbleToInfect(int idOfComputer)
+bool VirusModel::isAbleToInfect(int idComputer)
 {
-    if (archive[idOfComputer].isInfected())
+    if (archive[idComputer].isInfected())
     {
-        QVector<int> computersConnected = network.getConnectedComputers(idOfComputer);
+        QVector<int> computersConnected = network->getConnectedComputers(idComputer);
         foreach (int computer, computersConnected)
         {
             if (!archive[computer].isInfected())
+            {
                 return true;
+            }
         }
     }
     return false;

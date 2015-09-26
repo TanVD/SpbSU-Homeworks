@@ -11,12 +11,12 @@ enum OSName
 class OS
 {
 public:
-    OS(OSName name);
-    OS(QString name);
-    OSName getOSName();
-    int getOSChance();
+    OS(const OSName &name);
+    OS(const QString &name);
+    OSName getOSName() const;
+    int getOSChance() const;
 
 private:
-    int getChance(OSName name);
+    int getChance(OSName name) const;
     OSName name;
 };

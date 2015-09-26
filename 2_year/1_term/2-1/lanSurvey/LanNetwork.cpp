@@ -1,11 +1,11 @@
 #include "LanNetwork.h"
 
 
-LanNetwork::LanNetwork(int columns, int rows) :
-    columns(columns), rows(rows)
+LanNetwork::LanNetwork(int numberOfComputers) :
+    columns(numberOfComputers), rows(numberOfComputers)
 {
     networkMatrix =  new bool*[rows];
-    for (int i = 0; i < columns; i++)
+    for (int i = 0; i < rows; i++)
     {
         networkMatrix[i] = new bool[columns];
     }
@@ -18,7 +18,16 @@ LanNetwork::LanNetwork(int columns, int rows) :
     }
 }
 
-QVector<int> LanNetwork::getConnectedComputers(int idOfComputer)
+LanNetwork::~LanNetwork()
+{
+    for (int i = 0; i < columns; i++)
+    {
+        delete[] networkMatrix[i];
+    }
+    delete[] networkMatrix;
+}
+
+QVector<int> LanNetwork::getConnectedComputers(int idOfComputer) const
 {
     QVector<int> connectedComputers;
     for (int i = 0; i < rows; i++)
@@ -33,9 +42,9 @@ QVector<int> LanNetwork::getConnectedComputers(int idOfComputer)
 
 void LanNetwork::createFromStdin()
 {
+    QTextStream consoleInput(stdin);
     for (int i = 0; i < rows; i++)
     {
-        QTextStream consoleInput(stdin);
         QString newInput = consoleInput.readLine();
         QStringList numbers = newInput.split(" ");
         for (int j = 0; j < numbers.length(); j++)
@@ -45,7 +54,7 @@ void LanNetwork::createFromStdin()
     }
 }
 
-void LanNetwork::createFromQStringList(QStringList list)
+void LanNetwork::createFromQStringList(const QStringList &list)
 {
     for (int i = 0; i < rows; i++)
     {

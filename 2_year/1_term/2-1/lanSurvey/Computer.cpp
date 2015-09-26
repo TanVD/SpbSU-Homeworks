@@ -6,7 +6,7 @@ Computer::Computer() : computerOS(OS(Linux)), infectionStatus(false)
 Computer::Computer(OS os) : computerOS(os), infectionStatus(false)
 {}
 
-OSName Computer::getOSName()
+OSName Computer::getOSName() const
 {
     return computerOS.getOSName();
 }
@@ -25,7 +25,7 @@ void Computer::infectForced()
     infectionStatus = true;
 }
 
-bool Computer::isInfected()
+bool Computer::isInfected() const
 {
     return infectionStatus;
 }

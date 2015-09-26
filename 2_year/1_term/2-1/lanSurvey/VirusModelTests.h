@@ -15,8 +15,8 @@ public:
 private slots:
     void init()
     {
-        network = new LanNetwork(4, 4);
-        model = new VirusModel(4, *network);
+        network = new LanNetwork(4);
+        model = new VirusModel(4, network);
         QStringList networkList;
         networkList.append("1 1 0 0");
         networkList.append("1 1 1 1");
@@ -52,10 +52,10 @@ private slots:
     void cleanup()
     {
         RandomGenerator::makeFake(0);
-        delete model;
-        delete network;
+        delete model;    
     }
+
 private:
-    LanNetwork* network;
-    VirusModel* model;
+    LanNetwork *network;
+    VirusModel *model;
 };

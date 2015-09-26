@@ -8,21 +8,35 @@
 #include <QVector>
 #include "LanNetwork.h"
 
+
+/**
+ * @brief The VirusModel class Model representing virus attack in lan network
+ */
 class VirusModel
 {
 public:
-    VirusModel(int numberOfComputers, LanNetwork network);
+    VirusModel(int numberOfComputers, LanNetwork *network);
+
+    ~VirusModel();
+
     void createFromStdin();
-    void createFromQStringList(QStringList list);
+
+    void createFromQStringList(const QStringList &list);
+
+    /**
+     * @brief makeInfectionStep All infected computer will try to infect
+     * connected computers
+     */
     void makeInfectionStep();
-    void printOutStatus();
-    bool findIfIsInfected(int idOfComputer);
+
+    void printOutStatus() const;
+
+    bool findIfIsInfected(int idComputer) const;
 
 private:
-    bool isAbleToInfect(int idOfComputer);
+    bool isAbleToInfect(int idComputer);
     QVector<Computer> archive;
     int numberOfComputers;
-    LanNetwork network;
-
+    LanNetwork *network;
 };
 

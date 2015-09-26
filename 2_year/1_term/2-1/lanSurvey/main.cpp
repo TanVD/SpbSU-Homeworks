@@ -6,17 +6,17 @@
 #include <QtGlobal>
 #include <QTextStream>
 #include <QTest>
-#include "virusmodeltests.h"
+#include "VirusModelTests.h"
 
 int main(int argc, char *argv[])
 {
     VirusModelTest test;
     QTest::qExec(&test);
-    LanNetwork network(4, 4);
-    std::cout << "Enter your network as a connectivity matrix: \n";
+    LanNetwork network(4);
+    std::cout << "Enter your network as a connectivity matrix (for 4): \n";
     network.createFromStdin();
-    VirusModel list(4, network);
-    std::cout << "Enter OS names of your computers: \n";
+    VirusModel list(4, &network);
+    std::cout << "Enter OS names of your computers (macos, linux or windows): \n";
     list.createFromStdin();
     int steps = 5;
     qsrand(time(NULL));

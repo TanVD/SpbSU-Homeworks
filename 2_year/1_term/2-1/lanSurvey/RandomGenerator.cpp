@@ -6,7 +6,9 @@ bool RandomGenerator::tryChance(int percent)
 {
     int randomNumber = qrand() % 100;
     if (randomNumber < percent || percent == makeFakingPercent)
+    {
         return true;
+    }
     return false;
 }
 

@@ -21,5 +21,5 @@ HEADERS += \
     LanNetwork.h \
     Computer.h \
     VirusModel.h \
-    virusmodeltests.h
+    VirusModelTests.h
 
