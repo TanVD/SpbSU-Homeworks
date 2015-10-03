@@ -1,12 +1,14 @@
 #pragma once
 #include "Computer.h"
 #include "OS.h"
+#include "OSSwitcher.h"
 #include <QStringList>
 #include <QString>
 #include <QTextStream>
 #include <iostream>
 #include <QVector>
 #include "LanNetwork.h"
+#include "RandomGeneratorInterface.h"
 
 
 /**
@@ -15,7 +17,7 @@
 class VirusModel
 {
 public:
-    VirusModel(int numberOfComputers, LanNetwork *network);
+    VirusModel(int numberOfComputers, LanNetwork *network, RandomGeneratorInterface *generator);
 
     ~VirusModel();
 
@@ -38,5 +40,6 @@ private:
     QVector<Computer> archive;
     int numberOfComputers;
     LanNetwork *network;
+    RandomGeneratorInterface *generator;
 };
 

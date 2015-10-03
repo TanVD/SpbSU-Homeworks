@@ -1,6 +1,8 @@
 #include "OS.h"
+#include "OSSwitcher.h"
 #include "RandomGenerator.h"
 #include <QtGlobal>
+#include "RandomGeneratorInterface.h"
 
 /**
  * @brief The Computer class represent computer object which can
@@ -12,7 +14,9 @@ class Computer
 public:
     Computer();
 
-    Computer(OS os);
+    Computer(OS *os, RandomGeneratorInterface *generator);
+
+    ~Computer();
 
     /**
      * @brief getOSName Returns OS name of this computer. List of
@@ -37,7 +41,8 @@ public:
     bool isInfected() const;
 
 private:
-    OS computerOS;
+    OS *computerOS;
     bool infectionStatus;
+    RandomGeneratorInterface *generator;
 };
 

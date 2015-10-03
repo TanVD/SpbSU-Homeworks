@@ -1,7 +1,7 @@
 #include "VirusModel.h"
 
-VirusModel::VirusModel(int numberOfComputers, LanNetwork *network)
-    : numberOfComputers(numberOfComputers), network(network)
+VirusModel::VirusModel(int numberOfComputers, LanNetwork *network, RandomGeneratorInterface *generator)
+    : numberOfComputers(numberOfComputers), network(network), generator(generator)
 {}
 
 VirusModel::~VirusModel()
@@ -14,16 +14,16 @@ void VirusModel::createFromStdin()
     {
         std::cout << "Enter os of " << i + 1 << " computer:\n";
         QString newInput = consoleInput.readLine();
-        archive.append(Computer(OS(newInput)));
+        archive.append(Computer(OSSwitcher::getOS(newInput), generator));
     }
     archive[0].infectForced();
 }
 
 void VirusModel::createFromQStringList(const QStringList &list)
 {
-    foreach (QString name, list)
+    foreach (const QString &name, list)
     {
-        archive.append(Computer(OS(name)));
+        archive.append(Computer(OSSwitcher::getOS(name), generator));
     }
     archive[0].infectForced();
 }

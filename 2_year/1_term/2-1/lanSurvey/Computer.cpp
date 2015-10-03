@@ -1,19 +1,24 @@
 #include "Computer.h"
 
-Computer::Computer() : computerOS(OS(Linux)), infectionStatus(false)
+Computer::Computer() : computerOS(OSSwitcher::getOS("Linux")), infectionStatus(false)
 {}
 
-Computer::Computer(OS os) : computerOS(os), infectionStatus(false)
+Computer::Computer(OS *os, RandomGeneratorInterface *generator)
+    : computerOS(os), infectionStatus(false), generator(generator)
 {}
+
+Computer::~Computer()
+{
+}
 
 OSName Computer::getOSName() const
 {
-    return computerOS.getOSName();
+    return computerOS->getOSName();
 }
 
 bool Computer::tryToInfect()
 {
-    if (RandomGenerator::tryChance(computerOS.getOSChance()))
+    if (generator->tryChance(computerOS->getOSChance()))
     {
         infectionStatus = true;
     }

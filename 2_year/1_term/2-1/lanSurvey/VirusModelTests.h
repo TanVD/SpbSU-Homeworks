@@ -3,7 +3,7 @@
 #include <QtTest/QtTest>
 #include "VirusModel.h"
 #include "LanNetwork.h"
-#include "RandomGenerator.h"
+#include "RandomGeneratorFake.h"
 
 class VirusModelTest : public QObject
 {
@@ -16,7 +16,7 @@ private slots:
     void init()
     {
         network = new LanNetwork(4);
-        model = new VirusModel(4, network);
+        model = new VirusModel(4, network, &generator);
         QStringList networkList;
         networkList.append("1 1 0 0");
         networkList.append("1 1 1 1");
@@ -33,29 +33,29 @@ private slots:
 
     void testForcedInfection()
     {
-        RandomGenerator::makeFake(35);
+        generator.makeFake(35);
         model->makeInfectionStep();
         QVERIFY(model->findIfIsInfected(1));
-
     }
 
     void testTwoForcedInfections()
     {
-        RandomGenerator::makeFake(35);
+        generator.makeFake(35);
+        generator.makeFake(20);
         model->makeInfectionStep();
         QVERIFY(model->findIfIsInfected(1));
-        RandomGenerator::makeFake(20);
         model->makeInfectionStep();
         QVERIFY(model->findIfIsInfected(3));
     }
 
     void cleanup()
     {
-        RandomGenerator::makeFake(0);
+        generator.resetMakeFakeList();
         delete model;    
     }
 
 private:
     LanNetwork *network;
     VirusModel *model;
+    RandomGeneratorFake generator;
 };

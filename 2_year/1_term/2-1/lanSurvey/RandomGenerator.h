@@ -1,21 +1,12 @@
 #pragma once
+#include <RandomGeneratorInterface.h>
 #include <time.h>
 #include <QtGlobal>
 
-class RandomGenerator
+class RandomGenerator : public RandomGeneratorInterface
 {
 public:
-    static bool tryChance(int percent);
-
-    /**
-     * @brief makeFake Makes chance for percent
-     * parameter equal to 100% for every call of
-     * try chance from now
-     * @param percent Percent for fake
-     */
-    static void makeFake(int percent);
-
-private:
-    static int makeFakingPercent;
+    RandomGenerator();
+    bool tryChance(int percent);
 };
 
