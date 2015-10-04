@@ -1,24 +1,22 @@
 #pragma once
-#include <QObject>
-#include <QEvent>
-#include <QKeyEvent>
-#include <QTime>
-
-const int undefined = 0;
+#include "KeyControl.h"
+#include "FramesUpdater.h"
 
 class KeyManager : public QObject
 {
     Q_OBJECT
+
 public:
-    explicit KeyManager(QObject *parent = 0);
+    KeyManager(QList<KeyControl*> controls, FramesUpdater *updater, QObject *parent = 0);
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
-signals:
-    void newButtonPressed(char button, int msec);
 private:
-    char currentButton;
-    int msecPressed;
-    QTime timer;
+    QList<KeyControl *> controls;
+    FramesUpdater *updater;
+
+private slots:
+    void repressButton();
 };
+

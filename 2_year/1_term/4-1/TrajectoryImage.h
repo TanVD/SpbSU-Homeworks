@@ -2,17 +2,21 @@
 #include <QtGui>
 #include <QGraphicsItem>
 #include <math.h>
+#include "FramesUpdater.h"
+#include "GameGraphicsItem.h"
+#include <QGraphicsScene>
 
 
 //x=v0*cosα0*t
 //y=v0*sinα0*t-g*t2/2
 
-class TrajectoryImage : public QGraphicsItem
+class TrajectoryImage : public GameGraphicsItem
 {
+    Q_INTERFACES(QGraphicsItem)
 public:
-    TrajectoryImage();
 
-    TrajectoryImage(int degree, int speed, QPoint start);
+    TrajectoryImage(int degree, int speed, QPoint start, FramesUpdater *frameUpdater,
+                    QGraphicsScene *scene);
 
     void setDegree(int degree);
 
@@ -22,6 +26,8 @@ public:
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget) override;
+
+    void prepareToUpdate();
 
     QRectF boundingRect() const override;
 private:

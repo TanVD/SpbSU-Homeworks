@@ -1,19 +1,37 @@
 #include "tankgamewindow.h"
 #include "ui_tankgamewindow.h"
+#include "KeyControl.h"
 #include "KeyManager.h"
 #include "Avatar.h"
+#include "GameRules.h"
 #include <QMessageBox>
 
 TankGameWindow::TankGameWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::TankGameWindow)
 {
+    scene = new QGraphicsScene();
+    updater = new FramesUpdater(60, scene);
+
     ui->setupUi(this);
-    KeyManager *keyManager = new KeyManager(this);//singltone
-    scene = new QGraphicsScene;
+    KeyControl *keyManagerFirst = new KeyControl("ADWSQE ", this);
+    KeyControl *keyManagerSecond = new KeyControl("JLIKUO'", this);
+
+    QList<KeyControl *> list;
+    list << keyManagerFirst << keyManagerSecond;
+    KeyManager *manager = new KeyManager(list, updater, ui->graphicsView);
+
+
     ui->graphicsView->setScene(scene);
-    ui->graphicsView->installEventFilter(keyManager);
-    Avatar *tankFirst = new Avatar(scene, keyManager, QPoint(0, 0));
+    ui->graphicsView->installEventFilter(manager);
+
+    Avatar *tankFirst = new Avatar(scene, keyManagerFirst, QPoint(0, 0), updater);
+    Avatar *tankSecond = new Avatar(scene, keyManagerSecond, QPoint(20, 0), updater);
+
+    GameRules *overseer = new GameRules(scene, updater, this);
+    connect(tankFirst, &Avatar::exploded, overseer, &GameRules::tankExploded);
+    connect(tankSecond, &Avatar::exploded, overseer, &GameRules::tankExploded);
+
 }
 
 TankGameWindow::~TankGameWindow()

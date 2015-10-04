@@ -2,17 +2,15 @@
 #include <QtGui>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
+#include "ExplosionImage.h"
 #include <math.h>
 #include <QTimer>
+#include "GameGraphicsItem.h"
 
-const int msecToExit = 1000;
-
-class BulletImage : public QObject, public QGraphicsItem
+class BulletImage : public GameGraphicsItem
 {
-    Q_OBJECT
-
 public:
-    BulletImage(int degree, int speed, QPoint start, QGraphicsScene *scene);
+    BulletImage(int degree, int speed, QPoint start, QGraphicsScene *scene, FramesUpdater *frameUpdater);
 
     void setDegree(int degree);
 
@@ -24,16 +22,18 @@ public:
                QWidget *widget) override;
 
     QRectF boundingRect() const override;
+
+    void explode();
+
 public slots:
-    void updateImage();
+    void prepareToUpdate();
 
 private:
+    bool explodedTEST;
     QPointF getPosition();
-    int msecElapsed;
-    QTimer timer;
     QPoint start;
+    int msecElapsed;
     QPointF currentPosition;
-    QGraphicsScene* scene;
     double degree;
     int speed;
 };

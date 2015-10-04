@@ -1,22 +1,45 @@
 #include "Avatar.h"
 
+
 Avatar::Avatar(QObject *parent) : QObject(parent)
 {}
 
-Avatar::Avatar(QGraphicsScene *scene, KeyManager *control, QPoint start, QObject *parent) :
+Avatar::Avatar(QGraphicsScene *scene, AvatarControl *control, QPoint start,
+               FramesUpdater *updater, QObject *parent) :
     QObject(parent), scene(scene), control(control),
-    currentPosition(start), degreeOfGun(45), speed(45)
+    currentPosition(start), degreeOfGun(45), speed(45),
+    frameUpdater(updater), hitPoints(40)
 {
-    image = new QGraphicsRectItem(0, 0, 10, 10);
-    trajectory = new TrajectoryImage(degreeOfGun, speed, currentPosition);
-    paintYourPosition();
-    connect(control, SIGNAL(newButtonPressed(char, int)), this, SLOT(changePosition(char, int)));
-}
-
-void Avatar::paintYourPosition()
-{
+    image = new AvatarImage(start.x(), start.y(), 10, 10, hitPoints, this, scene, updater);
+    trajectory = new TrajectoryImage(degreeOfGun, speed, currentPosition, frameUpdater, this->scene);
     scene->addItem(trajectory);
     scene->addItem(image);
+    connect(control, SIGNAL(newCommand(Command, int)), this, SLOT(changePosition(Command, int)));
+}
+
+QGraphicsItem *Avatar::getImage()
+{
+    return image;
+}
+
+void Avatar::hit(int hitPoints, int idOfExplosion)
+{
+    if (explosionsHit.contains(idOfExplosion))
+    {
+        return;
+    }
+    explosionsHit.append(idOfExplosion);
+    this->hitPoints -= hitPoints;
+    image->setHitPoints(this->hitPoints);
+    if (this->hitPoints <= 0)
+    {
+        ExplosionImage *explosion = new ExplosionImage(currentPosition, 100, scene, frameUpdater);
+        scene->removeItem(trajectory);
+        scene->removeItem(image);
+        control->blockControls(true);
+        deleteLater();
+        emit exploded();
+    }
 }
 
 void Avatar::updateImage()
@@ -25,27 +48,23 @@ void Avatar::updateImage()
     trajectory->setStart(currentPosition);
     trajectory->setDegree(degreeOfGun);
     trajectory->setSpeed(speed);
-    trajectory->update();
-    scene->update();
-    //paintYourTrajectory
-
 }
 
-void Avatar::changePosition(char button, int msec)
+void Avatar::changePosition(Command button, int msec)
 {
     switch (button)
     {
-    case 'D':
+    case (Command::leftAvatar):
     {
-        currentPosition.setX(currentPosition.x() + int (double(msec) / 10) + 1);
+        currentPosition.setX(currentPosition.x() - 2);
         break;
     }
-    case 'A':
+    case (Command::rightAvatar):
     {
-        currentPosition.setX(currentPosition.x() - int (double(msec) / 10) + 1);
+        currentPosition.setX(currentPosition.x()  + 2);
         break;
     }
-    case 'W':
+    case (Command::upGun):
     {
         degreeOfGun += int (double(msec) / 100 ) + 1;
         if (degreeOfGun > 180)
@@ -54,7 +73,7 @@ void Avatar::changePosition(char button, int msec)
         }
         break;
     }
-    case 'S':
+    case (Command::downGun):
     {
         degreeOfGun -= int (double(msec) / 100 ) + 1;
         if (degreeOfGun < 0)
@@ -63,19 +82,19 @@ void Avatar::changePosition(char button, int msec)
         }
         break;
     }
-    case 'Q':
+    case (Command::fasterBullet):
     {
-        speed += int (double(msec) / 10) + 1;
+        speed += 1;
         break;
     }
-    case 'E':
+    case (Command::slowerBullet):
     {
-        speed -= int (double(msec) / 10) + 1;
+        speed -= 1;
         break;
     }
-    case ' ':
+    case (Command::fire):
     {
-        BulletImage *bullet = new BulletImage(degreeOfGun, speed, currentPosition, scene);
+        BulletImage *bullet = new BulletImage(degreeOfGun, speed, currentPosition, scene, frameUpdater);
         scene->addItem(bullet);
         break;
     }

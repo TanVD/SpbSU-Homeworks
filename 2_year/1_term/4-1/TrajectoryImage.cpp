@@ -1,10 +1,9 @@
 #include "TrajectoryImage.h"
 
-TrajectoryImage::TrajectoryImage()
-{}
 
-TrajectoryImage::TrajectoryImage(int degree, int speed, QPoint start) :
-    degree(degree * 3.14 / 180), speed(speed), start(start)
+TrajectoryImage::TrajectoryImage(int degree, int speed, QPoint start, FramesUpdater *frameUpdater,
+                                 QGraphicsScene *scene) :
+    GameGraphicsItem(frameUpdater, scene), degree(degree * 3.14 / 180), speed(speed), start(start)
 {}
 
 void TrajectoryImage::setDegree(int degree)
@@ -24,6 +23,7 @@ void TrajectoryImage::setStart(QPoint start)
 
 QRectF TrajectoryImage::boundingRect() const
 {
+    return QRectF(start.x(), start.y(), 1, 1);
 }
 
 void TrajectoryImage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
@@ -43,5 +43,10 @@ void TrajectoryImage::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         if (y < 0) // why??
             painter->drawEllipse(QPointF(x, y), 4, 4);
     }
+}
+
+void TrajectoryImage::prepareToUpdate()
+{
+
 }
 

@@ -4,26 +4,39 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Tanks
 TEMPLATE = app
 
-CONFIG += c++11
+CONFIG += c++11 warn_on
 
 SOURCES += main.cpp\
         tankgamewindow.cpp \
-    KeyManager.cpp \
     Avatar.cpp \
     TrajectoryImage.cpp \
-    BulletImage.cpp
+    BulletImage.cpp \
+    ExplosionImage.cpp \
+    FramesUpdater.cpp \
+    GameGraphicsItem.cpp \
+    KeyControl.cpp \
+    KeyManager.cpp \
+    GameRules.cpp \
+    AvatarImage.cpp
 
 HEADERS  += tankgamewindow.h \
-    KeyManager.h \
     Avatar.h \
     TrajectoryImage.h \
-    BulletImage.h
+    BulletImage.h \
+    ExplosionImage.h \
+    FramesUpdater.h \
+    GameGraphicsItem.h \
+    AvatarControl.h \
+    KeyControl.h \
+    KeyManager.h \
+    GameRules.h \
+    AvatarImage.h
 
 FORMS    += tankgamewindow.ui
