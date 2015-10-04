@@ -1,7 +1,7 @@
 #include "GameGraphicsItem.h"
 
-GameGraphicsItem::GameGraphicsItem(FramesUpdater *frameUpdater, QGraphicsScene *scene) :
-    frameUpdater(frameUpdater), scene(scene)
+GameGraphicsItem::GameGraphicsItem(FramesUpdater *frameUpdater) :
+    frameUpdater(frameUpdater)
 {
     connect(frameUpdater, &FramesUpdater::update, this, &GameGraphicsItem::requestedToUpdate);
 }
@@ -15,8 +15,12 @@ void GameGraphicsItem::explode()
 **/
 void GameGraphicsItem::requestedToUpdate()
 {
+    if (scene() == nullptr)
+    {
+        return;
+    }
     prepareToUpdate();
     update();
-    scene->update();
+    scene()->update();
 }
 

@@ -15,8 +15,8 @@ class TrajectoryImage : public GameGraphicsItem
     Q_INTERFACES(QGraphicsItem)
 public:
 
-    TrajectoryImage(int degree, int speed, QPoint start, FramesUpdater *frameUpdater,
-                    QGraphicsScene *scene);
+    TrajectoryImage(int degree, int speed, QPoint start, FramesUpdater *frameUpdater);
+    ~TrajectoryImage();
 
     void setDegree(int degree);
 

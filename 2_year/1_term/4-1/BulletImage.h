@@ -6,11 +6,13 @@
 #include <math.h>
 #include <QTimer>
 #include "GameGraphicsItem.h"
+#include "GroundImage.h"
 
 class BulletImage : public GameGraphicsItem
 {
 public:
-    BulletImage(int degree, int speed, QPoint start, QGraphicsScene *scene, FramesUpdater *frameUpdater);
+    BulletImage(int degree, int speed, QPoint start, FramesUpdater *frameUpdater);
+    ~BulletImage();
 
     void setDegree(int degree);
 
@@ -26,7 +28,7 @@ public:
     void explode();
 
 public slots:
-    void prepareToUpdate();
+    void prepareToUpdate() override;
 
 private:
     bool explodedTEST;

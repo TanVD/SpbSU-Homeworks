@@ -1,10 +1,14 @@
 #include "TrajectoryImage.h"
 
 
-TrajectoryImage::TrajectoryImage(int degree, int speed, QPoint start, FramesUpdater *frameUpdater,
-                                 QGraphicsScene *scene) :
-    GameGraphicsItem(frameUpdater, scene), degree(degree * 3.14 / 180), speed(speed), start(start)
+TrajectoryImage::TrajectoryImage(int degree, int speed, QPoint start, FramesUpdater *frameUpdater) :
+    GameGraphicsItem(frameUpdater), degree(degree * 3.14 / 180), speed(speed), start(start)
 {}
+
+TrajectoryImage::~TrajectoryImage()
+{
+
+}
 
 void TrajectoryImage::setDegree(int degree)
 {
@@ -31,7 +35,7 @@ void TrajectoryImage::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
 {
     //x=v0*cosα0*t
     //y=v0*sinα0*t-g*t2/2
-    for (int i = 0; i < 250; i++)
+    for (int i = 0; i < 500; i++)
     {
         int slowingConstant = 5;
         double time = i / slowingConstant;
@@ -40,7 +44,7 @@ void TrajectoryImage::paint(QPainter *painter, const QStyleOptionGraphicsItem *o
         double y = (start.y() + speed * (time) * sin(degree)
                  - double (9.8 * time * time ) / 2);
         y *= -1;
-        if (y < 0) // why??
+        if (y < 100) // why??
             painter->drawEllipse(QPointF(x, y), 4, 4);
     }
 }

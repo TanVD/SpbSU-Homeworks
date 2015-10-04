@@ -5,6 +5,7 @@
 #include "Avatar.h"
 #include "GameRules.h"
 #include <QMessageBox>
+#include "GroundImage.h"
 
 TankGameWindow::TankGameWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -25,8 +26,14 @@ TankGameWindow::TankGameWindow(QWidget *parent) :
     ui->graphicsView->setScene(scene);
     ui->graphicsView->installEventFilter(manager);
 
-    Avatar *tankFirst = new Avatar(scene, keyManagerFirst, QPoint(0, 0), updater);
-    Avatar *tankSecond = new Avatar(scene, keyManagerSecond, QPoint(20, 0), updater);
+    GroundImage *ground = new GroundImage(updater);
+
+    scene->addItem(ground);
+
+    Avatar *tankFirst = new Avatar(scene, ground, keyManagerFirst, QPoint(0, 0), updater);
+    Avatar *tankSecond = new Avatar(scene,ground,  keyManagerSecond, QPoint(20, 0), updater);
+
+
 
     GameRules *overseer = new GameRules(scene, updater, this);
     connect(tankFirst, &Avatar::exploded, overseer, &GameRules::tankExploded);

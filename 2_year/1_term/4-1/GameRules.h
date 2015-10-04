@@ -5,6 +5,7 @@
 #include "FramesUpdater.h"
 #include <AvatarImage.h>
 #include <QMessageBox>
+#include "GroundImage.h"
 
 class GameRules : public QObject
 {

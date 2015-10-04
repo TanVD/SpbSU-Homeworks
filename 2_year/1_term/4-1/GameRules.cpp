@@ -14,7 +14,7 @@ void GameRules::tankExploded()
 }
 
 void GameRules::update()
-{/**
+{
     QGraphicsItem *item;
     foreach(item,  scene->items())
     {
@@ -37,6 +37,6 @@ void GameRules::update()
                 }
             }
         }
-    }**/
+    }
 }
 

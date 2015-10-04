@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     KeyControl.cpp \
     KeyManager.cpp \
     GameRules.cpp \
-    AvatarImage.cpp
+    AvatarImage.cpp \
+    GroundImage.cpp
 
 HEADERS  += tankgamewindow.h \
     Avatar.h \
@@ -37,6 +38,7 @@ HEADERS  += tankgamewindow.h \
     KeyControl.h \
     KeyManager.h \
     GameRules.h \
-    AvatarImage.h
+    AvatarImage.h \
+    GroundImage.h
 
 FORMS    += tankgamewindow.ui

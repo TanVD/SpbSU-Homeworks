@@ -1,12 +1,17 @@
 #include "BulletImage.h"
 
 
-BulletImage::BulletImage(int degree, int speed, QPoint start, QGraphicsScene *scene, FramesUpdater *frameUpdater) :
-    GameGraphicsItem(frameUpdater, scene), start(start), msecElapsed(0),
+BulletImage::BulletImage(int degree, int speed, QPoint start, FramesUpdater *frameUpdater) :
+    GameGraphicsItem(frameUpdater), start(start), msecElapsed(0),
     currentPosition(start), degree(degree * 3.14 / 180),
     speed(speed)
 {
     explodedTEST = false;
+}
+
+BulletImage::~BulletImage()
+{
+
 }
 
 void BulletImage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -23,11 +28,15 @@ QRectF BulletImage::boundingRect() const
 
 void BulletImage::prepareToUpdate()
 {
+    if (scene() == nullptr)
+    {
+        return;
+    }
     msecElapsed += 17;
     currentPosition = getPosition();
     bool farFromSquare = (qAbs((currentPosition - start).x()) > 10)
             || (qAbs((currentPosition - start).y()) > 10 );
-    if (!scene->collidingItems(this).isEmpty() && farFromSquare)
+    if (!scene()->collidingItems(this).isEmpty() && farFromSquare)
     {
         explode();
         return;
@@ -40,14 +49,18 @@ void BulletImage::explode()
     {
         return;
     }
-    ExplosionImage *explosion = new ExplosionImage(currentPosition, 50, scene, frameUpdater);
-    scene->addItem(explosion);
+    ExplosionImage *explosion = new ExplosionImage(currentPosition, 50, frameUpdater);
+    frameUpdater->appendAdding(explosion);
     frameUpdater->appendClearing(this);
     explodedTEST = true;
 }
 
 QPointF BulletImage::getPosition()
 {
+    if (scene() == nullptr)
+    {
+        return start;
+    }
     //x=v0*cosα0*t
     //y=v0*sinα0*t-g*t2/2
     int slowingConstant = 10;
@@ -58,7 +71,17 @@ QPointF BulletImage::getPosition()
     double y = (start.y() + speed * time * sin(degree)
              - double (9.8 * time * time) / 2);
     y *= -1;
-    if (y <= 7 )
+
+    foreach (QGraphicsItem* item, this->scene()->items())
+    {
+        if (this->collidesWithItem(item) && dynamic_cast<GroundImage *>(item) != nullptr)
+        {
+            explode();
+            return QPointF(x, y);
+        }
+    }
+
+    if (y <= 500 )
     {
         return QPointF(x, y);
     }
@@ -66,6 +89,6 @@ QPointF BulletImage::getPosition()
     {
         explode();
     }
-    return QPointF(x, 0);
+    return QPointF(x, y);
 }
 

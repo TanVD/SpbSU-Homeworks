@@ -12,7 +12,8 @@ const int frameToExplode = 120;
 class ExplosionImage : public GameGraphicsItem
 {
 public:
-    ExplosionImage(QPointF center, double radius, QGraphicsScene *scene, FramesUpdater *frameUpdater);
+    ExplosionImage(QPointF center, double radius, FramesUpdater *frameUpdater);
+    ~ExplosionImage();
 
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget) override;
@@ -23,11 +24,11 @@ public:
 
    bool collidesWithItem(const QGraphicsItem *other, Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const override;
 
-   QList<QGraphicsItem *> myCollidingItems(Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const;
-
-   void prepareToUpdate();
 
    int getIdOfExplosion();
+
+public slots:
+   void prepareToUpdate() override;
 
 private:
     static int idMain;

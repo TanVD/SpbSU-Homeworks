@@ -8,14 +8,16 @@ class Avatar;
 class AvatarImage : public GameGraphicsItem
 {
 public:
-    AvatarImage(int x, int y, int w, int h, int hitPoints,
-                Avatar* avatar, QGraphicsScene* scene, FramesUpdater* updater);
+    AvatarImage(int x, int y, int w, int h, int hitPoints, int reloading,
+                Avatar* avatar, FramesUpdater* updater);
+    ~AvatarImage();
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     QRectF boundingRect() const override;
     void setPos(qreal x, qreal y);
     void setHitPoints(int hp);
+    void setReloading(int sec);
     Avatar *getAvatar();
-    void prepareToUpdate();
+    void prepareToUpdate() override;
 
 private:
     Avatar *avatar;
@@ -24,6 +26,7 @@ private:
     int w;
     int h;
     int hitPoints;
+    int reloading;
 
 
 };

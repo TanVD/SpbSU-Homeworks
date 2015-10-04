@@ -2,13 +2,18 @@
 
 int ExplosionImage::idMain = 0;
 
-ExplosionImage::ExplosionImage(QPointF center, double radius, QGraphicsScene *scene,
+ExplosionImage::ExplosionImage(QPointF center, double radius,
                                FramesUpdater *frameUpdater) :
-    GameGraphicsItem(frameUpdater, scene),  center(center),
+    GameGraphicsItem(frameUpdater),  center(center),
     idOfExplosion(idMain), radius(radius), framesElapsed(0)
 
 {
     idMain = idMain + 1;
+}
+
+ExplosionImage::~ExplosionImage()
+{
+
 }
 
 void ExplosionImage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -40,20 +45,6 @@ bool ExplosionImage::collidesWithItem(const QGraphicsItem *other, Qt::ItemSelect
     double y = otherPath.y() - ourPath.y();
     bool result = (x * x + y * y) < radius * radius;
     return result;
-}
-
-QList<QGraphicsItem *> ExplosionImage::myCollidingItems(Qt::ItemSelectionMode mode) const
-{
-    QList <QGraphicsItem *> list;
-    scene->items();
-    foreach (QGraphicsItem *item, scene->items())
-    {
-        if (collidesWithItem(item))
-        {
-            list.append(item);
-        }
-    }
-    return list;
 }
 
 void ExplosionImage::prepareToUpdate()
