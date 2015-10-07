@@ -23,6 +23,7 @@ public:
     Avatar(QGraphicsScene *scene, GroundImage *ground, AvatarControl *control, QPoint start,
            FramesUpdater *frameUpdater, QObject *parent = 0);
     QGraphicsItem *getImage();
+
     void hit(int hitPoints, int idOfExplosion);
 
     QPoint getPosition();
@@ -37,7 +38,7 @@ signals:
     void commandDone(Command command);
 
 private:
-    void setOnGround();
+
     QList<int> explosionsHit;
 
     QGraphicsScene *scene;
@@ -46,20 +47,21 @@ private:
     QPoint currentPosition;
 
     TrajectoryImage *trajectory;
-    int degreeOfGun;
-    int speed;
 
     FramesUpdater* frameUpdater;
 
+    int degreeOfGun;
+    int speed;
     int hitPoints;
     int reloading;
     int bulletToLoad;
 
+    void setOnGround();
     GroundImage *ground;
 
 
 private slots:
-    void updateByTrusted(QPoint currentPosition, int hp, int rel,
+    void updateAvatarForced(QPoint currentPosition, int hp, int rel,
                          int degree, int speed, bool fire);
     void changePosition(Command button, int msec);
     void updateImage();

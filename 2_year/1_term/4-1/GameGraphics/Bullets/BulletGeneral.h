@@ -3,8 +3,11 @@
 #include "FramesUpdater.h"
 #include "GroundImage.h"
 
+const int oneTimeValue = 17;
+
 class BulletGeneral : public GameGraphicsItem
 {
+
 public:
     BulletGeneral(int speed, QPoint start, int degree, int hit, int slowingConstant, FramesUpdater *updater);
 

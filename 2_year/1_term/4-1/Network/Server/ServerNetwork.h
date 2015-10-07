@@ -28,8 +28,6 @@ private slots:
     void sessionOpened();
     void readTextMsg();
 
-
-
 private:
     QList<QHostAddress> ipAddressesList;
     QTcpServer* tcpServer;

@@ -4,11 +4,13 @@
 #include "Avatar.h"
 #include "FramesUpdater.h"
 
-class NetworkGeneral  : public QObject
+class NetworkGeneral : public QObject
 {
     Q_OBJECT
 
 public:
+    NetworkGeneral();
+
     void setControl(AvatarControl *control, Avatar *avatar, FramesUpdater *updater);
 
 public slots:
@@ -20,11 +22,10 @@ signals:
 private:
     AvatarControl *control;
     Avatar *avatar;
-    static int updation;
+    int updation;
 
 private slots:
-    void commandToBroadcast(Command command);
-    void updateByBroadcast();
-
+    void broadcastCommand(Command command);
+    void broadcastUpdate();
 
 };

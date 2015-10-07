@@ -1,7 +1,8 @@
 #include "KeyControl.h"
 
 KeyControl::KeyControl(QString keys, QObject *parent) :
-    keys(keys), currentButton(undefined), msecPressed(undefined)
+    keys(keys), currentButton(undefined), msecPressed(undefined),
+    controlsBlocked(false)
 {}
 
 QString KeyControl::getKeys()

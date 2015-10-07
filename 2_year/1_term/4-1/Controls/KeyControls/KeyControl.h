@@ -13,8 +13,10 @@ class KeyControl : public AvatarControl
     ///QString includes keys in specific oreder "L(eft)R(ight)U(p)D(own)F(aster)S(lower)F(ire)"
 public:
     explicit KeyControl(QString keys, QObject *parent = 0);
+
     QString getKeys();
     char getCurrentButton();
+
     void blockControls(bool blocked);
 
 public:

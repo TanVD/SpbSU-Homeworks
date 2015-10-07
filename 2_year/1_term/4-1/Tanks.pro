@@ -28,11 +28,11 @@ SOURCES += main.cpp\
     GameGraphics/Bullets/BulletGeneral.cpp \
     GameGraphics/Bullets/Bullet50.cpp \
     GameGraphics/Bullets/Bullet20.cpp \
-    NetworkControl.cpp \
-    TransmissionCoder.cpp \
-    ServerNetwork.cpp \
-    ClientNetwork.cpp \
-    networkinterface.cpp
+    Controls/NetworkControls/NetworkControl.cpp \
+    Network/Transmission/TransmissionCoder.cpp \
+    Network/Server/ServerNetwork.cpp \
+    Network/Client/ClientNetwork.cpp \
+    Network/networkinterface.cpp
 
 HEADERS  += tankgamewindow.h \
     Avatar/Avatar.h \
@@ -49,12 +49,12 @@ HEADERS  += tankgamewindow.h \
     GameGraphics/Bullets/BulletGeneral.h \
     GameGraphics/Bullets/Bullet50.h \
     GameGraphics/Bullets/Bullet20.h \
-    NetworkControl.h \
-    TransmissionCoder.h \
-    unreliabletransmission.h \
-    ServerNetwork.h \
-    ClientNetwork.h \
-    networkinterface.h
+    Controls/NetworkControls/NetworkControl.h \
+    Network/Transmission/TransmissionCoder.h \
+    Network/Transmission/unreliabletransmission.h \
+    Network/Server/ServerNetwork.h \
+    Network/Client/ClientNetwork.h \
+    Network/networkinterface.h
 
 FORMS    += tankgamewindow.ui
 
@@ -67,4 +67,10 @@ GameGraphics/AvatarImage\
 GameGraphics/Bullets\
 GameGraphics/Explosion\
 GameGraphics/Ground\
-Rules
+Rules\
+Controls/NetworkControls\
+Network/Transmission\
+Network/Client\
+Network/Server\
+Network
+

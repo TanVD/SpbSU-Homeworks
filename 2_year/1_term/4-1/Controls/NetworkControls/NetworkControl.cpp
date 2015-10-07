@@ -1,8 +1,8 @@
 #include "NetworkControl.h"
 
-NetworkControl::NetworkControl(NetworkGeneral *interface) : interface(interface), blocked(false)
+NetworkControl::NetworkControl(NetworkGeneral *network) : network(network), blocked(false)
 {
-    connect(interface, &NetworkGeneral::newMessage, this, &NetworkControl::newMessage);
+    connect(network, &NetworkGeneral::newMessage, this, &NetworkControl::newMessage);
 }
 
 void NetworkControl::blockControls(bool blocked)
@@ -24,7 +24,7 @@ void NetworkControl::newMessage(QString message)
     int degree = list[3].toInt();
     int speed = list[4].toInt();
     bool fire = list[5].toInt();
-    emit updateBuTrustedSource(currentPosition, hp, rel, degree, speed, fire);
+    emit updateAvatarForced(currentPosition, hp, rel, degree, speed, fire);
 
 }
 

@@ -29,7 +29,7 @@ void BulletGeneral::prepareToUpdate()
     {
         return;
     }
-    msecElapsed += 17;
+    msecElapsed += oneTimeValue;
     currentPosition = getPosition();
     bool farFromSquare = (qAbs((currentPosition - start).x()) > 10)
             || (qAbs((currentPosition - start).y()) > 10 );
@@ -48,7 +48,7 @@ QPointF BulletGeneral::getPosition()
     }
     //x=v0*cosα0*t
     //y=v0*sinα0*t-g*t2/2
-    double time = double(msecElapsed) / (17 * slowingConstant);
+    double time = double(msecElapsed) / (oneTimeValue * slowingConstant);
 
     double x = (start.x() + speed * cos(degree) * time);
 
@@ -65,9 +65,9 @@ QPointF BulletGeneral::getPosition()
         }
     }
 
-    if (y <= 500 )
+    if (y >= 500 )
     {
-        return QPointF(x, y);
+        explode();
     }
     return QPointF(x, y);
 }

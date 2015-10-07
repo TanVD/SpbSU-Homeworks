@@ -3,7 +3,8 @@
 
 ServerNetwork::ServerNetwork(QWidget *parent) :
     blockSize(0),
-    clientConnection(nullptr)
+    clientConnection(nullptr),
+    NetworkGeneral()
 {
     tcpServer = new QTcpServer(this);
     tcpServer->listen(QHostAddress::Any, 5555);

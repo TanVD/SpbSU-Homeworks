@@ -16,7 +16,7 @@ Avatar::Avatar(QGraphicsScene *scene, GroundImage *ground, AvatarControl *contro
     scene->addItem(trajectory);
     scene->addItem(image);
     connect(control, &AvatarControl::newCommand, this, &Avatar::changePosition);
-    connect(control, &AvatarControl::updateBuTrustedSource, this, &Avatar::updateByTrusted);
+    connect(control, &AvatarControl::updateAvatarForced, this, &Avatar::updateAvatarForced);
     connect(frameUpdater, &FramesUpdater::update, this, &Avatar::updateImage);
 }
 
@@ -100,8 +100,8 @@ void Avatar::setOnGround()
     currentPosition.setY(qRound(y) - 15);
 }
 
-void Avatar::updateByTrusted(QPoint currentPosition, int hp, int rel,
-                             int degree, int speed, bool fire)
+void Avatar::updateAvatarForced(QPoint currentPosition, int hp, int rel,
+                                int degree, int speed, bool fire)
 {
     this->currentPosition = currentPosition;
     hitPoints = hp;
@@ -110,18 +110,18 @@ void Avatar::updateByTrusted(QPoint currentPosition, int hp, int rel,
     this->speed = speed;
     if (fire)
     {
-            BulletGeneral *bullet;
-            if (bulletToLoad == 0)
-            {
-                bullet = new Bullet50(degreeOfGun, speed,
-                                      QPoint(currentPosition.x() + 5, -currentPosition.y() + 20), frameUpdater);
-            }
-            else if (bulletToLoad == 1)
-            {
-                bullet = new Bullet20(degreeOfGun, speed,
-                                      QPoint(currentPosition.x() + 5, -currentPosition.y() + 20), frameUpdater);
-            }
-            frameUpdater->appendAdding(bullet);
+        BulletGeneral *bullet;
+        if (bulletToLoad == 0)
+        {
+            bullet = new Bullet50(degreeOfGun, speed,
+                                  QPoint(currentPosition.x() + 5, -currentPosition.y() + 20), frameUpdater);
+        }
+        else if (bulletToLoad == 1)
+        {
+            bullet = new Bullet20(degreeOfGun, speed,
+                                  QPoint(currentPosition.x() + 5, -currentPosition.y() + 20), frameUpdater);
+        }
+        frameUpdater->appendAdding(bullet);
     }
     updateImage();
 }

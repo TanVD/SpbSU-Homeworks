@@ -1,8 +1,8 @@
-#include "ClientControl.h"
+#include "ClientNetwork.h"
 #include "TransmissionCoder.h"
 
 ClientNetwork::ClientNetwork(QWidget *parent) :
-    blockSize(0)
+    blockSize(0), NetworkGeneral()
 {
     serverConnection = new QTcpSocket;
     connect(serverConnection, SIGNAL(readyRead()), this, SLOT(readTextMsg()));

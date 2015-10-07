@@ -10,7 +10,7 @@
 class NetworkControl : public AvatarControl
 {
 public:
-    NetworkControl(NetworkGeneral *interface);
+    explicit NetworkControl(NetworkGeneral *network);
     void blockControls(bool blocked);
 
 public slots:
@@ -19,6 +19,6 @@ public slots:
 private:
     bool blocked;
     ClientNetwork *client;
-    NetworkGeneral *interface;
+    NetworkGeneral *network;
 };
 

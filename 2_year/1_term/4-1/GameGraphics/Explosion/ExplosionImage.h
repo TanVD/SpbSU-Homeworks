@@ -22,14 +22,14 @@ public:
 
     QPainterPath shape() const override;
 
-   bool collidesWithItem(const QGraphicsItem *other, Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const override;
+    bool collidesWithItem(const QGraphicsItem *other, Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const override;
 
-   int getIdOfExplosion();
+    int getIdOfExplosion();
 
-   int getHits();
+    int getHits();
 
 public slots:
-   void prepareToUpdate() override;
+    void prepareToUpdate() override;
 
 private:
     static int idMain;

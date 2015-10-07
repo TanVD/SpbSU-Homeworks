@@ -12,6 +12,7 @@ class GameRules : public QObject
     Q_OBJECT
 public:
     GameRules(QGraphicsScene *scene, FramesUpdater *updater, QObject *parent = 0);
+
 public slots:
     void tankExploded();
 

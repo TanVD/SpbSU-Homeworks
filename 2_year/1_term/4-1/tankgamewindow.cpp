@@ -6,7 +6,46 @@ TankGameWindow::TankGameWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::TankGameWindow)
 {
-    bool isServer = true;
+    isServer = false;
+    ui->setupUi(this);
+    connect(ui->startButton, &QPushButton::clicked, this, &TankGameWindow::startButtonPushed);
+    connect(ui->radioButtonClient, &QRadioButton::clicked, this, &TankGameWindow::buttonClientPushed);
+    connect(ui->radioButtonServer, &QRadioButton::clicked, this,&TankGameWindow::buttonServerPushed);
+}
+
+TankGameWindow::~TankGameWindow()
+{
+    delete ui;
+}
+
+void TankGameWindow::getGround(QString ground)
+{
+    this->ground = new GroundImage(updater, ground);
+    ClientNetwork *client = dynamic_cast<ClientNetwork *> (network);
+    disconnect(client, &ClientNetwork::newMessage, this, &TankGameWindow::getGround);
+    loop.exit();
+}
+
+void TankGameWindow::sendGround()
+{
+    network->sendTextMessage(ground->serializeToString());
+    loop.exit();
+}
+
+void TankGameWindow::buttonClientPushed(bool value)
+{
+    isServer = false;
+    ui->ipLineEdit->setEnabled(true);
+}
+
+void TankGameWindow::buttonServerPushed(bool value)
+{
+    isServer = true;
+    ui->ipLineEdit->setEnabled(false);
+}
+
+void TankGameWindow::startButtonPushed(bool value)
+{
     scene = new QGraphicsScene();
     updater = new FramesUpdater(60, scene);
 
@@ -22,13 +61,19 @@ TankGameWindow::TankGameWindow(QWidget *parent) :
     {
         ClientNetwork *client = new ClientNetwork(this);
         network = client;
-        client->connectToServer("localhost", 5555);
+        client->connectToServer(ui->ipLineEdit->text(), 5555);
         connect(client, &ClientNetwork::newMessage, this, &TankGameWindow::getGround);
         loop.exec();
 
     }
+    delete ui->radioButtonClient;
+    delete ui->radioButtonServer;
+    delete ui->horizontalLayout;
+    delete ui->label;
+    delete ui->ipLineEdit;
+    delete ui->verticalLayout;
+    delete ui->verticalLayoutWidget;
 
-    ui->setupUi(this);
     KeyControl *keyControl = new KeyControl("ADWSQE 1", this);
     NetworkControl *networkControl = new NetworkControl(network);
 
@@ -60,31 +105,4 @@ TankGameWindow::TankGameWindow(QWidget *parent) :
     GameRules *overseer = new GameRules(scene, updater, this);
     connect(tankFirst, &Avatar::exploded, overseer, &GameRules::tankExploded);
     connect(tankSecond, &Avatar::exploded, overseer, &GameRules::tankExploded);
-
-}
-
-TankGameWindow::~TankGameWindow()
-{
-    delete ui;
-}
-
-void TankGameWindow::keyPressed(char button, int msec)
-{
-    QMessageBox msg(this);
-    msg.setDetailedText(QString(button) + " was pressed " + QString::number(msec));
-    msg.exec();
-}
-
-void TankGameWindow::getGround(QString ground)
-{
-    this->ground = new GroundImage(updater, ground);
-    ClientNetwork *client = dynamic_cast<ClientNetwork *> (network);
-    disconnect(client, &ClientNetwork::newMessage, this, &TankGameWindow::getGround);
-    loop.exit();
-}
-
-void TankGameWindow::sendGround()
-{
-    network->sendTextMessage(ground->serializeToString());
-    loop.exit();
 }

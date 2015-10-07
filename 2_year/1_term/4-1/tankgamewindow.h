@@ -14,6 +14,12 @@
 #include "NetworkControl.h"
 #include "ServerNetwork.h"
 #include "ClientNetwork.h"
+#include "QRadioButton"
+#include "QLineEdit"
+#include "QVBoxLayout"
+#include "QLabel"
+
+#include "QPushButton"
 
 namespace Ui {
 class TankGameWindow;
@@ -34,11 +40,13 @@ private:
     QEventLoop loop;
     GroundImage *ground;
     NetworkGeneral *network;
+    bool isServer;
 
 private slots:
-    void keyPressed(char button, int msec);
     void getGround(QString ground);
     void sendGround();
-
+    void buttonServerPushed(bool value);
+    void buttonClientPushed(bool value);
+    void startButtonPushed(bool value);
 };
 
