@@ -1,0 +1,69 @@
+#include "server.h"
+#include "TransmissionCoder.h"
+
+ServerNetwork::ServerNetwork(QWidget *parent) :
+    blockSize(0),
+    clientConnection(nullptr)
+{
+    tcpServer = new QTcpServer(this);
+    tcpServer->listen();
+    connect(tcpServer, SIGNAL(newConnection()), this, SLOT(sessionOpened()));
+
+    ipAddressesList = QNetworkInterface::allAddresses();
+    QStringList ipList;
+    for (int i = 0; i < ipAddressesList.size(); i++)
+    {
+        ipList.append(ipAddressesList[i].toString());
+    }
+    //ui->ipComboBox->addItems(ipList);
+    //ui->portLabel->setText(QString::number(tcpServer->serverPort()));
+   // ui->sendButton->setEnabled(false);
+}
+
+ServerNetwork::~ServerNetwork()
+{
+    delete tcpServer;
+    if (clientConnection != nullptr)
+        delete clientConnection;
+}
+
+void ServerNetwork::sessionOpened()
+{
+    clientConnection = tcpServer->nextPendingConnection();
+    connect(clientConnection, SIGNAL(readyRead()), this, SLOT(readTextMsg()));
+}
+
+void ServerNetwork::sendTextMessage(QString stringToCode)
+{
+    QByteArray block = TransmissionCoder::codeForTransmission(stringToCode);
+    clientConnection->write(block);
+}
+
+void ServerNetwork::readTextMsg()
+{
+    QString newText;
+    try
+    {
+        newText = TransmissionCoder::decodeFromTransmission(clientConnection, blockSize);
+        emit newMessage(newText);
+    }
+    catch (UnreliableTransmission)
+    {
+        return;
+    }
+    blockSize = 0;
+}
+
+void ServerNetwork::setOnline(const QHostAddress &address, quint16 port)
+{
+    if (clientConnection != nullptr)
+    {
+        clientConnection->disconnectFromHost();
+        delete clientConnection;
+        clientConnection = nullptr;
+    }
+    tcpServer->close();
+    tcpServer->listen(address, port);
+  //  ui->portLabel->setText(QString::number(tcpServer->serverPort()));
+   // ui->sendButton->setEnabled(false);
+}

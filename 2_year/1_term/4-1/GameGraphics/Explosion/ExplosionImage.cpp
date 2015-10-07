@@ -2,10 +2,11 @@
 
 int ExplosionImage::idMain = 0;
 
-ExplosionImage::ExplosionImage(QPointF center, double radius,
+ExplosionImage::ExplosionImage(QPointF center, double radius, int hits,
                                FramesUpdater *frameUpdater) :
     GameGraphicsItem(frameUpdater),  center(center),
-    idOfExplosion(idMain), radius(radius), framesElapsed(0)
+    idOfExplosion(idMain), radius(radius), framesElapsed(0),
+    hits(hits)
 
 {
     idMain = idMain + 1;
@@ -59,5 +60,10 @@ void ExplosionImage::prepareToUpdate()
 int ExplosionImage::getIdOfExplosion()
 {
     return idOfExplosion;
+}
+
+int ExplosionImage::getHits()
+{
+    return hits;
 }
 

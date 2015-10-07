@@ -45,7 +45,7 @@ void KeyManager::repressButton()
     foreach(KeyControl *control, controls)
     {
         char button = control->getCurrentButton();
-        if (button != 0 && button != control->getKeys()[6])
+        if (button != 0 && button != control->getKeys()[6] && button != control->getKeys()[7])
         {
             QKeyEvent eventRelease(QEvent::KeyRelease, button, Qt::KeyboardModifier::NoModifier);
             control->newButtonPushed(&eventRelease);

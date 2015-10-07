@@ -1,0 +1,28 @@
+#pragma once
+#include <QTcpSocket>
+
+class ClientNetwork : public QObject
+{
+    Q_OBJECT
+
+public:
+    explicit ClientNetwork(QWidget *parent = 0);
+    ~ClientNetwork();
+    
+public slots:
+    void sendTextMessage(QString stringToCode);
+    
+
+signals:
+    newMessage(QString stringFromNetwork);
+
+private:
+    QTcpSocket *serverConnection;
+    quint16 blockSize;
+private slots:
+    void readTextMsg();
+    void connectToServer(QString ip, quint16 port);
+    void connected();
+    void disconnected();
+
+};

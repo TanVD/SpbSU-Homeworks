@@ -73,6 +73,10 @@ Command KeyControl::getCommandFromKey(char button)
     {
         return fire;
     }
+    if (button == keys[7])
+    {
+        return changeBullet;
+    }
 }
 
 

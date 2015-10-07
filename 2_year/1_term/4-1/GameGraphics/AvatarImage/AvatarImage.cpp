@@ -42,7 +42,7 @@ void AvatarImage::setReloading(int sec)
     reloading = sec;
 }
 
-Avatar *AvatarImage::getAvatar()
+Avatar *AvatarImage::getAvatar() const
 {
     return avatar;
 }

@@ -28,11 +28,12 @@ void GameRules::update()
                 {
                     if (dynamic_cast<AvatarImage *>(itemCollides) != nullptr)
                     {
-                        dynamic_cast<AvatarImage *>(itemCollides)->getAvatar()->hit(10, image->getIdOfExplosion());
+                        dynamic_cast<AvatarImage *>(itemCollides)->getAvatar()->hit(
+                                    image->getHits(), image->getIdOfExplosion());
                     }
-                    else if (dynamic_cast<BulletImage *>(itemCollides) != nullptr)
+                    else if (dynamic_cast<Bullet50 *>(itemCollides) != nullptr)
                     {
-                        dynamic_cast<BulletImage *>(itemCollides)->explode();
+                        dynamic_cast<Bullet50 *>(itemCollides)->explode();
                     }
                 }
             }

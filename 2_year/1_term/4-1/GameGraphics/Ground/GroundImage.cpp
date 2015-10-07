@@ -21,6 +21,22 @@ GroundImage::GroundImage(FramesUpdater *updater) :
     }
 }
 
+GroundImage::GroundImage(FramesUpdater *updater, QString trajectorySerialized)
+    : GameGraphicsItem(updater)
+{
+    QStringList list = trajectorySerialized.split("|");
+    QList<QPoint> result;
+    for (int i = 0; i < list.length() - 1; i += 2)
+    {
+        QPoint current;
+        current.setX(list[i].toInt());
+        current.setY(list[i + 1].toInt());
+        result.append(current);
+    }
+    trajectory = result;
+
+}
+
 void GroundImage::prepareToUpdate()
 {
 
@@ -53,5 +69,15 @@ QPainterPath GroundImage::shape() const
         path.lineTo(trajectory[i + 1]);
     }
     return path;
+}
+
+QString GroundImage::serializeToString()
+{
+    QString result;
+    for (int i = 0; i < trajectory.length(); i++)
+    {
+        result += QString::number(trajectory[i].x()) + "|" + QString::number(trajectory[i].y()) + "|";
+    }
+    return result;
 }
 

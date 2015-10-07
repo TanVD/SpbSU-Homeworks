@@ -5,7 +5,9 @@
 #include "TrajectoryImage.h"
 #include <QObject>
 #include "GroundImage.h"
-#include "BulletImage.h"
+#include "BulletGeneral.h"
+#include "Bullet50.h"
+#include "Bullet20.h"
 #include "FramesUpdater.h"
 #include "AvatarControl.h"
 #include "ExplosionImage.h"
@@ -23,16 +25,22 @@ public:
     QGraphicsItem *getImage();
     void hit(int hitPoints, int idOfExplosion);
 
+    QPoint getPosition();
+    int getHitPoints();
+    int getReloadings();
+    int getDegree();
+    int getSpeed();
+
 
 signals:
     void exploded();
+    void commandDone(Command command);
 
 private:
     void setOnGround();
     QList<int> explosionsHit;
 
     QGraphicsScene *scene;
-
     AvatarControl *control;
     AvatarImage *image;
     QPoint currentPosition;
@@ -45,11 +53,14 @@ private:
 
     int hitPoints;
     int reloading;
+    int bulletToLoad;
 
     GroundImage *ground;
 
 
 private slots:
+    void updateByTrusted(QPoint currentPosition, int hp, int rel,
+                         int degree, int speed, bool fire);
     void changePosition(Command button, int msec);
     void updateImage();
 
