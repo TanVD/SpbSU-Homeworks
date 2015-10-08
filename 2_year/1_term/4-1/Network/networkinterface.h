@@ -4,6 +4,11 @@
 #include "Avatar.h"
 #include "FramesUpdater.h"
 
+/**
+ * @brief The NetworkGeneral class Used to send and receive states
+ * of away avatar
+ */
+
 class NetworkGeneral : public QObject
 {
     Q_OBJECT

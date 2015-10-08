@@ -6,6 +6,10 @@
 #include <QStringList>
 #include <QString>
 
+/**
+ * @brief The NetworkControl class Class represents network type of
+ * control of avatar
+ */
 
 class NetworkControl : public AvatarControl
 {
@@ -14,6 +18,9 @@ public:
     void blockControls(bool blocked);
 
 public slots:
+    /**
+     * @brief newMessage NetworkGeneral will send new message in this slot
+     */
     void newMessage(QString message);
 
 private:

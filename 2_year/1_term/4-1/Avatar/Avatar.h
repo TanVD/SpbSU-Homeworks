@@ -13,7 +13,13 @@
 #include "ExplosionImage.h"
 #include "AvatarImage.h"
 
+
+
 const int reloadingConst = 240;
+
+/**
+ * @brief The Avatar class This class represents tank on a game field
+ */
 
 class Avatar : public QObject
 {
@@ -24,17 +30,24 @@ public:
            FramesUpdater *frameUpdater, QObject *parent = 0);
     QGraphicsItem *getImage();
 
-    void hit(int hitPoints, int idOfExplosion);
+    void hit(int hitPointsToRemove, int idOfExplosion);
 
     QPoint getPosition();
     int getHitPoints();
     int getReloadings();
     int getDegree();
     int getSpeed();
+    int getBullet();
 
 
 signals:
     void exploded();
+    /**
+     * @brief commandDone Emitted when avatar has fulfilled all commands
+     * and new state can be broadcasted
+     * @param command Command which was Done. Only fire will be percieved by network,
+     * every else command will be ignored.
+     */
     void commandDone(Command command);
 
 private:
@@ -61,8 +74,12 @@ private:
 
 
 private slots:
+    /**
+     * @brief updateAvatarForced Used to update Avatar by
+     * network
+     */
     void updateAvatarForced(QPoint currentPosition, int hp, int rel,
-                         int degree, int speed, bool fire);
+                         int degree, int speed, bool fire, int bullet);
     void changePosition(Command button, int msec);
     void updateImage();
 

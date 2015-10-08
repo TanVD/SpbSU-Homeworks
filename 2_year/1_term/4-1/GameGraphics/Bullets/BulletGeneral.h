@@ -3,6 +3,11 @@
 #include "FramesUpdater.h"
 #include "GroundImage.h"
 
+/**
+ * @brief oneTimeValue General class for bullets. Responsible for
+ * working with frames updater
+ */
+
 const int oneTimeValue = 17;
 
 class BulletGeneral : public GameGraphicsItem

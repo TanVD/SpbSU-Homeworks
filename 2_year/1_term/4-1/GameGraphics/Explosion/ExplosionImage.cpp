@@ -19,7 +19,7 @@ ExplosionImage::~ExplosionImage()
 
 void ExplosionImage::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    for (int i = 0; i < 50; i += 5)
+    for (int i = 10; i < radius; i += 5)
     {
         painter->drawEllipse(center, radius * (framesElapsed % 2) - i, radius * (framesElapsed % 2) - i);
     }

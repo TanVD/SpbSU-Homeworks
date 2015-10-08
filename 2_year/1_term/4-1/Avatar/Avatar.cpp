@@ -13,8 +13,8 @@ Avatar::Avatar(QGraphicsScene *scene, GroundImage *ground, AvatarControl *contro
 {
     image = new AvatarImage(start.x(), start.y(), 10, 10, hitPoints, reloading, this, updater);
     trajectory = new TrajectoryImage(degreeOfGun, speed, currentPosition, frameUpdater);
-    scene->addItem(trajectory);
-    scene->addItem(image);
+    frameUpdater->appendAdding(trajectory);
+    frameUpdater->appendAdding(image);
     connect(control, &AvatarControl::newCommand, this, &Avatar::changePosition);
     connect(control, &AvatarControl::updateAvatarForced, this, &Avatar::updateAvatarForced);
     connect(frameUpdater, &FramesUpdater::update, this, &Avatar::updateImage);
@@ -25,20 +25,20 @@ QGraphicsItem *Avatar::getImage()
     return image;
 }
 
-void Avatar::hit(int hitPoints, int idOfExplosion)
+void Avatar::hit(int hitPointsToRemove, int idOfExplosion)
 {
     if (explosionsHit.contains(idOfExplosion))
     {
         return;
     }
     explosionsHit.append(idOfExplosion);
-    this->hitPoints -= hitPoints;
-    image->setHitPoints(this->hitPoints);
+    hitPoints -= hitPointsToRemove;
+    image->setHitPoints(hitPoints);
     if (this->hitPoints <= 0)
     {
         ExplosionImage *explosion = new ExplosionImage(currentPosition, 100, 20, frameUpdater);
-        scene->removeItem(trajectory);
-        scene->removeItem(image);
+        frameUpdater->appendClearing(trajectory);
+        frameUpdater->appendClearing(image);
         control->blockControls(true);
         deleteLater();
         emit exploded();
@@ -68,6 +68,11 @@ int Avatar::getDegree()
 int Avatar::getSpeed()
 {
     return speed;
+}
+
+int Avatar::getBullet()
+{
+    return bulletToLoad;
 }
 
 void Avatar::setOnGround()
@@ -101,13 +106,14 @@ void Avatar::setOnGround()
 }
 
 void Avatar::updateAvatarForced(QPoint currentPosition, int hp, int rel,
-                                int degree, int speed, bool fire)
+                                int degree, int speed, bool fire, int bullet)
 {
     this->currentPosition = currentPosition;
     hitPoints = hp;
     reloading = rel;
     degreeOfGun = degree;
     this->speed = speed;
+    bulletToLoad = bullet;
     if (fire)
     {
         BulletGeneral *bullet;

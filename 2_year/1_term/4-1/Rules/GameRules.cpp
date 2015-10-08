@@ -9,7 +9,7 @@ GameRules::GameRules(QGraphicsScene *scene, FramesUpdater *updater, QObject *par
 void GameRules::tankExploded()
 {
     QMessageBox box;
-    box.setText("You win");
+    box.setText("End of game");
     box.exec();
 }
 

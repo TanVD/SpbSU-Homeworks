@@ -7,6 +7,11 @@
 #include <QMessageBox>
 #include "GroundImage.h"
 
+/**
+ * @brief The GameRules class this class is used to detect collisions
+ * and treat them according to rules of game
+ */
+
 class GameRules : public QObject
 {
     Q_OBJECT

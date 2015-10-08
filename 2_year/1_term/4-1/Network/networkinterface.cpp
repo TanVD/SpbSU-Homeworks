@@ -22,6 +22,7 @@ void NetworkGeneral::broadcastCommand(Command command)
     QString degree = QString::number(avatar->getDegree());
     QString speed = QString::number(avatar->getSpeed());
     QString fire;
+    QString bullet = QString::number(avatar->getBullet());
     if (command == Command::fire)
     {
         fire = QString::number(1);
@@ -32,7 +33,7 @@ void NetworkGeneral::broadcastCommand(Command command)
     }
 
     sendTextMessage(hp + ";" + rel + ";" + point +
-                    ";" + degree + ";" + speed + ";" + fire);
+                    ";" + degree + ";" + speed + ";" + fire + ";" + bullet);
 }
 
 void NetworkGeneral::broadcastUpdate()
@@ -47,6 +48,7 @@ void NetworkGeneral::broadcastUpdate()
     QString point = QString::number(avatar->getPosition().x()) + "|" + QString::number(avatar->getPosition().y());
     QString degree = QString::number(avatar->getDegree());
     QString speed = QString::number(avatar->getSpeed());
+    QString bullet = QString::number(avatar->getBullet());
     sendTextMessage(hp + ";" + rel + ";" + point +
-                    ";" + degree + ";" + speed + ";" + "0");
+                    ";" + degree + ";" + speed + ";" + "0" + ";" + bullet);
 }

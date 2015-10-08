@@ -7,6 +7,11 @@
 #include <QRegion>
 #include <QtGui>
 
+/**
+ * @brief frameToExplode Class responsible for generating
+ * explosion and its image.
+ */
+
 const int frameToExplode = 120;
 
 class ExplosionImage : public GameGraphicsItem
@@ -24,8 +29,16 @@ public:
 
     bool collidesWithItem(const QGraphicsItem *other, Qt::ItemSelectionMode mode = Qt::IntersectsItemShape) const override;
 
+    /**
+     * @brief getIdOfExplosion Ids of explosion used to
+     * prevent hitting avatar by one explosion more than one time
+     */
     int getIdOfExplosion();
 
+    /**
+     * @brief getHits Returns number which will
+     * be subtracted from avatar
+     */
     int getHits();
 
 public slots:

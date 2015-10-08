@@ -5,6 +5,11 @@
 
 class Avatar;
 
+/**
+ * @brief The AvatarImage class Class responsible for painting Avatar
+ * on graphics scene
+ */
+
 class AvatarImage : public GameGraphicsItem
 {
 public:

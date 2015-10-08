@@ -9,6 +9,11 @@
 #include "GroundImage.h"
 #include "BulletGeneral.h"
 
+/**
+ * @brief The Bullet50 class One kind of bullet (radius 50 of
+ * explosion)
+ */
+
 class Bullet50 : public BulletGeneral
 {
 public:

@@ -8,6 +8,10 @@
 
 const int undefined = 0;
 
+/**
+ * @brief The KeyControl class Class represents control by keys of Avatar
+ */
+
 class KeyControl : public AvatarControl
 {
     ///QString includes keys in specific oreder "L(eft)R(ight)U(p)D(own)F(aster)S(lower)F(ire)"

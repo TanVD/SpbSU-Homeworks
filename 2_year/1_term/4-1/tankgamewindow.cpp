@@ -8,9 +8,12 @@ TankGameWindow::TankGameWindow(QWidget *parent) :
 {
     isServer = false;
     ui->setupUi(this);
+
     connect(ui->startButton, &QPushButton::clicked, this, &TankGameWindow::startButtonPushed);
     connect(ui->radioButtonClient, &QRadioButton::clicked, this, &TankGameWindow::buttonClientPushed);
     connect(ui->radioButtonServer, &QRadioButton::clicked, this,&TankGameWindow::buttonServerPushed);
+    ui->radioButtonClient->setChecked(true);
+    buttonClientPushed(true);
 }
 
 TankGameWindow::~TankGameWindow()
@@ -35,12 +38,14 @@ void TankGameWindow::sendGround()
 void TankGameWindow::buttonClientPushed(bool value)
 {
     isServer = false;
+    ui->startButton->setText("Connect to Server");
     ui->ipLineEdit->setEnabled(true);
 }
 
 void TankGameWindow::buttonServerPushed(bool value)
 {
     isServer = true;
+    ui->startButton->setText("Start Server");
     ui->ipLineEdit->setEnabled(false);
 }
 
@@ -55,6 +60,7 @@ void TankGameWindow::startButtonPushed(bool value)
         network = server;
         ground = new GroundImage(updater);
         connect(server, &ServerNetwork::sessionOpenedSig, this, &TankGameWindow::sendGround);
+        QGuiApplication::setOverrideCursor(QCursor(Qt::CursorShape::BusyCursor));
         loop.exec();
     }
     else
@@ -63,9 +69,11 @@ void TankGameWindow::startButtonPushed(bool value)
         network = client;
         client->connectToServer(ui->ipLineEdit->text(), 5555);
         connect(client, &ClientNetwork::newMessage, this, &TankGameWindow::getGround);
+        QGuiApplication::setOverrideCursor(QCursor(Qt::CursorShape::BusyCursor));
         loop.exec();
 
     }
+    QGuiApplication::restoreOverrideCursor();
     delete ui->radioButtonClient;
     delete ui->radioButtonServer;
     delete ui->horizontalLayout;

@@ -2,6 +2,10 @@
 #include "BulletGeneral.h"
 #include "ExplosionImage.h"
 
+/**
+ * @brief The Bullet20 class One kind of bullet (radius 20
+ * of explosion)
+ */
 
 class Bullet20 : public BulletGeneral
 {

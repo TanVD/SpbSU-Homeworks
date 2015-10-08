@@ -7,8 +7,10 @@
 #include <QGraphicsScene>
 
 
-//x=v0*cosα0*t
-//y=v0*sinα0*t-g*t2/2
+/**
+ * @brief The TrajectoryImage class Class responsible for painting
+ * trajectory on graphics Scene
+ */
 
 class TrajectoryImage : public GameGraphicsItem
 {

@@ -3,6 +3,11 @@
 #include <QGraphicsScene>
 #include "FramesUpdater.h"
 
+/**
+ * @brief The GameGraphicsItem class General class of all graphics items
+ * on scene. Includes FramesUpdater to update every n msec
+ */
+
 class GameGraphicsItem : public QObject, public QGraphicsItem
 {
     Q_OBJECT
@@ -10,7 +15,6 @@ class GameGraphicsItem : public QObject, public QGraphicsItem
 public:
     GameGraphicsItem(FramesUpdater *frameUpdater);
     virtual ~GameGraphicsItem() {}
-    //void explode();
 
 protected:
     FramesUpdater *frameUpdater;
