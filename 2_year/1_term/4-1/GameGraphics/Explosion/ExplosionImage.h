@@ -50,7 +50,7 @@ private:
     QPointF center;
     int idOfExplosion;
     double radius;
-    int hits;
     int framesElapsed;
+    int hits;
 };
 

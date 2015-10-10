@@ -14,9 +14,10 @@ const int undefined = 0;
 
 class KeyControl : public AvatarControl
 {
-    ///QString includes keys in specific oreder "L(eft)R(ight)U(p)D(own)F(aster)S(lower)F(ire)"
+    ///QString includes keys in specific oreder "L(eft)R(ight)U(p)D(own)F(aster)S(lower)F(ire)C(hange weapon)"
+    ///For example ADWSQE 1 represents A for L(eft), D for R(ight) and etc. (Of course you can choose any othe bunch of keys
 public:
-    explicit KeyControl(QString keys, QObject *parent = 0);
+    explicit KeyControl(QString keys);
 
     QString getKeys();
     char getCurrentButton();

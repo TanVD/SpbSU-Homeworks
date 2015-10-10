@@ -5,9 +5,8 @@
 class ClientNetwork : public NetworkGeneral
 {
     Q_OBJECT
-
 public:
-    explicit ClientNetwork(QWidget *parent = 0);
+    ClientNetwork();
     void connectToServer(QString ip, quint16 port);
     ~ClientNetwork();
 

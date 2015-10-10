@@ -1,12 +1,10 @@
 #include "ServerNetwork.h"
 #include "TransmissionCoder.h"
 
-ServerNetwork::ServerNetwork(QWidget *parent) :
-    blockSize(0),
-    clientConnection(nullptr),
-    NetworkGeneral()
+ServerNetwork::ServerNetwork() : NetworkGeneral(), tcpServer(new QTcpServer(this)),
+    blockSize(0), clientConnection(nullptr)
+
 {
-    tcpServer = new QTcpServer(this);
     tcpServer->listen(QHostAddress::Any, 5555);
     connect(tcpServer, SIGNAL(newConnection()), this, SLOT(sessionOpened()));
 

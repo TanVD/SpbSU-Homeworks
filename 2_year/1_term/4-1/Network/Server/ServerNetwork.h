@@ -11,9 +11,8 @@
 class ServerNetwork : public NetworkGeneral
 {
     Q_OBJECT
-
 public:
-    explicit ServerNetwork(QWidget *parent = 0);
+    ServerNetwork();
     ~ServerNetwork();
     QList<QHostAddress> getAddressesAvailable();
     void setOnline(const QHostAddress &address, quint16 port);

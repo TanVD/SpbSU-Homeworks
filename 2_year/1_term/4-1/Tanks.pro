@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = Tanks
 TEMPLATE = app
 
-CONFIG += c++11 warn_on
+CONFIG += c++11
 
 SOURCES += main.cpp\
         tankgamewindow.cpp \

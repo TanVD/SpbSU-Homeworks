@@ -24,8 +24,7 @@ public slots:
     void newMessage(QString message);
 
 private:
-    bool blocked;
-    ClientNetwork *client;
     NetworkGeneral *network;
+    bool blocked;
 };
 

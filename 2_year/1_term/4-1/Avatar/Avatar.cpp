@@ -37,6 +37,7 @@ void Avatar::hit(int hitPointsToRemove, int idOfExplosion)
     if (this->hitPoints <= 0)
     {
         ExplosionImage *explosion = new ExplosionImage(currentPosition, 100, 20, frameUpdater);
+        frameUpdater->appendAdding(explosion);
         frameUpdater->appendClearing(trajectory);
         frameUpdater->appendClearing(image);
         control->blockControls(true);

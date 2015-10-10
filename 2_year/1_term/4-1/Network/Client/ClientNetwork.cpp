@@ -1,10 +1,9 @@
 #include "ClientNetwork.h"
 #include "TransmissionCoder.h"
 
-ClientNetwork::ClientNetwork(QWidget *parent) :
-    blockSize(0), NetworkGeneral()
+ClientNetwork::ClientNetwork() :
+    NetworkGeneral(), serverConnection(new QTcpSocket), blockSize(0)
 {
-    serverConnection = new QTcpSocket;
     connect(serverConnection, SIGNAL(readyRead()), this, SLOT(readTextMsg()));
     connect(serverConnection, SIGNAL(disconnected()), this, SLOT(disconnected()));
     connect(serverConnection, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(disconnected()));
@@ -14,7 +13,6 @@ ClientNetwork::ClientNetwork(QWidget *parent) :
 ClientNetwork::~ClientNetwork()
 {
     delete serverConnection;
-   // delete ui;
 }
 
 void ClientNetwork::sendTextMessage(QString stringToCode)

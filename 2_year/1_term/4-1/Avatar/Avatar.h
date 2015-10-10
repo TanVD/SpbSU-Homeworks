@@ -55,23 +55,23 @@ private:
     QList<int> explosionsHit;
 
     QGraphicsScene *scene;
+    GroundImage *ground;
     AvatarControl *control;
-    AvatarImage *image;
-    QPoint currentPosition;
 
-    TrajectoryImage *trajectory;
+    QPoint currentPosition;
+    int degreeOfGun;
+    int speed;
 
     FramesUpdater* frameUpdater;
 
-    int degreeOfGun;
-    int speed;
     int hitPoints;
     int reloading;
     int bulletToLoad;
 
-    void setOnGround();
-    GroundImage *ground;
+    TrajectoryImage *trajectory;
+    AvatarImage *image;
 
+    void setOnGround();
 
 private slots:
     /**

@@ -45,8 +45,8 @@ private:
 private slots:
     void getGround(QString ground);
     void sendGround();
-    void buttonServerPushed(bool value);
-    void buttonClientPushed(bool value);
-    void startButtonPushed(bool value);
+    void buttonServerPushed();
+    void buttonClientPushed();
+    void startButtonPushed();
 };
 

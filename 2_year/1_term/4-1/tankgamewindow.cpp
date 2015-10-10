@@ -13,7 +13,7 @@ TankGameWindow::TankGameWindow(QWidget *parent) :
     connect(ui->radioButtonClient, &QRadioButton::clicked, this, &TankGameWindow::buttonClientPushed);
     connect(ui->radioButtonServer, &QRadioButton::clicked, this,&TankGameWindow::buttonServerPushed);
     ui->radioButtonClient->setChecked(true);
-    buttonClientPushed(true);
+    buttonClientPushed();
 }
 
 TankGameWindow::~TankGameWindow()
@@ -35,28 +35,28 @@ void TankGameWindow::sendGround()
     loop.exit();
 }
 
-void TankGameWindow::buttonClientPushed(bool value)
+void TankGameWindow::buttonClientPushed()
 {
     isServer = false;
     ui->startButton->setText("Connect to Server");
     ui->ipLineEdit->setEnabled(true);
 }
 
-void TankGameWindow::buttonServerPushed(bool value)
+void TankGameWindow::buttonServerPushed()
 {
     isServer = true;
     ui->startButton->setText("Start Server");
     ui->ipLineEdit->setEnabled(false);
 }
 
-void TankGameWindow::startButtonPushed(bool value)
+void TankGameWindow::startButtonPushed()
 {
     scene = new QGraphicsScene();
     updater = new FramesUpdater(60, scene);
 
     if (isServer)
     {
-        ServerNetwork *server = new ServerNetwork(this);//port 5555
+        ServerNetwork *server = new ServerNetwork();//port 5555
         network = server;
         ground = new GroundImage(updater);
         connect(server, &ServerNetwork::sessionOpenedSig, this, &TankGameWindow::sendGround);
@@ -65,7 +65,7 @@ void TankGameWindow::startButtonPushed(bool value)
     }
     else
     {
-        ClientNetwork *client = new ClientNetwork(this);
+        ClientNetwork *client = new ClientNetwork();
         network = client;
         client->connectToServer(ui->ipLineEdit->text(), 5555);
         connect(client, &ClientNetwork::newMessage, this, &TankGameWindow::getGround);
@@ -82,7 +82,7 @@ void TankGameWindow::startButtonPushed(bool value)
     delete ui->verticalLayout;
     delete ui->verticalLayoutWidget;
 
-    KeyControl *keyControl = new KeyControl("ADWSQE 1", this);
+    KeyControl *keyControl = new KeyControl("ADWSQE 1");
     NetworkControl *networkControl = new NetworkControl(network);
 
     QList<KeyControl *> list;
@@ -94,9 +94,11 @@ void TankGameWindow::startButtonPushed(bool value)
     ui->graphicsView->setScene(scene);
     ui->graphicsView->installEventFilter(manager);
 
-    Avatar *tankFirst;
-    Avatar *tankSecond;
+
     scene->addItem(ground);
+
+    Avatar *tankFirst = nullptr;
+    Avatar *tankSecond = nullptr;
     if (isServer)
     {
         tankFirst = new Avatar(scene, ground, keyControl, QPoint(0, 0), updater);
@@ -107,6 +109,7 @@ void TankGameWindow::startButtonPushed(bool value)
         tankFirst = new Avatar(scene, ground, keyControl, QPoint(20, 0), updater);
         tankSecond = new Avatar(scene,ground,  networkControl, QPoint(0, 0), updater);
     }
+
     network->setControl(keyControl, tankFirst, updater);
 
 

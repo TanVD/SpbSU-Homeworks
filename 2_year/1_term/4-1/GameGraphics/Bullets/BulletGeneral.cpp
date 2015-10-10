@@ -2,8 +2,8 @@
 
 
 BulletGeneral::BulletGeneral(int speed, QPoint start, int degree, int hit, int slowingConstant, FramesUpdater *updater) :
-    speed(speed), start(start), degree(double(degree) * 3.14 / 180), hit(hit), slowingConstant(slowingConstant),
-    msecElapsed(0), currentPosition(start), GameGraphicsItem(updater)
+    GameGraphicsItem(updater), speed(speed), start(start), degree(double(degree) * 3.14 / 180),
+    hit(hit), slowingConstant(slowingConstant), currentPosition(start), msecElapsed(0)
 {
 
 }

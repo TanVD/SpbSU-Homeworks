@@ -1,6 +1,6 @@
 #include "KeyControl.h"
 
-KeyControl::KeyControl(QString keys, QObject *parent) :
+KeyControl::KeyControl(QString keys) :
     keys(keys), currentButton(undefined), msecPressed(undefined),
     controlsBlocked(false)
 {}
@@ -78,6 +78,7 @@ Command KeyControl::getCommandFromKey(char button)
     {
         return changeBullet;
     }
+    return leftAvatar;
 }
 
 
