@@ -1,2 +1,0 @@
-listPowered2 :: (Num a) => Int -> [a]
-listPowered2 n = [2 ^ x | x <- [1..],  x < n]
