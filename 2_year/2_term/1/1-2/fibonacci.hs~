@@ -5,8 +5,8 @@ fibbonaci n = fibbonaciLin 0 1 0 n
 --memory. But i really want to see better solution in more functional way
 --(with equivalent time and memory)
 fibbonaciLin :: Integer -> Integer -> Integer -> Integer -> Integer
-fibbonaciLin a b acc n
-  | acc < n = fibbonaciLin (a + b) a (acc + 1) n
-  | acc == n = a
+fibbonaciLin a b succ n
+  | succ < n = fibbonaciLin (a + b) a (succ + 1) n
+  | succ == n = a
     
     
