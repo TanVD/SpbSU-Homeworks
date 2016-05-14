@@ -15,9 +15,9 @@ showVariants :: IO()
 showVariants = do
     putStrLn "Enter your choice:"
     putStrLn "0 - exit"
-    putStrLn "1 - addNumber"
-    putStrLn "2 - removeNumber"
-    putStrLn "3 - printNumbers"
+    putStrLn "1 - add number"
+    putStrLn "2 - remove number"
+    putStrLn "3 - print numbers"
 
 addNumber :: [Int] -> IO()
 addNumber list = do
