@@ -1,4 +1,5 @@
 import Prelude hiding (id)
+import Data.List as L
 
 data Point = Point { 
     id :: Int,
@@ -23,7 +24,22 @@ data Graph = Graph {
 
 data Way = Way {
     edges :: [Edge]
-} deriving Show
+}
+
+instance Show Way where
+    show (Way (edge:edges)) = 
+        show (id (from edge)) ++
+        "->" ++
+        show (id (to edge)) ++
+        " " ++
+        show (Way edges)
+    show (Way []) = 
+        ""
+
+instance Ord Edge where
+  (Edge _ (Point idTo _ _ _) _ ) `compare` (Edge (Point idFrom _ _ _) _ _) =
+    idTo `compare` idFrom
+
 {-
 let a = Graph [(Point 1 False (0) []), (Point 2 False (0) []), (Point 3 False (0) [])] [(Edge (Point 1 False 0 []) (Point 2 False 0 []) 2), (Edge (Point 2 False 0 []) (Point 3 False 0 []) 3), (Edge (Point 1 False 0 []) (Point 3 False 0 []) 8)] 
 let b = [(Point 1 False 0 []), (Point 2 False 0 []), (Point 3 False 0 [])]
@@ -36,9 +52,9 @@ printWay (a:as) point
 printWay [] point = Way []
 
 dejkstra :: Graph -> Int -> Way
-dejkstra (Graph as bs) idEnd = printWay (getPoints (dejkstra' start (Graph as bs))) end
+dejkstra (Graph as bs) idEnd =  Way (L.sort (edges (printWay ( (getPoints (dejkstra' start (Graph as bs)))) end)))
     where 
-        start = (Point 1 False (0) [])
+        start = Point 1 False 0 []
         end = Point idEnd False 0 []
 
 dejkstra' :: Point -> Graph -> Graph
