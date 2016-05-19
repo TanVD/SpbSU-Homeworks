@@ -1,12 +1,12 @@
 import Prelude hiding (id, log)
 import Data.List as L
-import Control.Monad.Writer.Lazy as W
+import Control.Monad.Writer.Lazy 
 
 data Point = Point { 
     id :: Int,
     wasVisited :: Bool,
     weightPoint :: Int
-} deriving Show
+}
 
 instance Eq Point where
  (==) a b = id a == id b
@@ -15,12 +15,12 @@ data Edge = Edge {
     from :: Point,
     to :: Point,
     weightEdge :: Int
-} deriving (Eq, Show)
+} deriving Eq
 
 data Graph = Graph {
     getPoints ::[Writer [Edge] Point],
     getEdges :: [Edge]
-} deriving Show
+}
 
 data Way = Way {
     edges :: [Edge]
@@ -28,12 +28,12 @@ data Way = Way {
 
 
 instance Show Way where
-    show (Way (edge:edges)) = 
+    show (Way (edge:edgeList)) = 
         show (id (from edge)) ++
         "->" ++
         show (id (to edge)) ++
         " " ++
-        show (Way edges)
+        show (Way edgeList)
     show (Way []) = 
         ""
 
@@ -47,36 +47,36 @@ let b = [(writer(Point 1 False 0, [])), (writer(Point 2 False 0, [])), (writer(P
 -}
 
 printWay :: [Writer [Edge] Point] -> Point -> Way
-printWay (writer:as) pointTo 
+printWay (writerItem:as) pointTo 
     | point == pointTo =  Way edge
     | otherwise = printWay as pointTo
-    where (point, edge) = runWriter writer
-printWay [] pointTo = Way []
+    where (point, edge) = runWriter writerItem
+printWay [] _ = Way []
 
 dejkstra :: Graph -> Int -> Way
-dejkstra (Graph as bs) idEnd =  Way (L.sort (edges (printWay ( (getPoints (dejkstra' start (Graph as bs)))) end)))
+dejkstra (Graph as bs) idEnd =  Way (L.sort (edges (printWay (getPoints (dejkstra' start (Graph as bs))) end)))
     where 
         start = writer (Point 1 False 0, [])
         end = Point idEnd False 0
 
 dejkstra' :: Writer [Edge] Point -> Graph -> Graph
-dejkstra' writer graph 
-    | point == (Point 0 True 0) = graph 
+dejkstra' writerItem graph 
+    | point == Point 0 True 0 = graph 
     | otherwise =  dejkstra' (getMin (getPoints newGraph)) newGraph
     where 
-        newGraph = updateGraph graph writer
-        (point, _) = runWriter writer
+        newGraph = updateGraph graph writerItem
+        (point, _) = runWriter writerItem
 
 
 getMin :: [Writer [Edge] Point] -> Writer [Edge] Point
 getMin as = getMin' as (-1) (writer(Point 0 True 0, []))
     where 
         getMin' [] _ point = point
-        getMin' (writer:bs) n writerMin
-            | (weightPoint pointWriter < n || n == (-1)) && not (wasVisited pointWriter) = getMin' bs (weightPoint pointWriter) writer
+        getMin' (writerItem:bs) n writerMin
+            | (weightPoint pointWriter < n || n == (-1)) && not (wasVisited pointWriter) = getMin' bs (weightPoint pointWriter) writerItem
             | otherwise = getMin' bs n writerMin
             where
-                (pointWriter, edgeWriter) = runWriter writer 
+                (pointWriter, _) = runWriter writerItem 
 
 
 updateGraph :: Graph -> Writer [Edge] Point -> Graph
@@ -89,23 +89,23 @@ updatePoints (Graph (writerCur:cs) es) writerMain
         : updatePoints (Graph cs es) writerMain
     | otherwise =  writerCur : updatePoints (Graph cs es)  writerMain
     where
-        (point, edge) = runWriter writerCur
+        (point, _) = runWriter writerCur
         (pointMain, edgesMain) = runWriter writerMain
 
 updatePoints (Graph [] _) _ = []
 
 updatePoint :: Writer [Edge] Point -> Writer [Edge] Point -> [Edge] -> Writer [Edge] Point
-updatePoint  writerOrig writerMain (edge:edges) 
+updatePoint  writerOrig writerMain (edge:edgeList) 
     | point == from edge && pointMain == to edge && ((weightPoint pointMain + weightEdge edge) < weightPoint point || (weightPoint point == 0)) =
-       writerMain >>= updateWeight pointMain point edge
+       writerMain >>= updateWeight point edge
     | point == to edge && pointMain == from edge && ((weightPoint pointMain + weightEdge edge) < weightPoint point || (weightPoint point == 0)) = 
-       writerMain >>= updateWeight pointMain point edge
-    | otherwise = updatePoint writerOrig writerMain edges
+       writerMain >>= updateWeight point edge
+    | otherwise = updatePoint writerOrig writerMain edgeList
     where
-        (point, edgesOrig) = runWriter writerOrig
-        (pointMain, edgesMain) = runWriter writerMain
+        (point, _) = runWriter writerOrig
+        (pointMain, _) = runWriter writerMain
 updatePoint writerOrig _ [] = writerOrig
 
-updateWeight :: Point -> Point -> Edge -> Point -> Writer [Edge] Point
-updateWeight pointMain pointOrig edge _ = writer (Point (id pointOrig) (wasVisited pointOrig) (weightPoint pointMain + weightEdge edge), [edge])
+updateWeight :: Point -> Edge -> Point -> Writer [Edge] Point
+updateWeight pointOrig edge pointMain = writer (Point (id pointOrig) (wasVisited pointOrig) (weightPoint pointMain + weightEdge edge), [edge])
 
